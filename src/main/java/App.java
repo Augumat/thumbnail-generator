@@ -7,12 +7,16 @@ import java.util.Scanner;
 
 public class App implements Runnable
 {
-    JFrame window;
+    /** The main window of the program. */
+    JFrame main;
+    /** The preview frame for generated thumbnails. */
+    JFrame preview;
     
     @Override
     public void run()
     {
         //todo implement
+        main = new JFrame();
     }
     
     private String loadFile(String fileName)
