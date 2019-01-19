@@ -163,8 +163,8 @@ public class App implements Runnable
         //begin font loading
         try
         {
-            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Futura_Condensed_Regular.ttf"));
-            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Lucida_Sans_Regular.ttf"));
+            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Futura_Condensed_Regular.ttf")).deriveFont(72F);
+            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Lucida_Sans_Regular.ttf")).deriveFont(48F);
         }
         catch (FontFormatException | IOException e)
         {
@@ -265,21 +265,35 @@ public class App implements Runnable
             
             //draw both characters to the canvas in their respective places
             currentThumbnail.drawImage(fighterLeft.getRender(),0,0,639,639,0,0,639,639,null);
-            currentThumbnail.drawImage(fighterRight.getRender(),640,0,1279,639,0,0,639,639,null);
+            currentThumbnail.drawImage(fighterRight.getRender(),1279,0,640,639,0,0,639,639,null);
             
             //draw the foreground template over the previous
             currentThumbnail.drawImage(fgTemplate,0,0,null);
             
             //draw text over the overlay
-            currentThumbnail.setFont(futuraCondensed.deriveFont(72F));
-            currentThumbnail.drawString(tagLeft,120,80);
-            currentThumbnail.drawString(tagRight,735,80);
+            String slambana = "SLAMBAMA #";
+            int leftStart = 0;
+            int rightStart = 720;
+            int playerBoxLength = 560;
+            int centerLine = 640;
     
-            currentThumbnail.setFont(futuraCondensed.deriveFont(60F));
-            currentThumbnail.drawString("SLAMBANA #" + eventNumber,400,650);
+            FontMetrics futuraMetrics = currentThumbnail.getFontMetrics(futuraCondensed);
+            FontMetrics lucidaMetrics = currentThumbnail.getFontMetrics(lucidaSans);
             
-            currentThumbnail.setFont(lucidaSans.deriveFont(48F));
-            currentThumbnail.drawString(roundTitle,420,710);
+            int leftTagIndent = leftStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagLeft))) / 2);
+            int rightTagIndent = rightStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagRight))) / 2);
+            int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(slambana + eventNumber)) / 2);
+            int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(roundTitle)) / 2);
+            
+            currentThumbnail.setColor(Color.WHITE);
+            currentThumbnail.setFont(futuraCondensed);
+            currentThumbnail.drawString(tagLeft, leftTagIndent, 75);
+            currentThumbnail.drawString(tagRight, rightTagIndent, 75);
+            currentThumbnail.drawString(slambana + eventNumber, eventNumberIndent,655);
+            
+            currentThumbnail.setColor(new Color(160,160,160));
+            currentThumbnail.setFont(lucidaSans);
+            currentThumbnail.drawString(roundTitle, roundNumberIndent,710);
             
             //begin save prompt
             try
@@ -336,10 +350,10 @@ public class App implements Runnable
     {
         fighterLeft = new Fighter(5);
         fighterRight = new Fighter(3);
-        tagLeft = "Juneau";
-        tagRight = "Aug";
-        roundTitle = "WINNERS ROUND 1";
-        eventNumber = 69;
+        tagLeft = "SW | Sheepie";
+        tagRight = "Anonymous Moniker";
+        roundTitle = "GRAND FINALS OR SOMETHING WEIRDER";
+        eventNumber = 10000;
         
         export();
     }
