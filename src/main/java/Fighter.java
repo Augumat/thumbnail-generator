@@ -21,7 +21,7 @@ public class Fighter
                     false, /* ID:6  Yoshi */
                     false, /* ID:7  Kirby */
                     false, /* ID:8  Fox */
-                    true , /* ID:9  Pikachu */
+                    false, /* ID:9  Pikachu */
                     false, /* ID:10 Luigi */
                     false, /* ID:11 Ness */
                     false, /* ID:12 Captain Falcon */
@@ -102,7 +102,7 @@ public class Fighter
                         {"Yoshi"},            /* ID:6  */
                         {"Kirby"},            /* ID:7  */
                         {"Fox"},              /* ID:8  */
-                        {"Pikachu", "Pikachu", "Pikachu", "Pikachu", "Pikachu", "Pikachu", "Pikachu", "Pikachu Libre"}, /* ID:9  */
+                        {"Pikachu"},          /* ID:9  */
                         {"Luigi"},            /* ID:10 */
                         {"Ness"},             /* ID:11 */
                         {"Captain Falcon"},   /* ID:12 */
@@ -197,7 +197,7 @@ public class Fighter
         }
         else
         {
-            System.out.println("[ERROR] Invalid fighter id passed.");
+            System.out.println("[ERROR] Invalid fighters id passed.");
             fighterID = 0;
             variantID = 0;
         }
@@ -225,13 +225,13 @@ public class Fighter
         }
         else
         {
-            System.out.println("[ERROR] Invalid fighter id passed.");
+            System.out.println("[ERROR] Invalid fighters id passed.");
             fighterID = 0;
             variantID = 0;
         }
     }
     
-    /** Getter for fighter id. */
+    /** Getter for fighters id. */
     public int getFighterID()
     {
         return fighterID;
@@ -244,14 +244,14 @@ public class Fighter
     
     /**
      * Returns a render of this Fighter in the form of a BufferedImage.
-     * @return the render of the fighter described by this instance of Fighter.
+     * @return the render of the fighters described by this instance of Fighter.
      */
     public BufferedImage getRender()
     {
         BufferedImage output;
         try
         {
-            output = ImageIO.read(new File("src/main/resources/" + fighterID + "/" + variantID + "/render.png"));
+            output = ImageIO.read(new File("src/main/resources/fighters/" + fighterID + "/" + variantID + "/render.png"));
         }
         catch (java.io.IOException e)
         {

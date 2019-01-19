@@ -13,12 +13,19 @@ public class App implements Runnable
     private static final int WIDTH = 512;
     private static final int HEIGHT = 512;
     
+    /** Whether or not the program is running. */
+    private boolean running;
     /** The main window of the program. */
     private JFrame window;
     /** The input pane of the application. */
     private JPanel inputPane;
     /** The layout of the program. */
     private LayoutManager layout;
+    
+    /** The font "Futura Condensed", as used in the player names. */
+    private Font futuraCondensed;
+    /** The font "Lucida Sans", as used in the description. */
+    private Font lucidaSans;
     
     /** The canvas that previews of the thumbnails will be drawn to. */
     private Canvas canvas;
@@ -43,11 +50,9 @@ public class App implements Runnable
     /** The tag of the player on the right. */
     private String tagRight;
     /** Which round of the tournament is being played. */
-    private String round;
-    /** The edition of the tournament. */
-    private int edition;
-    /** Whether or not the program is running. */
-    private boolean running;
+    private String roundTitle;
+    /** The event number of the tournament. */
+    private int eventNumber;
     
     /** The Graphics object used to paint the canvas. */
     private Graphics2D currentThumbnail;
@@ -60,15 +65,28 @@ public class App implements Runnable
     @Override
     public void run()
     {
-        init();
-        
-        while (running)
+        //initialize the app
+        if (!init())
         {
-            if (export())
-            {
-                reset();
-            }
+            return;
         }
+    
+        //stub testing
+        testExport();
+        return;
+        
+//        //enter the loop
+//        while (running)
+//        {
+//            if (export())
+//            {
+//                reset();
+//            }
+//        }
+//
+//        //exiting the loop ends the program.
+//        window.dispose();
+//        return;
         
         //todo implement
 
@@ -135,18 +153,42 @@ public class App implements Runnable
     
     /**
      * The first things called when the app runs.
+     * @return true if initialization was successful, false otherwise.
      */
-    private void init()
+    private boolean init()
     {
         //designates the App as running
         running = true;
         
-        //create window and set basic settings
+        //begin font loading
+        try
+        {
+            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Futura_Condensed_Regular.ttf"));
+            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Lucida_Sans_Regular.ttf"));
+        }
+        catch (FontFormatException | IOException e)
+        {
+            if (e instanceof IOException)
+            {
+                System.out.println("[ERROR] Font loading aborted.");
+            }
+            else
+            {
+                System.out.println("[ERROR] Font creation aborted.");
+            }
+            e.printStackTrace();
+            return false;
+        }
+        
+        //end font loading
+        
+        //begin window creation
         window = new JFrame("Thumbnail Generator v1.0");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setSize(WIDTH, HEIGHT);
+        //end window loading
         
-        //set window icon
+        //begin window icon
         BufferedImage windowIcon;
         try
         {
@@ -159,6 +201,7 @@ public class App implements Runnable
             windowIcon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         }
         window.setIconImage(windowIcon);
+        //end window icon
         
         //defines layout
         layout = new GridBagLayout();
@@ -175,8 +218,7 @@ public class App implements Runnable
         c.gridy = 0;
         inputPane.add(button, c);
         
-        //loads the basic template and initializes the Graphics object
-        //open
+        //begin template loading
         try
         {
             bgTemplate = ImageIO.read(new File("src/main/resources/bg.png"));
@@ -187,19 +229,28 @@ public class App implements Runnable
             System.out.println("[ERROR] Template load aborted.");
             e.printStackTrace();
             window.dispose();
-            return;
+            return false;
         }
-        //close
+        //end template loading
+        
+        
+        //resets other vars
+        reset();
         
         //reveals the window
         window.setVisible(true);
         window.requestFocus();
+        
+        //finish and return success flag
+        return true;
     }
     
+    /** Resets all temporary variables and provides a clean slate for creating a new thumbnail. */
     private void reset()
     {
         //todo implement
     }
+    
     /**
      * Generates a thumbnail from the accumulated state of the App class if everything is defined and prompts to save
      * the file to a user-defined location.
@@ -209,15 +260,33 @@ public class App implements Runnable
     {
         if (isGeneratorReady())
         {
+            //create canvas using background template
             currentThumbnail = bgTemplate.createGraphics();
+            
+            //draw both characters to the canvas in their respective places
             currentThumbnail.drawImage(fighterLeft.getRender(),0,0,639,639,0,0,639,639,null);
-            currentThumbnail.drawImage(fighterLeft.getRender(),0,0,639,639,1279,0,640,639,null);
+            currentThumbnail.drawImage(fighterRight.getRender(),640,0,1279,639,0,0,639,639,null);
+            
+            //draw the foreground template over the previous
             currentThumbnail.drawImage(fgTemplate,0,0,null);
+            
+            //draw text over the overlay
+            currentThumbnail.setFont(futuraCondensed.deriveFont(72F));
+            currentThumbnail.drawString(tagLeft,120,80);
+            currentThumbnail.drawString(tagRight,735,80);
+    
+            currentThumbnail.setFont(futuraCondensed.deriveFont(60F));
+            currentThumbnail.drawString("SLAMBANA #" + eventNumber,400,650);
+            
+            currentThumbnail.setFont(lucidaSans.deriveFont(48F));
+            currentThumbnail.drawString(roundTitle,420,710);
+            
+            //begin save prompt
             try
             {
-                FileDialog fDialog = new FileDialog(window, "Save", FileDialog.SAVE);
-                fDialog.setVisible(true);
-                String path = fDialog.getDirectory() + fDialog.getFile();
+                FileDialog dialog = new FileDialog(window, "Save", FileDialog.SAVE);
+                dialog.setVisible(true);
+                String path = dialog.getDirectory() + dialog.getFile();
                 ImageIO.write(bgTemplate, "PNG", new File(path));
             }
             catch (IOException e)
@@ -226,6 +295,8 @@ public class App implements Runnable
                 e.printStackTrace();
                 return false;
             }
+            //end save prompt
+    
             return true;
         }
         return false;
@@ -242,11 +313,34 @@ public class App implements Runnable
             fighterRight == null ||
             tagLeft == null ||
             tagRight == null ||
-            round == null ||
-            edition == 0)
+            roundTitle == null ||
+            eventNumber == 0)
         {
             return false;
         }
         return true;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private void testExport()
+    {
+        fighterLeft = new Fighter(5);
+        fighterRight = new Fighter(3);
+        tagLeft = "Juneau";
+        tagRight = "Aug";
+        roundTitle = "WINNERS ROUND 1";
+        eventNumber = 69;
+        
+        export();
     }
 }
