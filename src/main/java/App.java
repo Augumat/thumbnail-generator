@@ -270,7 +270,7 @@ public class App implements Runnable
             //draw the foreground template over the previous
             currentThumbnail.drawImage(fgTemplate,0,0,null);
             
-            //draw text over the overlay
+            //begin text field drawing
             String slambana = "SLAMBAMA #";
             int leftStart = 0;
             int rightStart = 720;
@@ -294,6 +294,7 @@ public class App implements Runnable
             currentThumbnail.setColor(new Color(160,160,160));
             currentThumbnail.setFont(lucidaSans);
             currentThumbnail.drawString(roundTitle, roundNumberIndent,710);
+            //end text field drawing
             
             //begin save prompt
             try
@@ -345,7 +346,7 @@ public class App implements Runnable
     
     
     
-    
+    //temp
     private void testExport()
     {
         fighterLeft = new Fighter(5);
