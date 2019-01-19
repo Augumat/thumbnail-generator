@@ -12,7 +12,7 @@ public class Fighter
     /** The static list of whether each Fighter has different Variant names organized by IDs. */
     public static boolean[] VARIANT_NAMED =
             {
-                    false, /* ID:0  Error */
+                    false, /* ID:0  N/A */
                     false, /* ID:1  Mario */
                     false, /* ID:2  Donkey Kong */
                     false, /* ID:3  Link */
@@ -93,7 +93,7 @@ public class Fighter
     /** The static list of the name of each Fighter organized by IDs. */
     public static String[][] FIGHTER_NAME =
             {
-                        {"Null"},             /* ID:0  */
+                        {""},                 /* ID:0  */
                         {"Mario"},            /* ID:1  */
                         {"Donkey Kong"},      /* ID:2  */
                         {"Link"},             /* ID:3  */
@@ -190,7 +190,7 @@ public class Fighter
      */
     public Fighter(int initFighter)
     {
-        if (initFighter > 0 && initFighter < FIGHTER_BOUND)
+        if (initFighter >= 0 && initFighter < FIGHTER_BOUND)
         {
             fighterID = initFighter;
             variantID = DEFAULT_VARIANT;
@@ -210,7 +210,7 @@ public class Fighter
      */
     public Fighter(int initFighter, int initVariant)
     {
-        if (initFighter > 0 && initFighter < FIGHTER_BOUND)
+        if (initFighter >= 0 && initFighter < FIGHTER_BOUND)
         {
             fighterID = initFighter;
             if (initVariant >= 0 && initVariant < VARIANT_BOUND)
