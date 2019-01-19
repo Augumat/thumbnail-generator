@@ -11,7 +11,7 @@ public class App implements Runnable
 {
     /** Selection window size constraints. */
     private static final int MAIN_WIDTH = 515;
-    private static final int MAIN_HEIGHT = 200;
+    private static final int MAIN_HEIGHT = 175;
     /** Preview window size constraints. */
     private static final int PREVIEW_WIDTH = 1280;
     private static final int PREVIEW_HEIGHT = 720;
@@ -135,7 +135,15 @@ public class App implements Runnable
         selectionWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         selectionWindow.setResizable(false);
     
-        selectionPane = new JPanel();
+        selectionPane = new JPanel()
+        {
+            @Override
+            protected void paintComponent(Graphics g)
+            {
+                super.paintComponent(g);
+                g.drawLine(5, 106, MAIN_WIDTH - 5, 106);
+            }
+        };
         selectionWindow.add(selectionPane);
         
         selectionPane.setLayout(null);
@@ -143,6 +151,7 @@ public class App implements Runnable
         
         //begin component creation
         Dimension buttonPreferredSize = new Dimension(120, 25);
+        Dimension bigButtonPreferredSize = new Dimension(160, 45);
         Dimension tagPreferredSize = new Dimension(180, 25);
         Dimension labelPreferredSize = new Dimension(85, 25);
         Dimension fighterPreferredSize = new Dimension(160, 24);
@@ -157,19 +166,19 @@ public class App implements Runnable
         bPreview.setPreferredSize(buttonPreferredSize);
         componentSize = bPreview.getPreferredSize();
         bPreview.setBounds(
-                MAIN_WIDTH - insets.right - componentSize.width,
-                MAIN_HEIGHT - insets.bottom - componentSize.height - 60,
+                insets.left + 38,
+                MAIN_HEIGHT - insets.bottom - buttonPreferredSize.height - 10,
                 componentSize.width,
                 componentSize.height
         );
         selectionPane.add(bPreview);
         
         JButton bGenerate = new JButton("Generate");
-        bGenerate.setPreferredSize(buttonPreferredSize);
+        bGenerate.setPreferredSize(bigButtonPreferredSize);
         componentSize = bGenerate.getPreferredSize();
         bGenerate.setBounds(
-                MAIN_WIDTH - insets.right - componentSize.width,
-                MAIN_HEIGHT - insets.bottom - componentSize.height - 30,
+                insets.left + buttonPreferredSize.width + 48,
+                MAIN_HEIGHT - insets.bottom - bigButtonPreferredSize.height,
                 componentSize.width,
                 componentSize.height
         );
@@ -179,8 +188,8 @@ public class App implements Runnable
         bReset.setPreferredSize(buttonPreferredSize);
         componentSize = bReset.getPreferredSize();
         bReset.setBounds(
-                MAIN_WIDTH - insets.right - componentSize.width,
-                MAIN_HEIGHT - insets.bottom - componentSize.height,
+                insets.left + buttonPreferredSize.width + bigButtonPreferredSize.width + 58,
+                MAIN_HEIGHT - insets.bottom - buttonPreferredSize.height - 10,
                 componentSize.width,
                 componentSize.height
         );
@@ -526,7 +535,7 @@ public class App implements Runnable
     
     
     
-    //temp
+    //temp todo remove
     private void testExport()
     {
         fighterLeft = new Fighter(5);
