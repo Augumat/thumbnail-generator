@@ -11,6 +11,10 @@ import java.io.IOException;
 
 public class App implements Runnable
 {
+    /** todo remove */
+    private static final String[] TEMP_VARIANCE = {"0","1","2","3","4","5","6","7"};
+    
+    //begin vars
     /** Selection window size constraints. */
     private static final int MAIN_WIDTH = 515;
     private static final int MAIN_HEIGHT = 175;
@@ -50,8 +54,6 @@ public class App implements Runnable
     /** The event number of the tournament. */
     private String eventNumber;
     
-    /** True if the preview window is visible, false otherwise. */
-    private boolean previewVisible;
     /** The JFrame containing the current preview thumbnail. */
     private JFrame previewWindow;
     /** The canvas that previews of the thumbnails will be drawn to. */
@@ -67,6 +69,7 @@ public class App implements Runnable
     private BufferedImage bgTemplate;
     /** The foreground template. */
     private BufferedImage fgTemplate;
+    //end vars
     
     
     
@@ -293,11 +296,11 @@ public class App implements Runnable
             public void actionPerformed(ActionEvent e)
             {
                 cFighterLeft.setEnabled(false);
-                cVariantLeft.setEnabled(true);
-                for (String current: Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()])
+                for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()]*/)
                 {
                     cVariantLeft.addItem(current);
                 }
+                cVariantLeft.setEnabled(true);
             }
         });
         cFighterLeft.setPreferredSize(fighterPreferredSize);
@@ -317,11 +320,11 @@ public class App implements Runnable
             public void actionPerformed(ActionEvent e)
             {
                 cFighterRight.setEnabled(false);
-                cVariantRight.setEnabled(true);
-                for (String current: Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()])
+                for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()]*/)
                 {
                     cVariantRight.addItem(current);
                 }
+                cVariantRight.setEnabled(true);
             }
         });
         cFighterRight.setPreferredSize(fighterPreferredSize);
@@ -476,8 +479,6 @@ public class App implements Runnable
         
         previewWindow.pack();
         
-        previewVisible = false;
-        
         //end preview window creation
         
         //begin template loading
@@ -528,15 +529,11 @@ public class App implements Runnable
         cFighterLeft.setSelectedIndex(0);
         cFighterLeft.setEnabled(true);
         cVariantLeft.removeAllItems();
-        cVariantLeft.addItem("0");
-        cVariantLeft.setSelectedIndex(0);
         cVariantLeft.setEnabled(false);
         fighterRight = new Fighter(0);
         cFighterRight.setSelectedIndex(0);
         cFighterRight.setEnabled(true);
         cVariantRight.removeAllItems();
-        cVariantRight.addItem("0");
-        cVariantRight.setSelectedIndex(0);
         cVariantRight.setEnabled(false);
         
         matchTitle = "";
@@ -558,7 +555,6 @@ public class App implements Runnable
             Graphics tempGraphics = previewCanvas.getGraphics();
             tempGraphics.drawImage(previewThumbnail, 0, 0, null);
             previewWindow.setLocation(0, 0);
-            previewVisible = true;
             previewWindow.setVisible(true);
             previewWindow.requestFocus();
         }
@@ -570,7 +566,6 @@ public class App implements Runnable
     /** Hides the preview window. */
     private void hidePreview()
     {
-        previewVisible = false;
         previewWindow.setVisible(false);
         selectionWindow.requestFocus();
     }

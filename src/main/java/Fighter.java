@@ -12,7 +12,7 @@ public class Fighter
     /** The selection of characters able to be selected . */
     public static final String[] FIGHTER_OPTIONS =
             {
-                    "",                 /* ID:0  */
+                    "(Fighter)",        /* ID:0  */
                     "Mario",            /* ID:1  */
                     "Donkey Kong",      /* ID:2  */
                     "Link",             /* ID:3  */
@@ -61,7 +61,7 @@ public class Fighter
                     "Toon Link",        /* ID:46 */
                     "Wolf",             /* ID:47 */
                     "Villager",         /* ID:48 */
-                    "Mega Man",         /* ID:49 */
+                    "Megaman",          /* ID:49 */
                     "Wii Fit Trainer",  /* ID:50 */
                     "Rosalina & Luma",  /* ID:51 */
                     "Little Mac",       /* ID:52 */
@@ -142,7 +142,7 @@ public class Fighter
                         {"Toon Link"},        /* ID:46 */
                         {"Wolf"},             /* ID:47 */
                         {"Villager"},         /* ID:48 */
-                        {"Mega Man"},         /* ID:49 */
+                        {"Megaman"},          /* ID:49 */
                         {"Wii Fit Trainer"},  /* ID:50 */
                         {"Rosalina & Luma"},  /* ID:51 */
                         {"Little Mac"},       /* ID:52 */
@@ -328,7 +328,7 @@ public class Fighter
         BufferedImage output;
         try
         {
-            output = ImageIO.read(new File("src/main/resources/fighters/" + fighterID + "/" + variantID + "/render.png"));
+            output = ImageIO.read(new File("src/main/resources/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + FIGHTER_OPTIONS[fighterID] + ".png"));
         }
         catch (java.io.IOException e)
         {
