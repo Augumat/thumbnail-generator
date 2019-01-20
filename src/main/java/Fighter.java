@@ -9,6 +9,168 @@ import java.io.File;
  */
 public class Fighter
 {
+    /** The selection of characters able to be selected . */
+    public static final String[] FIGHTER_OPTIONS =
+            {
+                    "",                 /* ID:0  */
+                    "Mario",            /* ID:1  */
+                    "Donkey Kong",      /* ID:2  */
+                    "Link",             /* ID:3  */
+                    "Samus",            /* ID:4  */
+                    "Dark Samus",       /* ID:5  */
+                    "Yoshi",            /* ID:6  */
+                    "Kirby",            /* ID:7  */
+                    "Fox",              /* ID:8  */
+                    "Pikachu",          /* ID:9  */
+                    "Luigi",            /* ID:10 */
+                    "Ness",             /* ID:11 */
+                    "Captain Falcon",   /* ID:12 */
+                    "Jigglypuff",       /* ID:13 */
+                    "Peach",            /* ID:14 */
+                    "Daisy",            /* ID:15 */
+                    "Bowser",           /* ID:16 */
+                    "Ice Climbers",     /* ID:17 */
+                    "Sheik",            /* ID:18 */
+                    "Zelda",            /* ID:19 */
+                    "Dr. Mario",        /* ID:20 */
+                    "Pichu",            /* ID:21 */
+                    "Falco",            /* ID:22 */
+                    "Marth",            /* ID:23 */
+                    "Lucina",           /* ID:24 */
+                    "Young Link",       /* ID:25 */
+                    "Ganondorf",        /* ID:26 */
+                    "Mewtwo",           /* ID:27 */
+                    "Roy",              /* ID:28 */
+                    "Chrom",            /* ID:29 */
+                    "Mr. Game & Watch", /* ID:30 */
+                    "Meta Knight",      /* ID:31 */
+                    "Pit",              /* ID:32 */
+                    "Dark Pit",         /* ID:33 */
+                    "Zero Suit Samus",  /* ID:34 */
+                    "Wario",            /* ID:35 */
+                    "Snake",            /* ID:36 */
+                    "Ike",              /* ID:37 */
+                    "Pokemon Trainer",  /* ID:38 */
+                    "Diddy Kong",       /* ID:39 */
+                    "Lucas",            /* ID:40 */
+                    "Sonic",            /* ID:41 */
+                    "King Dedede",      /* ID:42 */
+                    "Olimar",           /* ID:43 */
+                    "Lucario",          /* ID:44 */
+                    "R.O.B.",           /* ID:45 */
+                    "Toon Link",        /* ID:46 */
+                    "Wolf",             /* ID:47 */
+                    "Villager",         /* ID:48 */
+                    "Mega Man",         /* ID:49 */
+                    "Wii Fit Trainer",  /* ID:50 */
+                    "Rosalina & Luma",  /* ID:51 */
+                    "Little Mac",       /* ID:52 */
+                    "Greninja",         /* ID:53 */
+                    "Palutena",         /* ID:54 */
+                    "Pac Man",          /* ID:55 */
+                    "Robin",            /* ID:56 */
+                    "Shulk",            /* ID:57 */
+                    "Boswer Jr.",       /* ID:58 */
+                    "Duck Hunt",        /* ID:59 */
+                    "Ryu",              /* ID:60 */
+                    "Ken",              /* ID:61 */
+                    "Cloud",            /* ID:62 */
+                    "Corrin",           /* ID:63 */
+                    "Bayonetta",        /* ID:64 */
+                    "Inkling",          /* ID:65 */
+                    "Ridley",           /* ID:66 */
+                    "Simon",            /* ID:67 */
+                    "Richter",          /* ID:68 */
+                    "King K. Rool",     /* ID:69 */
+                    "Isabelle",         /* ID:70 */
+                    "Incineroar",       /* ID:71 */
+                    "Mii Brawler",      /* ID:72 */
+                    "Mii Swordfighter", /* ID:73 */
+                    "Mii Gunner",       /* ID:74 */
+                    "Pirahna Plant",    /* ID:75 */
+                    "Joker"             /* ID:76 */
+            };
+    /** The static list of the name of each Fighter organized by Fighter IDs and Variant IDs. */
+    public static String[][] VARIANT_OPTIONS =
+            {
+                        {""},                 /* ID:0  */
+                        {"Mario"},            /* ID:1  */
+                        {"Donkey Kong"},      /* ID:2  */
+                        {"Link"},             /* ID:3  */
+                        {"Samus"},            /* ID:4  */
+                        {"Dark Samus"},       /* ID:5  */
+                        {"Yoshi"},            /* ID:6  */
+                        {"Kirby"},            /* ID:7  */
+                        {"Fox"},              /* ID:8  */
+                        {"Pikachu"},          /* ID:9  */
+                        {"Luigi"},            /* ID:10 */
+                        {"Ness"},             /* ID:11 */
+                        {"Captain Falcon"},   /* ID:12 */
+                        {"Jigglypuff"},       /* ID:13 */
+                        {"Peach"},            /* ID:14 */
+                        {"Daisy"},            /* ID:15 */
+                        {"Bowser"},           /* ID:16 */
+                        {"Ice Climbers"},     /* ID:17 */
+                        {"Sheik"},            /* ID:18 */
+                        {"Zelda"},            /* ID:19 */
+                        {"Dr. Mario"},        /* ID:20 */
+                        {"Pichu"},            /* ID:21 */
+                        {"Falco"},            /* ID:22 */
+                        {"Marth"},            /* ID:23 */
+                        {"Lucina"},           /* ID:24 */
+                        {"Young Link"},       /* ID:25 */
+                        {"Ganondorf"},        /* ID:26 */
+                        {"Mewtwo"},           /* ID:27 */
+                        {"Roy"},              /* ID:28 */
+                        {"Chrom"},            /* ID:29 */
+                        {"Mr. Game & Watch"}, /* ID:30 */
+                        {"Meta Knight"},      /* ID:31 */
+                        {"Pit"},              /* ID:32 */
+                        {"Dark Pit"},         /* ID:33 */
+                        {"Zero Suit Samus"},  /* ID:34 */
+                        {"Wario"},            /* ID:35 */
+                        {"Snake"},            /* ID:36 */
+                        {"Ike"},              /* ID:37 */
+                        {"Pokemon Trainer"},  /* ID:38 */
+                        {"Diddy Kong"},       /* ID:39 */
+                        {"Lucas"},            /* ID:40 */
+                        {"Sonic"},            /* ID:41 */
+                        {"King Dedede"},      /* ID:42 */
+                        {"Olimar", "Olimar", "Olimar", "Olimar", "Alph", "Alph", "Alph", "Alph"}, /* ID:43 */
+                        {"Lucario"},          /* ID:44 */
+                        {"R.O.B."},           /* ID:45 */
+                        {"Toon Link"},        /* ID:46 */
+                        {"Wolf"},             /* ID:47 */
+                        {"Villager"},         /* ID:48 */
+                        {"Mega Man"},         /* ID:49 */
+                        {"Wii Fit Trainer"},  /* ID:50 */
+                        {"Rosalina & Luma"},  /* ID:51 */
+                        {"Little Mac"},       /* ID:52 */
+                        {"Greninja"},         /* ID:53 */
+                        {"Palutena"},         /* ID:54 */
+                        {"Pac Man"},          /* ID:55 */
+                        {"Robin"},            /* ID:56 */
+                        {"Shulk"},            /* ID:57 */
+                        {"Boswer Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig"}, /* ID:58 */
+                        {"Duck Hunt"},        /* ID:59 */
+                        {"Ryu"},              /* ID:60 */
+                        {"Ken"},              /* ID:61 */
+                        {"Cloud"},            /* ID:62 */
+                        {"Corrin"},           /* ID:63 */
+                        {"Bayonetta"},        /* ID:64 */
+                        {"Inkling"},          /* ID:65 */
+                        {"Ridley", "Meta Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Mecha Ridley"}, /* ID:66 */
+                        {"Simon"},            /* ID:67 */
+                        {"Richter"},          /* ID:68 */
+                        {"King K. Rool"},     /* ID:69 */
+                        {"Isabelle"},         /* ID:70 */
+                        {"Incineroar"},       /* ID:71 */
+                        {"Mii Brawler"},      /* ID:72 */
+                        {"Mii Swordfighter"}, /* ID:73 */
+                        {"Mii Gunner"},       /* ID:74 */
+                        {"Pirahna Plant"},    /* ID:75 */
+                        {"Joker"}             /* ID:76 */
+            };
     /** The static list of whether each Fighter has different Variant names organized by IDs. */
     public static boolean[] VARIANT_NAMED =
             {
@@ -90,87 +252,7 @@ public class Fighter
                     false, /* ID:75 Pirahna Plant */
                     false  /* ID:76 Joker */
             };
-    /** The static list of the name of each Fighter organized by IDs. */
-    public static String[][] FIGHTER_NAME =
-            {
-                        {""},                 /* ID:0  */
-                        {"Mario"},            /* ID:1  */
-                        {"Donkey Kong"},      /* ID:2  */
-                        {"Link"},             /* ID:3  */
-                        {"Samus"},            /* ID:4  */
-                        {"Dark Samus"},       /* ID:5  */
-                        {"Yoshi"},            /* ID:6  */
-                        {"Kirby"},            /* ID:7  */
-                        {"Fox"},              /* ID:8  */
-                        {"Pikachu"},          /* ID:9  */
-                        {"Luigi"},            /* ID:10 */
-                        {"Ness"},             /* ID:11 */
-                        {"Captain Falcon"},   /* ID:12 */
-                        {"Jigglypuff"},       /* ID:13 */
-                        {"Peach"},            /* ID:14 */
-                        {"Daisy"},            /* ID:15 */
-                        {"Bowser"},           /* ID:16 */
-                        {"Ice Climbers"},     /* ID:17 */
-                        {"Sheik"},            /* ID:18 */
-                        {"Zelda"},            /* ID:19 */
-                        {"Dr. Mario"},        /* ID:20 */
-                        {"Pichu"},            /* ID:21 */
-                        {"Falco"},            /* ID:22 */
-                        {"Marth"},            /* ID:23 */
-                        {"Lucina"},           /* ID:24 */
-                        {"Young Link"},       /* ID:25 */
-                        {"Ganondorf"},        /* ID:26 */
-                        {"Mewtwo"},           /* ID:27 */
-                        {"Roy"},              /* ID:28 */
-                        {"Chrom"},            /* ID:29 */
-                        {"Mr. Game & Watch"}, /* ID:30 */
-                        {"Meta Knight"},      /* ID:31 */
-                        {"Pit"},              /* ID:32 */
-                        {"Dark Pit"},         /* ID:33 */
-                        {"Zero Suit Samus"},  /* ID:34 */
-                        {"Wario"},            /* ID:35 */
-                        {"Snake"},            /* ID:36 */
-                        {"Ike"},              /* ID:37 */
-                        {"Pokemon Trainer"},  /* ID:38 */
-                        {"Diddy Kong"},       /* ID:39 */
-                        {"Lucas"},            /* ID:40 */
-                        {"Sonic"},            /* ID:41 */
-                        {"King Dedede"},      /* ID:42 */
-                        {"Olimar", "Olimar", "Olimar", "Olimar", "Alph", "Alph", "Alph", "Alph"}, /* ID:43 */
-                        {"Lucario"},          /* ID:44 */
-                        {"R.O.B."},           /* ID:45 */
-                        {"Toon Link"},        /* ID:46 */
-                        {"Wolf"},             /* ID:47 */
-                        {"Villager"},         /* ID:48 */
-                        {"Mega Man"},         /* ID:49 */
-                        {"Wii Fit Trainer"},  /* ID:50 */
-                        {"Rosalina & Luma"},  /* ID:51 */
-                        {"Little Mac"},       /* ID:52 */
-                        {"Greninja"},         /* ID:53 */
-                        {"Palutena"},         /* ID:54 */
-                        {"Pac Man"},          /* ID:55 */
-                        {"Robin"},            /* ID:56 */
-                        {"Shulk"},            /* ID:57 */
-                        {"Boswer Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig"}, /* ID:58 */
-                        {"Duck Hunt"},        /* ID:59 */
-                        {"Ryu"},              /* ID:60 */
-                        {"Ken"},              /* ID:61 */
-                        {"Cloud"},            /* ID:62 */
-                        {"Corrin"},           /* ID:63 */
-                        {"Bayonetta"},        /* ID:64 */
-                        {"Inkling"},          /* ID:65 */
-                        {"Ridley", "Meta Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Mecha Ridley"}, /* ID:66 */
-                        {"Simon"},            /* ID:67 */
-                        {"Richter"},          /* ID:68 */
-                        {"King K. Rool"},     /* ID:69 */
-                        {"Isabelle"},         /* ID:70 */
-                        {"Incineroar"},       /* ID:71 */
-                        {"Mii Brawler"},      /* ID:72 */
-                        {"Mii Swordfighter"}, /* ID:73 */
-                        {"Mii Gunner"},       /* ID:74 */
-                        {"Pirahna Plant"},    /* ID:75 */
-                        {"Joker"}             /* ID:76 */
-            };
+    
     /** The total number of Fighters in the game. */
     public static int FIGHTER_BOUND = 77;
     /** The total number of Fighters in the game. */
@@ -236,11 +318,6 @@ public class Fighter
     {
         return fighterID;
     }
-    /** Getter for variant id. */
-    public int getVariantID()
-    {
-        return variantID;
-    }
     
     /**
      * Returns a render of this Fighter in the form of a BufferedImage.
@@ -268,8 +345,8 @@ public class Fighter
     {
         if (VARIANT_NAMED[fighterID])
         {
-            return FIGHTER_NAME[fighterID][variantID];
+            return VARIANT_OPTIONS[fighterID][variantID];
         }
-        return FIGHTER_NAME[fighterID][0];
+        return VARIANT_OPTIONS[fighterID][0];
     }
 }

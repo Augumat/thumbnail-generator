@@ -3,6 +3,8 @@ package main.java;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +24,18 @@ public class App implements Runnable
     private JFrame selectionWindow;
     /** The selection pane of the application. */
     private JPanel selectionPane;
+    /** Components of the selection panel. */
+    private JButton bPreview;
+    private JButton bGenerate;
+    private JButton bReset;
+    private JTextField tTagLeft;
+    private JTextField tTagRight;
+    private JComboBox cFighterLeft;
+    private JComboBox cFighterRight;
+    private JComboBox cVariantLeft;
+    private JComboBox cVariantRight;
+    private JTextField tMatchTitle;
+    private JTextField tEventNumber;
     
     /** The left Fighter. */
     private Fighter fighterLeft;
@@ -32,7 +46,7 @@ public class App implements Runnable
     /** The tag of the player on the right. */
     private String tagRight;
     /** Which round of the tournament is being played. */
-    private String roundTitle;
+    private String matchTitle;
     /** The event number of the tournament. */
     private String eventNumber;
     
@@ -61,28 +75,10 @@ public class App implements Runnable
     public void run()
     {
         //initialize the app
-        if (!init())
-        {
-            return;
-        }
-    
-        //stub testing todo remove
-        //testExport();
-        
-        //enter the loop
-        while (running)
-        {
-//            if (export())
-//            {
-//                reset();
-//            }
-        }
-
-        //exiting the loop ends the program.
-        selectionWindow.dispose();
-        previewWindow.dispose();
-        return;
+        init();
     }
+    
+    
     
     /**
      * The first things called when the app runs.
@@ -162,7 +158,15 @@ public class App implements Runnable
         Dimension componentSize;
         
         //begin main control buttons
-        JButton bPreview = new JButton("Show Preview");
+        bPreview = new JButton("Show Preview");
+        bPreview.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                revealPreview();
+            }
+        });
         bPreview.setPreferredSize(buttonPreferredSize);
         componentSize = bPreview.getPreferredSize();
         bPreview.setBounds(
@@ -173,7 +177,16 @@ public class App implements Runnable
         );
         selectionPane.add(bPreview);
         
-        JButton bGenerate = new JButton("Generate");
+        bGenerate = new JButton("Generate");
+        bGenerate.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                export();
+                reset();
+            }
+        });
         bGenerate.setPreferredSize(bigButtonPreferredSize);
         componentSize = bGenerate.getPreferredSize();
         bGenerate.setBounds(
@@ -184,7 +197,15 @@ public class App implements Runnable
         );
         selectionPane.add(bGenerate);
         
-        JButton bReset = new JButton("Reset");
+        bReset = new JButton("Reset");
+        bReset.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                reset();
+            }
+        });
         bReset.setPreferredSize(buttonPreferredSize);
         componentSize = bReset.getPreferredSize();
         bReset.setBounds(
@@ -197,7 +218,20 @@ public class App implements Runnable
         //end main control buttons
         
         //begin tag/fighter/variant fields
-        JTextField tTagLeft = new JTextField(tagLeft);
+        tTagLeft = new JTextField(tagLeft);
+        tTagLeft.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                tagLeft = tTagLeft.getText();
+                tTagLeft.setEditable(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         tTagLeft.setPreferredSize(tagPreferredSize);
         componentSize = tTagLeft.getPreferredSize();
         tTagLeft.setBounds(
@@ -218,7 +252,20 @@ public class App implements Runnable
         selectionPane.add(lTagLeft);
         selectionPane.add(tTagLeft);
         
-        JTextField tTagRight = new JTextField(tagRight);
+        tTagRight = new JTextField(tagRight);
+        tTagRight.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                tagRight = tTagRight.getText();
+                tTagRight.setEditable(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         tTagRight.setPreferredSize(tagPreferredSize);
         componentSize = tTagRight.getPreferredSize();
         tTagRight.setBounds(
@@ -239,7 +286,20 @@ public class App implements Runnable
         selectionPane.add(lTagRight);
         selectionPane.add(tTagRight);
     
-        JComboBox cFighterLeft = new JComboBox();
+        cFighterLeft = new JComboBox(Fighter.FIGHTER_OPTIONS);
+        cFighterLeft.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                cFighterLeft.setEnabled(false);
+                cVariantLeft.setEnabled(true);
+                for (String current: Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()])
+                {
+                    cVariantLeft.addItem(current);
+                }
+            }
+        });
         cFighterLeft.setPreferredSize(fighterPreferredSize);
         componentSize = cFighterLeft.getPreferredSize();
         cFighterLeft.setBounds(
@@ -250,7 +310,20 @@ public class App implements Runnable
         );
         selectionPane.add(cFighterLeft);
     
-        JComboBox cFighterRight = new JComboBox();
+        cFighterRight = new JComboBox(Fighter.FIGHTER_OPTIONS);
+        cFighterRight.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                cFighterRight.setEnabled(false);
+                cVariantRight.setEnabled(true);
+                for (String current: Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()])
+                {
+                    cVariantRight.addItem(current);
+                }
+            }
+        });
         cFighterRight.setPreferredSize(fighterPreferredSize);
         componentSize = cFighterRight.getPreferredSize();
         cFighterRight.setBounds(
@@ -261,7 +334,20 @@ public class App implements Runnable
         );
         selectionPane.add(cFighterRight);
     
-        JComboBox cVariantLeft = new JComboBox();
+        cVariantLeft = new JComboBox();
+        cVariantLeft.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                fighterLeft = new Fighter(cFighterLeft.getSelectedIndex(), cVariantLeft.getSelectedIndex());
+                cVariantLeft.setEnabled(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         cVariantLeft.setPreferredSize(variantPreferredSize);
         componentSize = cVariantLeft.getPreferredSize();
         cVariantLeft.setBounds(
@@ -272,7 +358,20 @@ public class App implements Runnable
         );
         selectionPane.add(cVariantLeft);
     
-        JComboBox cVariantRight = new JComboBox();
+        cVariantRight = new JComboBox();
+        cVariantRight.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                fighterRight = new Fighter(cFighterRight.getSelectedIndex(), cVariantRight.getSelectedIndex());
+                cVariantRight.setEnabled(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         cVariantRight.setPreferredSize(variantPreferredSize);
         componentSize = cVariantRight.getPreferredSize();
         cVariantRight.setBounds(
@@ -282,10 +381,23 @@ public class App implements Runnable
                 componentSize.height
         );
         selectionPane.add(cVariantRight);
-        //end tag and character / costume fields
+        //end tag/fighter/variant fields
         
         //begin match data fields
-        JTextField tMatchTitle = new JTextField(tagLeft);
+        tMatchTitle = new JTextField(tagLeft);
+        tMatchTitle.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                matchTitle = tMatchTitle.getText();
+                tMatchTitle.setEditable(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         tMatchTitle.setPreferredSize(matchPreferredSize);
         componentSize = tMatchTitle.getPreferredSize();
         tMatchTitle.setBounds(
@@ -306,7 +418,20 @@ public class App implements Runnable
         selectionPane.add(lMatchTitle);
         selectionPane.add(tMatchTitle);
     
-        JTextField tEventNumber = new JTextField(tagLeft);
+        tEventNumber = new JTextField(tagLeft);
+        tEventNumber.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                eventNumber = tEventNumber.getText();
+                tEventNumber.setEditable(false);
+                if (isGeneratorReady())
+                {
+                    fullTrigger();
+                }
+            }
+        });
         tEventNumber.setPreferredSize(eventPreferredSize);
         componentSize = tEventNumber.getPreferredSize();
         tEventNumber.setBounds(
@@ -352,7 +477,7 @@ public class App implements Runnable
         previewWindow.pack();
         
         previewVisible = false;
-    
+        
         //end preview window creation
         
         //begin template loading
@@ -377,15 +502,52 @@ public class App implements Runnable
         return true;
     }
     
+    /** The method that is called when every field is filled. */
+    private void fullTrigger()
+    {
+        bGenerate.setEnabled(true);
+        bPreview.setEnabled(true);
+    }
+    
     /** Resets all temporary variables and provides a clean slate for creating a new thumbnail. */
     private void reset()
     {
-        //todo implement
         hidePreview();
         
+        bPreview.setEnabled(false);
+        bGenerate.setEnabled(false);
+        
+        tagLeft = "";
+        tTagLeft.setEditable(true);
+        tTagLeft.setText("");
+        tagRight = "";
+        tTagRight.setEditable(true);
+        tTagRight.setText("");
+        
         fighterLeft = new Fighter(0);
+        cFighterLeft.setSelectedIndex(0);
+        cFighterLeft.setEnabled(true);
+        cVariantLeft.removeAllItems();
+        cVariantLeft.addItem("0");
+        cVariantLeft.setSelectedIndex(0);
+        cVariantLeft.setEnabled(false);
         fighterRight = new Fighter(0);
+        cFighterRight.setSelectedIndex(0);
+        cFighterRight.setEnabled(true);
+        cVariantRight.removeAllItems();
+        cVariantRight.addItem("0");
+        cVariantRight.setSelectedIndex(0);
+        cVariantRight.setEnabled(false);
+        
+        matchTitle = "";
+        tMatchTitle.setEditable(true);
+        tMatchTitle.setText("");
+        eventNumber = "";
+        tEventNumber.setEditable(true);
+        tEventNumber.setText("");
     }
+    
+    
     
     /** Reveals the preview window. */
     private void revealPreview()
@@ -393,7 +555,8 @@ public class App implements Runnable
         BufferedImage previewThumbnail = generate();
         if (previewThumbnail != null)
         {
-            previewCanvas.getGraphics().drawImage(previewThumbnail, 0, 0, null);
+            Graphics tempGraphics = previewCanvas.getGraphics();
+            tempGraphics.drawImage(previewThumbnail, 0, 0, null);
             previewWindow.setLocation(0, 0);
             previewVisible = true;
             previewWindow.setVisible(true);
@@ -409,10 +572,8 @@ public class App implements Runnable
     {
         previewVisible = false;
         previewWindow.setVisible(false);
-        previewCanvas.getGraphics().drawRect(0,0, PREVIEW_WIDTH, PREVIEW_HEIGHT);
         selectionWindow.requestFocus();
     }
-    
     
     /**
      * Generates a thumbnail from the accumulated state of the App class if everything is defined and prompts to save
@@ -451,7 +612,8 @@ public class App implements Runnable
         if (isGeneratorReady())
         {
             //create canvas using background template
-            currentThumbnail = bgTemplate.createGraphics();
+            BufferedImage newThumbnail = copyImage(bgTemplate);
+            currentThumbnail = newThumbnail.createGraphics();
         
             //draw both characters to the canvas in their respective places
             currentThumbnail.drawImage(fighterLeft.getRender(),0,0,639,639,0,0,639,639,null);
@@ -473,7 +635,7 @@ public class App implements Runnable
             int leftTagIndent = leftStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagLeft))) / 2);
             int rightTagIndent = rightStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagRight))) / 2);
             int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(slambana + eventNumber)) / 2);
-            int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(roundTitle)) / 2);
+            int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(matchTitle)) / 2);
         
             currentThumbnail.setColor(Color.WHITE);
             currentThumbnail.setFont(futuraCondensed);
@@ -483,11 +645,11 @@ public class App implements Runnable
         
             currentThumbnail.setColor(new Color(160,160,160));
             currentThumbnail.setFont(lucidaSans);
-            currentThumbnail.drawString(roundTitle, roundNumberIndent,710);
+            currentThumbnail.drawString(matchTitle, roundNumberIndent,710);
             //end text field drawing
             
             //finalize and return
-            return copyImage(bgTemplate);
+            return newThumbnail;
         }
         System.out.println("[ERROR] Thumbnail generation failed.");
         return null;
@@ -504,7 +666,7 @@ public class App implements Runnable
             fighterRight == null || fighterRight.getFighterID() == 0 ||
             tagLeft == null || tagLeft == "" ||
             tagRight == null || tagRight == "" ||
-            roundTitle == null || eventNumber == "" ||
+            matchTitle == null || matchTitle == "" ||
             eventNumber == null || eventNumber == ""
         )
         {
@@ -523,28 +685,6 @@ public class App implements Runnable
         BufferedImage newImage = new BufferedImage(oldImage.getWidth(), oldImage.getHeight(), oldImage.getType());
         Graphics2D tempGraphics = newImage.createGraphics();
         tempGraphics.drawImage(oldImage, 0, 0, null);
-        tempGraphics.dispose();
         return newImage;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //temp todo remove
-    private void testExport()
-    {
-        fighterLeft = new Fighter(5);
-        fighterRight = new Fighter(3);
-        tagLeft = "SW | Sheepie";
-        tagRight = "Anonymous Moniker";
-        roundTitle = "LOSERS QUARTER FINALS";
-        eventNumber = "57";
-        
-        export();
     }
 }
