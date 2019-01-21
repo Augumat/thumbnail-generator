@@ -8,8 +8,11 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
-public class App implements Runnable
+public class Generator implements Runnable
 {
     /** todo remove */
     private static final String[] TEMP_VARIANCE = {"0","1","2","3","4","5","6","7"};
@@ -89,7 +92,7 @@ public class App implements Runnable
      * The first things called when the app runs.
      * @return true if initialization was successful, false otherwise.
      */
-    private boolean init()
+    private void init()
     {
         //designates the App as running
         running = true;
@@ -97,8 +100,8 @@ public class App implements Runnable
         //begin font loading
         try
         {
-            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Futura_Condensed_Regular.ttf")).deriveFont(72F);
-            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/resources/fonts/Lucida_Sans_Regular.ttf")).deriveFont(48F);
+            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Futura_Condensed_Regular.ttf")).deriveFont(72F);
+            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Lucida_Sans_Regular.ttf")).deriveFont(48F);
         }
         catch (FontFormatException | IOException e)
         {
@@ -111,27 +114,26 @@ public class App implements Runnable
                 System.out.println("[ERROR] Font creation aborted.");
             }
             e.printStackTrace();
-            return false;
+            System.exit(1);
         }
-        
         //end font loading
     
         //begin icon loading
-        BufferedImage windowIcon;
+        BufferedImage windowIcon = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
         try
         {
-            windowIcon = ImageIO.read(new File("src/main/resources/icon.png"));
+            windowIcon = ImageIO.read(getClass().getResource("/icon.png"));
         }
         catch (java.io.IOException e)
         {
             System.out.println("[ERROR] Window icon load aborted.");
             e.printStackTrace();
-            return false;
+            System.exit(1);
         }
         //end icon loading
         
         //begin selection window creation
-        selectionWindow = new JFrame("Thumbnail Generator v1.1");
+        selectionWindow = new JFrame("Thumbnail Generator v1.2");
         selectionWindow.setIconImage(windowIcon);
         selectionWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         selectionWindow.setResizable(false);
@@ -164,14 +166,7 @@ public class App implements Runnable
         
         //begin main control buttons
         bPreview = new JButton("Show Preview");
-        bPreview.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                revealPreview();
-            }
-        });
+        bPreview.addActionListener(e -> revealPreview());
         bPreview.setPreferredSize(buttonPreferredSize);
         componentSize = bPreview.getPreferredSize();
         bPreview.setBounds(
@@ -183,14 +178,10 @@ public class App implements Runnable
         selectionPane.add(bPreview);
         
         bGenerate = new JButton("Generate");
-        bGenerate.addActionListener(new ActionListener()
+        bGenerate.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                export();
-                reset();
-            }
+            export();
+            reset();
         });
         bGenerate.setPreferredSize(bigButtonPreferredSize);
         componentSize = bGenerate.getPreferredSize();
@@ -203,14 +194,7 @@ public class App implements Runnable
         selectionPane.add(bGenerate);
         
         bReset = new JButton("Reset");
-        bReset.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                reset();
-            }
-        });
+        bReset.addActionListener(e -> reset());
         bReset.setPreferredSize(buttonPreferredSize);
         componentSize = bReset.getPreferredSize();
         bReset.setBounds(
@@ -224,17 +208,13 @@ public class App implements Runnable
         
         //begin tag/fighter/variant fields
         tTagLeft = new JTextField(tagLeft);
-        tTagLeft.addActionListener(new ActionListener()
+        tTagLeft.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            tagLeft = tTagLeft.getText();
+            tTagLeft.setEditable(false);
+            if (isGeneratorReady())
             {
-                tagLeft = tTagLeft.getText();
-                tTagLeft.setEditable(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         tTagLeft.setPreferredSize(tagPreferredSize);
@@ -258,17 +238,13 @@ public class App implements Runnable
         selectionPane.add(tTagLeft);
         
         tTagRight = new JTextField(tagRight);
-        tTagRight.addActionListener(new ActionListener()
+        tTagRight.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            tagRight = tTagRight.getText();
+            tTagRight.setEditable(false);
+            if (isGeneratorReady())
             {
-                tagRight = tTagRight.getText();
-                tTagRight.setEditable(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         tTagRight.setPreferredSize(tagPreferredSize);
@@ -292,18 +268,14 @@ public class App implements Runnable
         selectionPane.add(tTagRight);
     
         cFighterLeft = new JComboBox(Fighter.FIGHTER_OPTIONS);
-        cFighterLeft.addActionListener(new ActionListener()
+        cFighterLeft.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            cFighterLeft.setEnabled(false);
+            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()]*/)
             {
-                cFighterLeft.setEnabled(false);
-                for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()]*/)
-                {
-                    cVariantLeft.addItem(current);
-                }
-                cVariantLeft.setEnabled(true);
+                cVariantLeft.addItem(current);
             }
+            cVariantLeft.setEnabled(true);
         });
         cFighterLeft.setPreferredSize(fighterPreferredSize);
         componentSize = cFighterLeft.getPreferredSize();
@@ -316,18 +288,14 @@ public class App implements Runnable
         selectionPane.add(cFighterLeft);
     
         cFighterRight = new JComboBox(Fighter.FIGHTER_OPTIONS);
-        cFighterRight.addActionListener(new ActionListener()
+        cFighterRight.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            cFighterRight.setEnabled(false);
+            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()]*/)
             {
-                cFighterRight.setEnabled(false);
-                for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()]*/)
-                {
-                    cVariantRight.addItem(current);
-                }
-                cVariantRight.setEnabled(true);
+                cVariantRight.addItem(current);
             }
+            cVariantRight.setEnabled(true);
         });
         cFighterRight.setPreferredSize(fighterPreferredSize);
         componentSize = cFighterRight.getPreferredSize();
@@ -340,17 +308,13 @@ public class App implements Runnable
         selectionPane.add(cFighterRight);
     
         cVariantLeft = new JComboBox();
-        cVariantLeft.addActionListener(new ActionListener()
+        cVariantLeft.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            fighterLeft = new Fighter(cFighterLeft.getSelectedIndex(), cVariantLeft.getSelectedIndex());
+            cVariantLeft.setEnabled(false);
+            if (isGeneratorReady())
             {
-                fighterLeft = new Fighter(cFighterLeft.getSelectedIndex(), cVariantLeft.getSelectedIndex());
-                cVariantLeft.setEnabled(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         cVariantLeft.setPreferredSize(variantPreferredSize);
@@ -364,17 +328,13 @@ public class App implements Runnable
         selectionPane.add(cVariantLeft);
     
         cVariantRight = new JComboBox();
-        cVariantRight.addActionListener(new ActionListener()
+        cVariantRight.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            fighterRight = new Fighter(cFighterRight.getSelectedIndex(), cVariantRight.getSelectedIndex());
+            cVariantRight.setEnabled(false);
+            if (isGeneratorReady())
             {
-                fighterRight = new Fighter(cFighterRight.getSelectedIndex(), cVariantRight.getSelectedIndex());
-                cVariantRight.setEnabled(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         cVariantRight.setPreferredSize(variantPreferredSize);
@@ -390,17 +350,13 @@ public class App implements Runnable
         
         //begin match data fields
         tMatchTitle = new JTextField(tagLeft);
-        tMatchTitle.addActionListener(new ActionListener()
+        tMatchTitle.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            matchTitle = tMatchTitle.getText();
+            tMatchTitle.setEditable(false);
+            if (isGeneratorReady())
             {
-                matchTitle = tMatchTitle.getText();
-                tMatchTitle.setEditable(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         tMatchTitle.setPreferredSize(matchPreferredSize);
@@ -424,17 +380,13 @@ public class App implements Runnable
         selectionPane.add(tMatchTitle);
     
         tEventNumber = new JTextField(tagLeft);
-        tEventNumber.addActionListener(new ActionListener()
+        tEventNumber.addActionListener(e ->
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
+            eventNumber = tEventNumber.getText();
+            tEventNumber.setEditable(false);
+            if (isGeneratorReady())
             {
-                eventNumber = tEventNumber.getText();
-                tEventNumber.setEditable(false);
-                if (isGeneratorReady())
-                {
-                    fullTrigger();
-                }
+                fullTrigger();
             }
         });
         tEventNumber.setPreferredSize(eventPreferredSize);
@@ -486,23 +438,20 @@ public class App implements Runnable
         //begin template loading
         try
         {
-            bgTemplate = ImageIO.read(new File("src/main/resources/bg.png"));
-            fgTemplate = ImageIO.read(new File("src/main/resources/fg.png"));
+            bgTemplate = ImageIO.read(getClass().getResource("/bg.png"));
+            fgTemplate = ImageIO.read(getClass().getResource("/fg.png"));
         }
         catch (java.io.IOException e)
         {
             System.out.println("[ERROR] Template load aborted.");
             e.printStackTrace();
             selectionWindow.dispose();
-            return false;
+            System.exit(1);
         }
         //end template loading
         
         //resets other vars
         reset();
-        
-        //finish and return success flag
-        return true;
     }
     
     /** The method that is called when every field is filled. */
@@ -556,7 +505,6 @@ public class App implements Runnable
         {
             Graphics tempGraphics = previewCanvas.getGraphics();
             tempGraphics.drawImage(previewThumbnail, 0, 0, null);
-            previewWindow.setLocation(0, 0);
             previewWindow.setVisible(true);
             previewWindow.requestFocus();
         }
@@ -620,7 +568,7 @@ public class App implements Runnable
             currentThumbnail.drawImage(fgTemplate,0,0,null);
         
             //begin text field drawing
-            String slambana = "SLAMBAMA #";
+            String slambana = "SLAMBANA #";
             int leftStart = 0;
             int rightStart = 720;
             int playerBoxLength = 560;

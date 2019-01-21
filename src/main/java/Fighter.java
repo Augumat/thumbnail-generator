@@ -3,6 +3,9 @@ package main.java;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * Defines a Fighter and stores the images, offsets, and costumes (WIP) associated with them.
@@ -328,7 +331,18 @@ public class Fighter
         BufferedImage output;
         try
         {
-            output = ImageIO.read(new File("src/main/resources/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + FIGHTER_OPTIONS[fighterID] + ".png"));
+            URL url;
+            File file;
+            //todo remove this trash and just copy paste the names like a normal person
+            try
+            {
+                output = ImageIO.read(getClass().getResource("/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + VARIANT_OPTIONS[fighterID][variantID] + ".png"));
+            }
+            catch (ArrayIndexOutOfBoundsException e)
+            {
+                System.out.println("[ERROR] Failed alternate name request");
+                output = ImageIO.read(getClass().getResource("/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + VARIANT_OPTIONS[fighterID][0] + ".png"));
+            }
         }
         catch (java.io.IOException e)
         {
