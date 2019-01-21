@@ -73,7 +73,7 @@ public class Fighter
                     "Pac Man",          /* ID:55 */
                     "Robin",            /* ID:56 */
                     "Shulk",            /* ID:57 */
-                    "Boswer Jr.",       /* ID:58 */
+                    "Bowser Jr.",       /* ID:58 */
                     "Duck Hunt",        /* ID:59 */
                     "Ryu",              /* ID:60 */
                     "Ken",              /* ID:61 */
@@ -154,7 +154,7 @@ public class Fighter
                         {"Pac Man"},          /* ID:55 */
                         {"Robin"},            /* ID:56 */
                         {"Shulk"},            /* ID:57 */
-                        {"Boswer Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig"}, /* ID:58 */
+                        {"Bowser Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig"}, /* ID:58 */
                         {"Duck Hunt"},        /* ID:59 */
                         {"Ryu"},              /* ID:60 */
                         {"Ken"},              /* ID:61 */
