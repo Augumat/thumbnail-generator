@@ -24,6 +24,8 @@ public class Generator implements Runnable
     /** Preview window size constraints. */
     private static final int PREVIEW_WIDTH = 1280;
     private static final int PREVIEW_HEIGHT = 720;
+    /** Version Number. */
+    private static final String version = "v1.3";
     
     /** Whether or not the program is running. */
     private boolean running;
@@ -133,7 +135,7 @@ public class Generator implements Runnable
         //end icon loading
         
         //begin selection window creation
-        selectionWindow = new JFrame("Thumbnail Generator v1.2");
+        selectionWindow = new JFrame("Thumbnail Generator " + version);
         selectionWindow.setIconImage(windowIcon);
         selectionWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         selectionWindow.setResizable(false);
