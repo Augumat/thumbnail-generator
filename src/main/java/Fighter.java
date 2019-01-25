@@ -13,6 +13,87 @@ import java.nio.file.Paths;
 public class Fighter
 {
     /** The selection of characters able to be selected . */
+    public static final String[] FILE =
+            {
+                    "_",                /* ID:0  */
+                    "mario",            /* ID:1  */
+                    "donkeykong",       /* ID:2  */
+                    "link",             /* ID:3  */
+                    "samus",            /* ID:4  */
+                    "darksamus",        /* ID:5  */
+                    "yoshi",            /* ID:6  */
+                    "kirby",            /* ID:7  */
+                    "fox",              /* ID:8  */
+                    "pikachu",          /* ID:9  */
+                    "luigi",            /* ID:10 */
+                    "ness",             /* ID:11 */
+                    "captainfalcon",    /* ID:12 */
+                    "jigglypuff",       /* ID:13 */
+                    "peach",            /* ID:14 */
+                    "daisy",            /* ID:15 */
+                    "bowser",           /* ID:16 */
+                    "iceclimbers",      /* ID:17 */
+                    "sheik",            /* ID:18 */
+                    "zelda",            /* ID:19 */
+                    "drmario",          /* ID:20 */
+                    "pichu",            /* ID:21 */
+                    "falco",            /* ID:22 */
+                    "marth",            /* ID:23 */
+                    "lucina",           /* ID:24 */
+                    "younglink",        /* ID:25 */
+                    "ganondorf",        /* ID:26 */
+                    "mewtwo",           /* ID:27 */
+                    "roy",              /* ID:28 */
+                    "chrom",            /* ID:29 */
+                    "mrgame&watch",     /* ID:30 */
+                    "metaknight",       /* ID:31 */
+                    "pit",              /* ID:32 */
+                    "darkpit",          /* ID:33 */
+                    "zerosuitsamus",    /* ID:34 */
+                    "wario",            /* ID:35 */
+                    "snake",            /* ID:36 */
+                    "ike",              /* ID:37 */
+                    "pokemontrainer",   /* ID:38 */
+                    "diddykong",        /* ID:39 */
+                    "lucas",            /* ID:40 */
+                    "sonic",            /* ID:41 */
+                    "kingdedede",       /* ID:42 */
+                    "olimar",           /* ID:43 */
+                    "lucario",          /* ID:44 */
+                    "rob",              /* ID:45 */
+                    "toonlink",         /* ID:46 */
+                    "wolf",             /* ID:47 */
+                    "villager",         /* ID:48 */
+                    "megaman",          /* ID:49 */
+                    "wiifittrainer",    /* ID:50 */
+                    "rosalina&luma",    /* ID:51 */
+                    "littlemac",        /* ID:52 */
+                    "greninja",         /* ID:53 */
+                    "palutena",         /* ID:54 */
+                    "pacman",           /* ID:55 */
+                    "robin",            /* ID:56 */
+                    "shulk",            /* ID:57 */
+                    "bowserjr",         /* ID:58 */
+                    "duckhunt",         /* ID:59 */
+                    "ryu",              /* ID:60 */
+                    "ken",              /* ID:61 */
+                    "cloud",            /* ID:62 */
+                    "corrin",           /* ID:63 */
+                    "bayonetta",        /* ID:64 */
+                    "inkling",          /* ID:65 */
+                    "ridley",           /* ID:66 */
+                    "simon",            /* ID:67 */
+                    "richter",          /* ID:68 */
+                    "kingkrool",        /* ID:69 */
+                    "isabelle",         /* ID:70 */
+                    "incineroar",       /* ID:71 */
+                    "miibrawler",       /* ID:72 */
+                    "miiswordfighter",  /* ID:73 */
+                    "miigunner",        /* ID:74 */
+                    "pirahnaplant",     /* ID:75 */
+                    "joker"             /* ID:76 */
+            };
+    /** The selection of characters able to be selected . */
     public static final String[] FIGHTER_OPTIONS =
             {
                     "(Fighter)",        /* ID:0  */
@@ -336,19 +417,19 @@ public class Fighter
             //todo remove this trash and just copy paste the names like a normal person
             try
             {
-                output = ImageIO.read(getClass().getResource("/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + VARIANT_OPTIONS[fighterID][variantID] + ".png"));
+                output = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
                 System.out.println("[ERROR] Failed alternate name request");
-                output = ImageIO.read(getClass().getResource("/fighters/" + FIGHTER_OPTIONS[fighterID] + "/" + variantID + "/" + VARIANT_OPTIONS[fighterID][0] + ".png"));
+                output = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
             }
         }
         catch (java.io.IOException e)
         {
             System.out.println("[ERROR] Render load aborted.");
             e.printStackTrace();
-            output = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
+            output = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         }
         return output;
     }

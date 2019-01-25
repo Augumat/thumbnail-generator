@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class Generator implements Runnable
 {
-    /** todo remove */
+    /** todo remove after fixing variants */
     private static final String[] TEMP_VARIANCE = {"0","1","2","3","4","5","6","7"};
     
     //begin vars
@@ -25,7 +25,7 @@ public class Generator implements Runnable
     private static final int PREVIEW_WIDTH = 1280;
     private static final int PREVIEW_HEIGHT = 720;
     /** Version Number. */
-    private static final String version = "v1.3";
+    private static final String version = "v1.4";
     
     /** Whether or not the program is running. */
     private boolean running;
@@ -440,8 +440,9 @@ public class Generator implements Runnable
         //begin template loading
         try
         {
-            bgTemplate = ImageIO.read(getClass().getResource("/bg.png"));
-            fgTemplate = ImageIO.read(getClass().getResource("/fg.png"));
+            //todo add multiple template support
+            bgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/bg.png"));
+            fgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/fg.png"));
         }
         catch (java.io.IOException e)
         {
@@ -535,9 +536,16 @@ public class Generator implements Runnable
         //begin save prompt
         try
         {
+            //todo use JFileChooser instead of FileDialog
+//            JFileChooser chooser = new JFileChooser();
+//            chooser.setDialogTitle("AyyLmao");
+//            String path = dialog.getDirectory() + dialog.getFile();
+//            ImageIO.write(generatedThumbnail, "PNG", new File(path));
+//            chooser.showDialog(selectionWindow, "Save Thumbnail");
+            
             FileDialog dialog = new FileDialog(selectionWindow, "Save", FileDialog.SAVE);
             dialog.setVisible(true);
-            String path = dialog.getDirectory() + dialog.getFile();
+            String path = dialog.getDirectory() + dialog.getFile(); //todo this line and dialog.getFile specifically are interesting...
             ImageIO.write(generatedThumbnail, "PNG", new File(path));
         }
         catch (IOException e)
