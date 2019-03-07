@@ -3,16 +3,11 @@ package main.java;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
-public class Generator implements Runnable
+public class Temp implements Runnable
 {
     /** todo remove after fixing variants */
     private static final String[] TEMP_VARIANCE = {"0","1","2","3","4","5","6","7"};
@@ -25,10 +20,8 @@ public class Generator implements Runnable
     private static final int PREVIEW_WIDTH = 1280;
     private static final int PREVIEW_HEIGHT = 720;
     /** Version Number. */
-    private static final String version = "v1.4";
+    private static final String version = "v2.0";
     
-    /** Whether or not the program is running. */
-    private boolean running;
     /** The main window of the program. */
     private JFrame selectionWindow;
     /** The selection pane of the application. */
@@ -45,6 +38,8 @@ public class Generator implements Runnable
     private JComboBox cVariantRight;
     private JTextField tMatchTitle;
     private JTextField tEventNumber;
+    
+    /** Flag variables for data entered. */
     
     /** The left Fighter. */
     private Fighter fighterLeft;
@@ -88,7 +83,21 @@ public class Generator implements Runnable
         //???
     }
     
-    
+    //todo was temp for testing, might be added as util of some sort
+//    public static BufferedImage getWindowBackground()
+//    {
+//        try
+//        {
+//            return ImageIO.read(Temp.class.getResource("/generator.png"));
+//        }
+//        catch (java.io.IOException e)
+//        {
+//            System.out.println("[ERROR] Window background load aborted.");
+//            e.printStackTrace();
+//            System.exit(1);
+//            return null;
+//        }
+//    }
     
     /**
      * The first things called when the app runs.
@@ -96,9 +105,6 @@ public class Generator implements Runnable
      */
     private void init()
     {
-        //designates the App as running
-        running = true;
-        
         //begin font loading
         try
         {
@@ -121,7 +127,7 @@ public class Generator implements Runnable
         //end font loading
     
         //begin icon loading
-        BufferedImage windowIcon = new BufferedImage(1,1, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage windowIcon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         try
         {
             windowIcon = ImageIO.read(getClass().getResource("/icon.png"));
@@ -135,6 +141,10 @@ public class Generator implements Runnable
         //end icon loading
         
         //begin selection window creation
+        //todo use this instead
+        //Generator mainWindow = new Generator();
+        //Preview previewWindow = new Preview(null); //(takes a BufferedImage input, null is blank)
+        //todo actually maybe don't do that, create a new preview window whenever it's needed
         selectionWindow = new JFrame("Thumbnail Generator " + version);
         selectionWindow.setIconImage(windowIcon);
         selectionWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -147,6 +157,8 @@ public class Generator implements Runnable
             {
                 super.paintComponent(g);
                 g.drawLine(5, 106, MAIN_WIDTH - 5, 106);
+                //g.drawImage(Temp.getWindowBackground(), 0, 0, null);
+                //todo maybe add this if I do a button overhaul
             }
         };
         selectionWindow.add(selectionPane);
@@ -208,7 +220,7 @@ public class Generator implements Runnable
         selectionPane.add(bReset);
         //end main control buttons
         
-        //begin tag/fighter/variant fields
+        //begin tag/fighters/variant fields
         tTagLeft = new JTextField(tagLeft);
         tTagLeft.addActionListener(e ->
         {
@@ -273,7 +285,7 @@ public class Generator implements Runnable
         cFighterLeft.addActionListener(e ->
         {
             cFighterLeft.setEnabled(false);
-            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterLeft.getFighterID()]*/)
+            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterLeft.getId()]*/)
             {
                 cVariantLeft.addItem(current);
             }
@@ -293,7 +305,7 @@ public class Generator implements Runnable
         cFighterRight.addActionListener(e ->
         {
             cFighterRight.setEnabled(false);
-            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getFighterID()]*/)
+            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getId()]*/)
             {
                 cVariantRight.addItem(current);
             }
@@ -348,7 +360,7 @@ public class Generator implements Runnable
                 componentSize.height
         );
         selectionPane.add(cVariantRight);
-        //end tag/fighter/variant fields
+        //end tag/fighters/variant fields
         
         //begin match data fields
         tMatchTitle = new JTextField(tagLeft);
@@ -506,9 +518,11 @@ public class Generator implements Runnable
         BufferedImage previewThumbnail = generate();
         if (previewThumbnail != null)
         {
-            Graphics tempGraphics = previewCanvas.getGraphics();
-            tempGraphics.drawImage(previewThumbnail, 0, 0, null);
+            System.out.println("Entered preview");
             previewWindow.setVisible(true);
+            Graphics tempGraphics = previewWindow.getGraphics();
+            tempGraphics.drawRect(1,1,30,30);
+            tempGraphics.drawImage(previewThumbnail, 0, 0, previewThumbnail.getWidth(), previewThumbnail.getHeight(), null);
             previewWindow.requestFocus();
         }
         else
@@ -523,6 +537,7 @@ public class Generator implements Runnable
         selectionWindow.requestFocus();
     }
     
+    //todo generate goes to Generator, export stays
     /**
      * Generates a thumbnail from the accumulated state of the App class if everything is defined and prompts to save
      * the file to a user-defined location.
@@ -558,6 +573,7 @@ public class Generator implements Runnable
     
         return true;
     }
+    //todo generate goes to Generator, export stays
     /**
      * Generates a thumbnail and returns it as a new BufferedImage.
      * @return The newly generated thumbnail.
@@ -571,8 +587,14 @@ public class Generator implements Runnable
             currentThumbnail = newThumbnail.createGraphics();
         
             //draw both characters to the canvas in their respective places
-            currentThumbnail.drawImage(fighterLeft.getRender(),0,0,639,639,0,0,639,639,null);
-            currentThumbnail.drawImage(fighterRight.getRender(),1279,0,640,639,0,0,639,639,null);
+            try {
+                currentThumbnail.drawImage(fighterLeft.getRender(0), 0, 0, 639, 639, 0, 0, 639, 639, null);
+                currentThumbnail.drawImage(fighterRight.getRender(0), 1279, 0, 640, 639, 0, 0, 639, 639, null);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+                System.exit(-1);
+            }
         
             //draw the foreground template over the previous
             currentThumbnail.drawImage(fgTemplate,0,0,null);
@@ -609,21 +631,22 @@ public class Generator implements Runnable
         System.out.println("[ERROR] Thumbnail generation failed.");
         return null;
     }
+    //todo make this check flags after moving it to Generator, or just remove entirely and initialize all the values at the beginning
+    //todo keep flags for whether or not a Fighter is selected
     /**
      * Checks if all of the information required to generate a thumbnail is
      * @return true if the generator is ready, false otherwise.
      */
     private boolean isGeneratorReady()
     {
-        if (bgTemplate == null ||
+        if (bgTemplate == null||
             fgTemplate == null ||
-            fighterLeft == null || fighterLeft.getFighterID() == 0 ||
-            fighterRight == null || fighterRight.getFighterID() == 0 ||
-            tagLeft == null || tagLeft == "" ||
-            tagRight == null || tagRight == "" ||
-            matchTitle == null || matchTitle == "" ||
-            eventNumber == null || eventNumber == ""
-        )
+            fighterLeft == null || fighterLeft.getId() == 0 ||
+            fighterRight == null || fighterRight.getId() == 0 ||
+            tagLeft == null || tagLeft.equals("") ||
+            tagRight == null || tagRight.equals("") ||
+            matchTitle == null || matchTitle.equals("") ||
+            eventNumber == null || eventNumber.equals(""))
         {
             return false;
         }

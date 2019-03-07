@@ -1,18 +1,192 @@
 package main.java;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 
 /**
- * Defines a Fighter and stores the images, offsets, and costumes (WIP) associated with them.
+ * Defines a Fighter and stores the images, offsets, and variant costumes associated with them.
+ * @author Augumat
  */
-public class Fighter
-{
+public class Fighter implements Comparable<Fighter> {
+    
+    /** The number of Variants that each fighter has. */
+    private static int VARIANT_BOUND = 8;
+    
+    /** ID number of this Fighter, ordered according to  */
+    private int id;
+    
+    /** Whether or not this Fighter is an echo fighter. */
+    private boolean echo;
+    
+    /** A simplified version of this Fighter's name, and also the name of their resources folder. */
+    private String simpleName;
+    
+    /**
+     * Properly formatted full version of this Fighter's name. This is also used as the default name for the Fighter
+     * and the name used for any variants that do not have unique names associated with them.
+     */
+    private String properName;
+    
+    /**
+     * A list of length 8 that stores the unique names of each variant of this Fighter. If an element is null, then the
+     * variant at that index will be set to the properName of the Fighter. If the array itself is null, every element of
+     * the array will be set to the properName.
+     */
+    private String[] variantNames;
+    
+    /**
+     * This indicates whether or not the variant corresponding to the index in the array has a valid render that can be
+     * loaded from resources. The JSON for this section should be updated manually when new renders are added to the
+     * project.
+     */
+    private boolean[] variantSupported;
+    
+    /** An array of the Fighter's stock icons, includes all 8 variants. */
+    private ImageIcon[] icons;
+    
+    /** An array of the Fighter's full-scale renders, includes all 8 variants. */
+    private BufferedImage[] renders;
+    
+    
+    /**
+     * Initializes the fighter and loads all of the supported icons and renders associated with this fighter
+     */
+    public void init() {
+    
+        // Attempt to load each render from /res/ if it is supported, otherwise leave it as null.  If a render is
+        // allegedly supported but cannot be loaded, throw an exception.
+        renders = new BufferedImage[VARIANT_BOUND];
+        for (int variantID = 0; variantID < VARIANT_BOUND; variantID++) {
+            if (variantSupported[variantID]) {
+                try {
+                    renders[variantID] = ImageIO.read(getClass().getResource(
+                            "/fighters/" + simpleName + "/render" + variantID + ".png"
+                    ));
+                } catch (java.io.IOException e) {
+                    System.out.println("[ERROR] Failed to load " + simpleName + "'s " + variantID + " render, which was allegedly supported.");
+                }
+            }
+        }
+    
+        // Attempt to load each icon from /res/ if it is supported, otherwise leave it as null.  If an icon is allegedly
+        // supported but cannot be loaded, throw an exception.
+        icons = new ImageIcon[VARIANT_BOUND];
+        for (int variantID = 0; variantID < VARIANT_BOUND; variantID++) {
+            if (variantSupported[variantID]) {
+                try {
+                    icons[variantID] = new ImageIcon(ImageIO.read(getClass().getResource(
+                            "/fighters/" + simpleName + "/icon" + variantID + ".png"
+                    )));
+                } catch (java.io.IOException e) {
+                    System.out.println("[ERROR] Failed to load " + simpleName + "'s " + variantID + " render, which was allegedly supported.");
+                }
+            }
+        }
+    }
+    
+    /** Getter for fighters id. */
+    public int getId() {
+        return id;
+    }
+    
+    /** Simple getter for the Fighter's formal name. */
+    public String getName() {
+        return properName;
+    }
+    
+    /**
+     * Attempts to retrieve the render of this Fighter with the specified variant ID.
+     * @param variantId A number from 0-7 inclusive that indicates which render of the fighter to return from the
+     *                  available variants.
+     * @return Returns the render of this Fighter of the variant specified.
+     * @throws Exception Throws an Exception with a message reporting that an illegal variant number was requested or
+     *                   that the variant specified is not currently supported in this version of the application.
+     */
+    @NotNull
+    public BufferedImage getRender(final int variantId) throws Exception {
+        
+        // If the specified variantId is outside the bounds of acceptable values, throw an exception
+        if (variantId < 0 || variantId >= VARIANT_BOUND) {
+            throw new Exception("Attempted to get a Fighter render that was not between 0-7 inclusive");
+        }
+        
+        // If the current version does not support the fighter at the given index, throw an exception
+        if (!variantSupported[variantId]) {
+            throw new Exception("Attempted to get a Fighter render that is not currently supported by Thumbnail-Generator");
+        }
+        
+        // If the inputs are acceptable, return the render of the specified variant
+        return renders[variantId];
+    }
+    
+    /**
+     * Attempts to retrieve the stock icon of this Fighter with the specified variant ID.
+     * @param variantId A number from 0-7 inclusive that indicates which icon of the fighter to return from the
+     *                  available variants.
+     * @return Returns the icon of this Fighter of the variant specified.
+     * @throws Exception Throws an Exception with a message reporting that an illegal variant number was requested or
+     *                   that the variant specified is not currently supported in this version of the application.
+     */
+    @NotNull
+    public ImageIcon getIcon(final int variantId) throws Exception {
+        
+        // If the specified variantId is outside the bounds of acceptable values, throw an exception
+        if (variantId < 0 || variantId >= VARIANT_BOUND) {
+            throw new Exception("Attempted to get a Fighter icon that was not between 0-7 inclusive");
+        }
+        
+        // If the current version does not support the fighter at the given index, throw an exception
+        if (!variantSupported[variantId]) {
+            throw new Exception("Attempted to get a Fighter icon that is not currently supported by Thumbnail-Generator");
+        }
+        
+        // If the inputs are acceptable, return the render of the specified variant
+        return icons[variantId];
+    }
+    
+    @Override
+    public String toString() {
+        return properName;
+    }
+    
+    @Override
+    public boolean equals(Object that) {
+        return that instanceof Fighter
+            && this.id == ((Fighter) that).id
+            && this.echo == ((Fighter) that).echo;
+    }
+    
+    @Override
+    public int compareTo(Fighter that) {
+        
+        // If the two Fighters are equivalent, return 0
+        if (this.equals(that)) {
+            return 0;
+        }
+        
+        // Get the difference in IDs
+        int comparisonWeight = this.id - that.id;
+        
+        // If the IDs are the same, use the status as an echo to compare them (ECHOS COME AFTER DEFAULTS)
+        if (comparisonWeight == 0 && that.echo) {
+            return -1;
+        } else if (comparisonWeight == 0 && this.echo) {
+            return 1;
+        }
+        
+        // If the comparisonWeight is not zero, simply return the weight, since it will be signed correctly
+        return comparisonWeight;
+    }
+    
+    
+    
+    // todo the goal is to remove everything from below ------------------------- THIS POINT --------------------------
+    
     /** The selection of characters able to be selected . */
+    @Deprecated
     public static final String[] FILE =
             {
                     "_",                /* ID:0  */
@@ -94,6 +268,7 @@ public class Fighter
                     "joker"             /* ID:76 */
             };
     /** The selection of characters able to be selected . */
+    @Deprecated
     public static final String[] FIGHTER_OPTIONS =
             {
                     "(Fighter)",        /* ID:0  */
@@ -174,274 +349,103 @@ public class Fighter
                     "Pirahna Plant",    /* ID:75 */
                     "Joker"             /* ID:76 */
             };
-    /** The static list of the name of each Fighter organized by Fighter IDs and Variant IDs. */
-    public static String[][] VARIANT_OPTIONS =
-            {
-                        {""},                 /* ID:0  */
-                        {"Mario"},            /* ID:1  */
-                        {"Donkey Kong"},      /* ID:2  */
-                        {"Link"},             /* ID:3  */
-                        {"Samus"},            /* ID:4  */
-                        {"Dark Samus"},       /* ID:5  */
-                        {"Yoshi"},            /* ID:6  */
-                        {"Kirby"},            /* ID:7  */
-                        {"Fox"},              /* ID:8  */
-                        {"Pikachu"},          /* ID:9  */
-                        {"Luigi"},            /* ID:10 */
-                        {"Ness"},             /* ID:11 */
-                        {"Captain Falcon"},   /* ID:12 */
-                        {"Jigglypuff"},       /* ID:13 */
-                        {"Peach"},            /* ID:14 */
-                        {"Daisy"},            /* ID:15 */
-                        {"Bowser"},           /* ID:16 */
-                        {"Ice Climbers"},     /* ID:17 */
-                        {"Sheik"},            /* ID:18 */
-                        {"Zelda"},            /* ID:19 */
-                        {"Dr. Mario"},        /* ID:20 */
-                        {"Pichu"},            /* ID:21 */
-                        {"Falco"},            /* ID:22 */
-                        {"Marth"},            /* ID:23 */
-                        {"Lucina"},           /* ID:24 */
-                        {"Young Link"},       /* ID:25 */
-                        {"Ganondorf"},        /* ID:26 */
-                        {"Mewtwo"},           /* ID:27 */
-                        {"Roy"},              /* ID:28 */
-                        {"Chrom"},            /* ID:29 */
-                        {"Mr. Game & Watch"}, /* ID:30 */
-                        {"Meta Knight"},      /* ID:31 */
-                        {"Pit"},              /* ID:32 */
-                        {"Dark Pit"},         /* ID:33 */
-                        {"Zero Suit Samus"},  /* ID:34 */
-                        {"Wario"},            /* ID:35 */
-                        {"Snake"},            /* ID:36 */
-                        {"Ike"},              /* ID:37 */
-                        {"Pokemon Trainer"},  /* ID:38 */
-                        {"Diddy Kong"},       /* ID:39 */
-                        {"Lucas"},            /* ID:40 */
-                        {"Sonic"},            /* ID:41 */
-                        {"King Dedede"},      /* ID:42 */
-                        {"Olimar", "Olimar", "Olimar", "Olimar", "Alph", "Alph", "Alph", "Alph"}, /* ID:43 */
-                        {"Lucario"},          /* ID:44 */
-                        {"R.O.B."},           /* ID:45 */
-                        {"Toon Link"},        /* ID:46 */
-                        {"Wolf"},             /* ID:47 */
-                        {"Villager"},         /* ID:48 */
-                        {"Megaman"},          /* ID:49 */
-                        {"Wii Fit Trainer"},  /* ID:50 */
-                        {"Rosalina & Luma"},  /* ID:51 */
-                        {"Little Mac"},       /* ID:52 */
-                        {"Greninja"},         /* ID:53 */
-                        {"Palutena"},         /* ID:54 */
-                        {"Pac Man"},          /* ID:55 */
-                        {"Robin"},            /* ID:56 */
-                        {"Shulk"},            /* ID:57 */
-                        {"Bowser Jr.", "Larry", "Roy", "Wendy", "Iggy", "Morton", "Lemmy", "Ludwig"}, /* ID:58 */
-                        {"Duck Hunt"},        /* ID:59 */
-                        {"Ryu"},              /* ID:60 */
-                        {"Ken"},              /* ID:61 */
-                        {"Cloud"},            /* ID:62 */
-                        {"Corrin"},           /* ID:63 */
-                        {"Bayonetta"},        /* ID:64 */
-                        {"Inkling"},          /* ID:65 */
-                        {"Ridley", "Meta Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Ridley", "Mecha Ridley"}, /* ID:66 */
-                        {"Simon"},            /* ID:67 */
-                        {"Richter"},          /* ID:68 */
-                        {"King K. Rool"},     /* ID:69 */
-                        {"Isabelle"},         /* ID:70 */
-                        {"Incineroar"},       /* ID:71 */
-                        {"Mii Brawler"},      /* ID:72 */
-                        {"Mii Swordfighter"}, /* ID:73 */
-                        {"Mii Gunner"},       /* ID:74 */
-                        {"Pirahna Plant"},    /* ID:75 */
-                        {"Joker"}             /* ID:76 */
-            };
-    /** The static list of whether each Fighter has different Variant names organized by IDs. */
-    public static boolean[] VARIANT_NAMED =
-            {
-                    false, /* ID:0  N/A */
-                    false, /* ID:1  Mario */
-                    false, /* ID:2  Donkey Kong */
-                    false, /* ID:3  Link */
-                    false, /* ID:4  Samus */
-                    false, /* ID:5  Dark Samus */
-                    false, /* ID:6  Yoshi */
-                    false, /* ID:7  Kirby */
-                    false, /* ID:8  Fox */
-                    false, /* ID:9  Pikachu */
-                    false, /* ID:10 Luigi */
-                    false, /* ID:11 Ness */
-                    false, /* ID:12 Captain Falcon */
-                    false, /* ID:13 Jigglypuff */
-                    false, /* ID:14 Peach */
-                    false, /* ID:15 Daisy */
-                    false, /* ID:16 Bowser */
-                    false, /* ID:17 Ice Climbers */
-                    false, /* ID:18 Sheik */
-                    false, /* ID:19 Zelda */
-                    false, /* ID:20 Dr. Mario */
-                    false, /* ID:21 Pichu */
-                    false, /* ID:22 Falco */
-                    false, /* ID:23 Marth */
-                    false, /* ID:24 Lucina */
-                    false, /* ID:25 Young Link */
-                    false, /* ID:26 Ganondorf */
-                    false, /* ID:27 Mewtwo */
-                    false, /* ID:28 Roy */
-                    false, /* ID:29 Chrom */
-                    false, /* ID:30 Mr. Game & Watch */
-                    false, /* ID:31 Meta Knight */
-                    false, /* ID:32 Pit */
-                    false, /* ID:33 Dark Pit */
-                    false, /* ID:34 Zero Suit Samus */
-                    false, /* ID:35 Wario */
-                    false, /* ID:36 Snake */
-                    false, /* ID:37 Ike */
-                    false, /* ID:38 Pokemon Trainer */
-                    false, /* ID:39 Diddy Kong */
-                    false, /* ID:40 Lucas */
-                    false, /* ID:41 Sonic */
-                    false, /* ID:42 King Dedede */
-                    true , /* ID:43 Olimar */
-                    false, /* ID:44 Lucario */
-                    false, /* ID:45 R.O.B. */
-                    false, /* ID:46 Toon Link */
-                    false, /* ID:47 Wolf */
-                    false, /* ID:48 Villager */
-                    false, /* ID:49 Mega Man */
-                    false, /* ID:50 Wii Fit Trainer */
-                    false, /* ID:51 Rosalina & Luma */
-                    false, /* ID:52 Little Mac */
-                    false, /* ID:53 Greninja */
-                    false, /* ID:54 Palutena */
-                    false, /* ID:55 Pac Man */
-                    false, /* ID:56 Robin */
-                    false, /* ID:57 Shulk */
-                    true , /* ID:58 Bowser Jr. */
-                    false, /* ID:59 Duck Hunt */
-                    false, /* ID:60 Ryu */
-                    false, /* ID:61 Ken */
-                    false, /* ID:62 Cloud */
-                    false, /* ID:63 Corrin */
-                    false, /* ID:64 Bayonetta */
-                    false, /* ID:65 Inkling */
-                    true , /* ID:66 Ridley */
-                    false, /* ID:67 Simon */
-                    false, /* ID:68 Richter */
-                    false, /* ID:69 King K. Rool */
-                    false, /* ID:70 Isabelle */
-                    false, /* ID:71 Incineroar */
-                    false, /* ID:72 Mii Brawler */
-                    false, /* ID:73 Mii Swordfighter */
-                    false, /* ID:74 Mii Gunner */
-                    false, /* ID:75 Pirahna Plant */
-                    false  /* ID:76 Joker */
-            };
     
     /** The total number of Fighters in the game. */
+    @Deprecated
     public static int FIGHTER_BOUND = 77;
-    /** The total number of Fighters in the game. */
-    public static int VARIANT_BOUND = 8;
+    
     /** The default variant for every Fighter. */
+    @Deprecated
     public static int DEFAULT_VARIANT = 0;
     
     /** The id of this Fighter. */
+    @Deprecated
     private int fighterID;
     /** The id of the current variant of this Fighter. */
+    @Deprecated
     private int variantID;
+    
+    /** This Fighter's versus render. */
+    @Deprecated
+    private BufferedImage render;
+    /** This Fighter's stock icon. */
+    @Deprecated
+    private ImageIcon icon;
+    
+    
     
     /**
      * Basic constructor.
      * Creates a Fighter object based on an id number referring to a specific image in resources.
      * @param initFighter The id of the Fighter being loaded from file.
      */
-    public Fighter(int initFighter)
-    {
-        if (initFighter >= 0 && initFighter < FIGHTER_BOUND)
-        {
+    @Deprecated
+    public Fighter(int initFighter) {
+        // Set IDs
+        if (initFighter >= 0 && initFighter < FIGHTER_BOUND) {
             fighterID = initFighter;
-            variantID = DEFAULT_VARIANT;
-        }
-        else
-        {
+        } else {
             System.out.println("[ERROR] Invalid fighters id passed.");
             fighterID = 0;
-            variantID = 0;
         }
+        variantID = DEFAULT_VARIANT;
+        
+        // Set icon and render
+        try {
+            //todo remove this trash and just copy paste the names like a normal person
+            try {
+                render = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("[ERROR] Failed alternate name request");
+                render = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
+            }
+        }
+        catch (java.io.IOException e) {
+            System.out.println("[ERROR] Render load aborted.");
+            e.printStackTrace();
+            render = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        }
+        //todo set icon
     }
+    
     /**
      * Variant constructor.
      * Creates a Fighter object based on id numbers referring to a specific image in resources.
      * @param initFighter The id of the Fighter being created.
      * @param initVariant The id of the Variant of the Fighter being created.
      */
-    public Fighter(int initFighter, int initVariant)
-    {
-        if (initFighter >= 0 && initFighter < FIGHTER_BOUND)
-        {
+    @Deprecated
+    public Fighter(int initFighter, int initVariant) {
+        // Set IDs
+        if (initFighter >= 0 && initFighter < FIGHTER_BOUND) {
             fighterID = initFighter;
-            if (initVariant >= 0 && initVariant < VARIANT_BOUND)
-            {
+            if (initVariant >= 0 && initVariant < VARIANT_BOUND) {
                 variantID = initVariant;
-            }
-            else
-            {
+            } else {
                 System.out.println("[ERROR] Invalid variant id passed.");
                 variantID = DEFAULT_VARIANT;
             }
-        }
-        else
-        {
+        } else {
             System.out.println("[ERROR] Invalid fighters id passed.");
             fighterID = 0;
             variantID = 0;
         }
-    }
     
-    /** Getter for fighters id. */
-    public int getFighterID()
-    {
-        return fighterID;
-    }
-    
-    /**
-     * Returns a render of this Fighter in the form of a BufferedImage.
-     * @return the render of the fighters described by this instance of Fighter.
-     */
-    public BufferedImage getRender()
-    {
-        BufferedImage output;
-        try
-        {
-            URL url;
-            File file;
+        // Set icon and render
+        try {
             //todo remove this trash and just copy paste the names like a normal person
-            try
-            {
-                output = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
-            }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
+            try {
+                render = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
+            } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("[ERROR] Failed alternate name request");
-                output = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
+                render = ImageIO.read(getClass().getResource("/fighters/" + FILE[fighterID] + "/render" + variantID + ".png"));
             }
         }
-        catch (java.io.IOException e)
-        {
+        catch (java.io.IOException e) {
             System.out.println("[ERROR] Render load aborted.");
             e.printStackTrace();
-            output = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+            render = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         }
-        return output;
-    }
-    
-    /** Evaluates to the name of the Fighter's default Variant. */
-    @Override
-    public String toString()
-    {
-        if (VARIANT_NAMED[fighterID])
-        {
-            return VARIANT_OPTIONS[fighterID][variantID];
-        }
-        return VARIANT_OPTIONS[fighterID][0];
+        //todo set icon
     }
 }

@@ -1,10 +1,8 @@
 package main.java;
 
-public class Main
-{
-    public static void main(String[] unused)
-    {
-        Generator instance = new Generator();
+public class Main {
+    public static void main(String[] unused) {
+        Temp instance = new Temp();
         instance.run();
     }
 }
