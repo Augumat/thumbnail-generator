@@ -7,6 +7,8 @@ public class FighterProxy implements Comparable
     /** The ID number of the Fighter this object refers to. */
     private int fighterID;
     
+    
+    
     @Override
     public int compareTo(Object o)
     {
