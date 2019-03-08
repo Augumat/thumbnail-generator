@@ -45,7 +45,7 @@ public class Fighter
                     "mewtwo",           /* ID:27 */
                     "roy",              /* ID:28 */
                     "chrom",            /* ID:29 */
-                    "mrgame&watch",     /* ID:30 */
+                    "mrgameandwatch",   /* ID:30 */
                     "metaknight",       /* ID:31 */
                     "pit",              /* ID:32 */
                     "darkpit",          /* ID:33 */
@@ -66,7 +66,7 @@ public class Fighter
                     "villager",         /* ID:48 */
                     "megaman",          /* ID:49 */
                     "wiifittrainer",    /* ID:50 */
-                    "rosalina&luma",    /* ID:51 */
+                    "rosalinaandluma",  /* ID:51 */
                     "littlemac",        /* ID:52 */
                     "greninja",         /* ID:53 */
                     "palutena",         /* ID:54 */

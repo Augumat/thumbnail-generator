@@ -441,8 +441,8 @@ public class Generator implements Runnable
         try
         {
             //todo add multiple template support
-            bgTemplate = ImageIO.read(getClass().getResource("/templates/house_of_paign/bg.png"));
-            fgTemplate = ImageIO.read(getClass().getResource("/templates/house_of_paign/fg.png"));
+            bgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/bg.png"));
+            fgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/fg.png"));
         }
         catch (java.io.IOException e)
         {
@@ -578,7 +578,7 @@ public class Generator implements Runnable
             currentThumbnail.drawImage(fgTemplate,0,0,null);
         
             //begin text field drawing
-            String slambana = "HOUSE OF PAIGN ";
+            String slambana = "Slambana #";
             int leftStart = 0;
             int rightStart = 720;
             int playerBoxLength = 560;
