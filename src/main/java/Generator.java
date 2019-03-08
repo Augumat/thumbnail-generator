@@ -25,7 +25,7 @@ public class Generator implements Runnable
     private static final int PREVIEW_WIDTH = 1280;
     private static final int PREVIEW_HEIGHT = 720;
     /** Version Number. */
-    private static final String version = "v1.4";
+    private static final String version = "v1.5";
     
     /** Whether or not the program is running. */
     private boolean running;
