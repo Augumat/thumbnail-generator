@@ -8,6 +8,9 @@ public class VariantRenderer extends JLabel implements ListCellRenderer
     /** The JLabel containing the icon of this variant. */
     private JLabel variantLabel;
     
+    /**
+     *
+     */
     public VariantRenderer() {
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -22,6 +25,15 @@ public class VariantRenderer extends JLabel implements ListCellRenderer
         setBackground(Color.WHITE);
     }
     
+    /**
+     *
+     * @param list
+     * @param value
+     * @param index
+     * @param isSelected
+     * @param cellHasFocus
+     * @return
+     */
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
     {
