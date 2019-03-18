@@ -147,11 +147,13 @@ public class Fighter implements Comparable<Fighter> {
         return icons[variantId];
     }
     
+    /** Returns the proper name of this Fighter. */
     @Override
     public String toString() {
         return properName;
     }
     
+    /** Returns true of the Fighter ID and its echo status are the same. */
     @Override
     public boolean equals(Object that) {
         return that instanceof Fighter
@@ -159,6 +161,7 @@ public class Fighter implements Comparable<Fighter> {
             && this.echo == ((Fighter) that).echo;
     }
     
+    /** Sorts Fighters in ascending order of ID, and ascending order from regular Fighter to echo. */
     @Override
     public int compareTo(Fighter that) {
         
@@ -349,31 +352,31 @@ public class Fighter implements Comparable<Fighter> {
                     "Pirahna Plant",    /* ID:75 */
                     "Joker"             /* ID:76 */
             };
-    
+
     /** The total number of Fighters in the game. */
     @Deprecated
     public static int FIGHTER_BOUND = 77;
-    
+
     /** The default variant for every Fighter. */
     @Deprecated
     public static int DEFAULT_VARIANT = 0;
-    
+
     /** The id of this Fighter. */
     @Deprecated
     private int fighterID;
     /** The id of the current variant of this Fighter. */
     @Deprecated
     private int variantID;
-    
+
     /** This Fighter's versus render. */
     @Deprecated
     private BufferedImage render;
     /** This Fighter's stock icon. */
     @Deprecated
     private ImageIcon icon;
-    
-    
-    
+
+
+
     /**
      * Basic constructor.
      * Creates a Fighter object based on an id number referring to a specific image in resources.
@@ -389,7 +392,7 @@ public class Fighter implements Comparable<Fighter> {
             fighterID = 0;
         }
         variantID = DEFAULT_VARIANT;
-        
+
         // Set icon and render
         try {
             //todo remove this trash and just copy paste the names like a normal person
@@ -407,7 +410,7 @@ public class Fighter implements Comparable<Fighter> {
         }
         //todo set icon
     }
-    
+
     /**
      * Variant constructor.
      * Creates a Fighter object based on id numbers referring to a specific image in resources.
@@ -430,7 +433,7 @@ public class Fighter implements Comparable<Fighter> {
             fighterID = 0;
             variantID = 0;
         }
-    
+
         // Set icon and render
         try {
             //todo remove this trash and just copy paste the names like a normal person

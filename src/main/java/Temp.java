@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.frames.Preview;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +40,9 @@ public class Temp implements Runnable
     private JComboBox cVariantRight;
     private JTextField tMatchTitle;
     private JTextField tEventNumber;
+    
+    //temp
+    private BufferedImage windowIcon;
     
     /** Flag variables for data entered. */
     
@@ -108,8 +113,8 @@ public class Temp implements Runnable
         //begin font loading
         try
         {
-            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Futura_Condensed_Regular.ttf")).deriveFont(72F);
-            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Lucida_Sans_Regular.ttf")).deriveFont(48F);
+            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/futura_condensed_regular.ttf")).deriveFont(72F);
+            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/lucida_sans_regular.ttf")).deriveFont(48F);
         }
         catch (FontFormatException | IOException e)
         {
@@ -127,7 +132,7 @@ public class Temp implements Runnable
         //end font loading
     
         //begin icon loading
-        BufferedImage windowIcon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        windowIcon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         try
         {
             windowIcon = ImageIO.read(getClass().getResource("/icon.png"));
@@ -436,16 +441,16 @@ public class Temp implements Runnable
         //end selection window creation
     
         //begin preview window creation
-        previewWindow = new JFrame("Thumbnail Preview");
-        previewWindow.setIconImage(windowIcon);
-        previewWindow.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-        previewWindow.setResizable(false);
-        
-        previewCanvas = new Canvas();
-        previewCanvas.setSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
-        previewWindow.add(previewCanvas);
-        
-        previewWindow.pack();
+//        previewWindow = new JFrame("Thumbnail Preview");
+//        previewWindow.setIconImage(windowIcon);
+//        previewWindow.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+//        previewWindow.setResizable(false);
+    
+//        previewCanvas = new Canvas();
+//        previewCanvas.setSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
+//        previewWindow.add(previewCanvas);
+//
+//        previewWindow.pack();
         
         //end preview window creation
         
@@ -481,7 +486,7 @@ public class Temp implements Runnable
     {
         hidePreview();
         
-        bPreview.setEnabled(false);
+        bPreview.setEnabled(true);
         bGenerate.setEnabled(false);
         
         tagLeft = "";
@@ -515,26 +520,29 @@ public class Temp implements Runnable
     /** Reveals the preview window. */
     private void revealPreview()
     {
-        BufferedImage previewThumbnail = generate();
-        if (previewThumbnail != null)
-        {
-            System.out.println("Entered preview");
-            previewWindow.setVisible(true);
-            Graphics tempGraphics = previewWindow.getGraphics();
-            tempGraphics.drawRect(1,1,30,30);
-            tempGraphics.drawImage(previewThumbnail, 0, 0, previewThumbnail.getWidth(), previewThumbnail.getHeight(), null);
-            previewWindow.requestFocus();
-        }
-        else
-        {
-            System.out.println("[ERROR] Preview reveal failed.");
-        }
+        new Preview(generate(), windowIcon);
+//        if (previewThumbnail != null)
+//        {
+//            System.out.println("Entered preview");
+//
+//            previewWindow = new Preview(previewThumbnail, icon);
+//
+//            previewWindow.setVisible(true);
+//            Graphics tempGraphics = previewWindow.getGraphics();
+//            tempGraphics.drawRect(1,1,30,30);
+//            tempGraphics.drawImage(previewThumbnail, 0, 0, previewThumbnail.getWidth(), previewThumbnail.getHeight(), null);
+//            previewWindow.requestFocus();
+//        }
+//        else
+//        {
+//            System.out.println("[ERROR] Preview reveal failed.");
+//        }
     }
     /** Hides the preview window. */
     private void hidePreview()
     {
-        previewWindow.setVisible(false);
-        selectionWindow.requestFocus();
+//        previewWindow.setVisible(false);
+//        selectionWindow.requestFocus();
     }
     
     //todo generate goes to Generator, export stays
