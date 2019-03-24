@@ -45,7 +45,7 @@ public class Fighter implements Comparable<Fighter> {
     private boolean[] variantSupported;
     
     /** An array of the Fighter's stock icons, includes all 8 variants. */
-    private ImageIcon[] icons;
+    private Icon[] icons;
     
     /** An array of the Fighter's full-scale renders, includes all 8 variants. */
     private BufferedImage[] renders;
@@ -73,7 +73,7 @@ public class Fighter implements Comparable<Fighter> {
     
         // Attempt to load each icon from /res/ if it is supported, otherwise leave it as null.  If an icon is allegedly
         // supported but cannot be loaded, throw an exception.
-        icons = new ImageIcon[VARIANT_BOUND];
+        icons = new Icon[VARIANT_BOUND];
         for (int variantID = 0; variantID < VARIANT_BOUND; variantID++) {
             if (variantSupported[variantID]) {
                 try {
@@ -83,6 +83,13 @@ public class Fighter implements Comparable<Fighter> {
                 } catch (java.io.IOException e) {
                     System.out.println("[ERROR] Failed to load " + simpleName + "'s " + variantID + " render, which was allegedly supported.");
                 }
+            }
+        }
+        
+        // Set the variant names for each index of VariantNames
+        for (int i = 0; i < variantNames.length; i++) {
+            if (variantNames[i] == null) {
+                variantNames[i] = properName;
             }
         }
     }
@@ -95,6 +102,14 @@ public class Fighter implements Comparable<Fighter> {
     /** Simple getter for the Fighter's formal name. */
     public String getName() {
         return properName;
+    }
+    
+    /** Gets the Fighter's formal name for when it is wearing the specified variant. */
+    public String getName(int variantId) {
+        if (variantId < 0 || variantId >= variantNames.length) {
+            return null;
+        }
+        return variantNames[variantId];
     }
     
     /**
@@ -131,7 +146,7 @@ public class Fighter implements Comparable<Fighter> {
      *                   that the variant specified is not currently supported in this version of the application.
      */
     @NotNull
-    public ImageIcon getIcon(final int variantId) throws Exception {
+    public Icon getIcon(final int variantId) throws Exception {
         
         // If the specified variantId is outside the bounds of acceptable values, throw an exception
         if (variantId < 0 || variantId >= VARIANT_BOUND) {
@@ -145,12 +160,6 @@ public class Fighter implements Comparable<Fighter> {
         
         // If the inputs are acceptable, return the render of the specified variant
         return icons[variantId];
-    }
-    
-    /** Returns the proper name of this Fighter. */
-    @Override
-    public String toString() {
-        return properName;
     }
     
     /** Returns true of the Fighter ID and its echo status are the same. */

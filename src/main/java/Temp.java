@@ -70,6 +70,7 @@ public class Temp implements Runnable
     private Font futuraCondensed;
     /** The font "Lucida Sans", as used in the description. */
     private Font lucidaSans;
+    
     /** The background template. */
     private BufferedImage bgTemplate;
     /** The foreground template. */
