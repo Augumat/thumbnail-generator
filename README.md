@@ -10,6 +10,12 @@ https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA
 
 
 ## Changelog
+v1.5.1
+
+- Updated the "Slambana" text to be all caps
+
+- Permanently moved compiled release versions to the Releases tab and out of the repository
+
 v1.5
 
 - Updated some character portraits
