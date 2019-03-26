@@ -578,7 +578,7 @@ public class Generator implements Runnable
             currentThumbnail.drawImage(fgTemplate,0,0,null);
         
             //begin text field drawing
-            String slambana = "Slambana #";
+            String slambana = "SLAMBANA #";
             int leftStart = 0;
             int rightStart = 720;
             int playerBoxLength = 560;
