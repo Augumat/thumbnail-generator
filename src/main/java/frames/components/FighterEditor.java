@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import java.awt.*;
 
-public class FighterEditor extends BasicComboBoxEditor {
+class FighterEditor extends BasicComboBoxEditor {
     
     /** Components of the editor. */
     private JPanel panel;
@@ -15,7 +15,7 @@ public class FighterEditor extends BasicComboBoxEditor {
     
     
     
-    public FighterEditor() {
+    FighterEditor() {
         
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -38,7 +38,7 @@ public class FighterEditor extends BasicComboBoxEditor {
      * Sets the contents of the FighterEditor to be contents of a Fighter object.
      * @param fighter The character variant to be displayed
      */
-    public void setContents(Fighter fighter) {
+    void setContents(Fighter fighter) {
         
         // Cover null case
         if (fighter == null) {

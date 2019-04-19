@@ -5,10 +5,10 @@ import main.java.Fighter;
 import javax.swing.*;
 import java.awt.*;
 
-public class FighterRenderer extends JLabel implements ListCellRenderer {
+class FighterRenderer extends JLabel implements ListCellRenderer {
     
     /** Options for what kind of renderer this should be. */
-    public enum RenderOption {
+    enum RenderOption {
         FIGHTER,
         VARIANT
     }
@@ -22,7 +22,7 @@ public class FighterRenderer extends JLabel implements ListCellRenderer {
     
     
     /** Constructor for Fighter select combo boxes. */
-    public FighterRenderer(RenderOption type) {
+    FighterRenderer(RenderOption type) {
         renderType = type;
         
         setLayout(new GridBagLayout());

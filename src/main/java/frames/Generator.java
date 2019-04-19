@@ -2,6 +2,7 @@ package main.java.frames;
 
 import com.google.gson.Gson;
 import main.java.Fighter;
+import main.java.frames.components.FighterSelectBox;
 import main.java.templates.Template;
 
 import javax.imageio.ImageIO;
@@ -21,10 +22,19 @@ public class Generator extends JFrame implements ItemListener {
     private static final String version = "v2.0";
     
     private static final int WINDOW_WIDTH = 515;
-    private static final int WINDOW_HEIGHT = 175;
+    private static final int WINDOW_HEIGHT = 205;
     
     /** The selection pane of the application. */
     private JPanel selectionPane;
+    
+    /** The menu containing all of the relevant options regarding templates and Fighter ordering. */
+    private JMenuBar menuBar;
+    /** The menu for selecting which template to use for the generated thumbnail. */
+    private JMenu templateMenu;
+    /** The list of Templates loaded by this version of the generator. */
+    private Template[] templates;
+    /** */
+    private JMenu fighterSortMenu;
     
     /** Records the tag of the player on the left. */
     private JTextField tTagLeft;
@@ -69,6 +79,7 @@ public class Generator extends JFrame implements ItemListener {
         // Initialize the Generator with its proper name and version
         super("Thumbnail Generator " + version);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setResizable(false);
         
         //begin font loading ...
@@ -98,9 +109,48 @@ public class Generator extends JFrame implements ItemListener {
         this.setIconImage(windowIcon);
         //end icon loading
     
+        //begin template loading
+        //todo remove temp and load actual templates from the folder
+        final String tempSlambana = "{\n" +
+                        "  \"templateDisplayName\": \"Slambana\",\n" +
+                        "  \"templateVersionNumber\": 1.0,\n" +
+                        "  \"directoryName\": \"slambana\",\n" +
+                        "  \"eventName\": \"Slambana #\"\n" +
+                        "}";
+        templates = new Template[1];
+        templates[0] = (new Gson()).fromJson(tempSlambana, Template.class);
+//        try
+//        {
+//            //todo create a file in the directory and then try to discover all templates in the folder
+//            templates = new Template[tempFileName.discover.size];
+//            for (int i = 0; i < templates.length; i++) {
+//                templates[i] = new Gson().fromJson(tempFileName.get, Template.class);
+//            }
+//            //bgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/bg.png"));
+//            //fgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/fg.png"));
+//        }
+//        catch (java.io.IOException e)
+//        {
+//            System.out.println("[ERROR] Template load aborted.");
+//            e.printStackTrace();
+//            System.exit(-1);
+//        }
+        //end template loading
+    
+        //begin fighter sort loading
+        //todo implement
+        //end fighter sort loading
+        
+        //todo load saved settings from last session
+        
+        // Build the GUI and all related components
         buildGui();
         
+        // Reset everything to the defaults and reveal the window
+        reset();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
+        this.requestFocus();
     }
     
     
@@ -115,7 +165,7 @@ public class Generator extends JFrame implements ItemListener {
             protected void paintComponent(Graphics g)
             {
                 super.paintComponent(g);
-                g.drawLine(5, 106, WINDOW_WIDTH - 5, 106);
+                g.drawLine(5, 116, WINDOW_WIDTH - 13, 116);
                 //g.drawImage(Temp.getWindowBackground(), 0, 0, null);
                 //todo maybe add this if I do a button overhaul
             }
@@ -123,13 +173,44 @@ public class Generator extends JFrame implements ItemListener {
         this.add(selectionPane);
         selectionPane.setLayout(null);
         selectionPane.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-    
-        // Create components
-    
+        
+        //enter menu system
+        // Create the menu bar
+        menuBar = new JMenuBar();
+        menuBar.setBounds(
+                0,
+                0,
+                WINDOW_WIDTH,
+                20
+        );
+        
+        // Create the template menu
+        templateMenu = new JMenu("Templates");
+        for (Template currentTemplate: templates) {
+            JRadioButtonMenuItem current = new JRadioButtonMenuItem(currentTemplate.toString());
+            current.addActionListener(e -> System.out.println("get rid of this")/*todo*/);
+            templateMenu.add(current);
+        }
+        templateMenu.getItem(0).setSelected(true);
+        menuBar.add(templateMenu);
+        
+        // Create the fighter sort menu
+        //todo implement
+//        fighterSortMenu = new JMenu("Fighter Sort Mode");
+//        for (FighterSort currentSort: fighterSorts) {
+//            JRadioButtonMenuItem current = new JRadioButtonMenuItem(currentSort.toString());
+//            templateMenu.add();
+//        }
+//        fighterSortMenu.getItem(0).setSelected(true);
+//        menuBar.add(fighterSortMenu);
+        
+        selectionPane.add(menuBar);
+        //end menu system
+        
         //begin main control buttons
         Dimension buttonPreferredSize = new Dimension(120, 25);
         Dimension bigButtonPreferredSize = new Dimension(160, 45);
-        Insets insets = new Insets(10, 9, 10, 9);
+        Insets insets = new Insets(26, 9, 36, 9);
         Dimension componentSize;
     
         // Create the preview button
@@ -177,35 +258,199 @@ public class Generator extends JFrame implements ItemListener {
     
         Dimension tagPreferredSize = new Dimension(180, 25);
         Dimension labelPreferredSize = new Dimension(85, 25);
-        Dimension fighterPreferredSize = new Dimension(160, 24);
-        Dimension variantPreferredSize = new Dimension(50, 24);
+    
+        //begin tag fields
+        tTagLeft = new JTextField();
+        tTagLeft.setPreferredSize(tagPreferredSize);
+        componentSize = tTagLeft.getPreferredSize();
+        tTagLeft.setBounds(
+                insets.left + labelPreferredSize.width,
+                insets.top,
+                componentSize.width,
+                componentSize.height
+        );
+        JLabel lTagLeft = new JLabel("Player Tag (L)");
+        lTagLeft.setPreferredSize(labelPreferredSize);
+        componentSize = lTagLeft.getPreferredSize();
+        lTagLeft.setBounds(
+                insets.left,
+                insets.top,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(lTagLeft);
+        selectionPane.add(tTagLeft);
+    
+        tTagRight = new JTextField();
+        tTagRight.setPreferredSize(tagPreferredSize);
+        componentSize = tTagRight.getPreferredSize();
+        tTagRight.setBounds(
+                insets.left + labelPreferredSize.width,
+                insets.top + 30,
+                componentSize.width,
+                componentSize.height
+        );
+        JLabel lTagRight = new JLabel("Player Tag (R)");
+        lTagRight.setPreferredSize(labelPreferredSize);
+        componentSize = lTagRight.getPreferredSize();
+        lTagRight.setBounds(
+                insets.left,
+                insets.top + 30,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(lTagRight);
+        selectionPane.add(tTagRight);
+        //end tag fields
+        
         Dimension matchPreferredSize = new Dimension(240, 25);
         Dimension eventPreferredSize = new Dimension(70, 25);
+        
+        //begin match data fields
+        tMatchTitle = new JTextField();
+        tMatchTitle.setPreferredSize(matchPreferredSize);
+        componentSize = tMatchTitle.getPreferredSize();
+        tMatchTitle.setBounds(
+                insets.left + labelPreferredSize.width,
+                insets.top + 60,
+                componentSize.width,
+                componentSize.height
+        );
+        JLabel lMatchTitle = new JLabel("      Match Title");
+        lMatchTitle.setPreferredSize(labelPreferredSize);
+        componentSize = lMatchTitle.getPreferredSize();
+        lMatchTitle.setBounds(
+                insets.left,
+                insets.top + 60,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(lMatchTitle);
+        selectionPane.add(tMatchTitle);
+    
+        tEventNumber = new JTextField();
+        tEventNumber.setPreferredSize(eventPreferredSize);
+        componentSize = tEventNumber.getPreferredSize();
+        tEventNumber.setBounds(
+                insets.left + labelPreferredSize.width + matchPreferredSize.width + eventPreferredSize.width + 31,
+                insets.top + 60,
+                componentSize.width,
+                componentSize.height
+        );
+        JLabel lEventNumber = new JLabel("  Event Number");
+        lEventNumber.setPreferredSize(labelPreferredSize);
+        componentSize = lEventNumber.getPreferredSize();
+        lEventNumber.setBounds(
+                insets.left + labelPreferredSize.width + matchPreferredSize.width + 10,
+                insets.top + 60,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(lEventNumber);
+        selectionPane.add(tEventNumber);
+        //end match data fields
+    
+        //todo -----------------------------------------------------------------------------------------------Below here
+        
+//        Dimension fighterPreferredSize = new Dimension(160, 24);
+//        Dimension variantPreferredSize = new Dimension(50, 24);
+//
+//        cFighterLeft = new FighterSelectBox(sortedFighters);
+//        cFighterLeft.addActionListener(e ->
+//        {
+//            cVariantLeft.setup(cFighterLeft.getSelectedItem());
+//            cVariantLeft.setEnabled(true);
+//        });
+//        cFighterLeft.setPreferredSize(fighterPreferredSize);
+//        componentSize = cFighterLeft.getPreferredSize();
+//        cFighterLeft.setBounds(
+//                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
+//                insets.top,
+//                componentSize.width,
+//                componentSize.height
+//        );
+//        selectionPane.add(cFighterLeft);
+//
+//        cFighterRight = new JComboBox(Fighter.FIGHTER_OPTIONS);
+//        cFighterRight.addActionListener(e ->
+//        {
+//            cFighterRight.setEnabled(false);
+//            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getId()]*/)
+//            {
+//                cVariantRight.addItem(current);
+//            }
+//            cVariantRight.setEnabled(true);
+//        });
+//        cFighterRight.setPreferredSize(fighterPreferredSize);
+//        componentSize = cFighterRight.getPreferredSize();
+//        cFighterRight.setBounds(
+//                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
+//                insets.top + 30,
+//                componentSize.width,
+//                componentSize.height
+//        );
+//        selectionPane.add(cFighterRight);
+//
+//        cVariantLeft = new JComboBox();
+//        cVariantLeft.addActionListener(e ->
+//        {
+//            fighterLeft = new Fighter(cFighterLeft.getSelectedIndex(), cVariantLeft.getSelectedIndex());
+//            cVariantLeft.setEnabled(false);
+//            if (isGeneratorReady())
+//            {
+//                fullTrigger();
+//            }
+//        });
+//        cVariantLeft.setPreferredSize(variantPreferredSize);
+//        componentSize = cVariantLeft.getPreferredSize();
+//        cVariantLeft.setBounds(
+//                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
+//                insets.top,
+//                componentSize.width,
+//                componentSize.height
+//        );
+//        selectionPane.add(cVariantLeft);
+//
+//        cVariantRight = new JComboBox();
+//        cVariantRight.addActionListener(e ->
+//        {
+//            fighterRight = new Fighter(cFighterRight.getSelectedIndex(), cVariantRight.getSelectedIndex());
+//            cVariantRight.setEnabled(false);
+//            if (isGeneratorReady())
+//            {
+//                fullTrigger();
+//            }
+//        });
+//        cVariantRight.setPreferredSize(variantPreferredSize);
+//        componentSize = cVariantRight.getPreferredSize();
+//        cVariantRight.setBounds(
+//                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
+//                insets.top + 30,
+//                componentSize.width,
+//                componentSize.height
+//        );
+//        selectionPane.add(cVariantRight);
+        //end tag/fighters/variant fields
+        //end component creation
     }
     
     /** Resets all temporary variables and provides a clean slate for creating a new thumbnail. */
     private void reset() {
         
-        //todo remove the editable options
-        tTagLeft.setEditable(true);
         tTagLeft.setText("");
-        tTagRight.setEditable(true);
         tTagRight.setText("");
-        
-        cFighterLeft.setSelectedIndex(0);
-        cFighterLeft.setEnabled(true);
-        cVariantLeft.removeAllItems();
-        cVariantLeft.setEnabled(false);
-        cFighterRight.setSelectedIndex(0);
-        cFighterRight.setEnabled(true);
-        cVariantRight.removeAllItems();
-        cVariantRight.setEnabled(false);
-        
-        tMatchTitle.setEditable(true);
+    
         tMatchTitle.setText("");
-        
-        tEventNumber.setEditable(true);
         tEventNumber.setText("");
+        
+        //cFighterLeft.setSelectedIndex(0);
+        //cFighterLeft.setEnabled(true);
+        //cVariantLeft.removeAllItems();
+        //cVariantLeft.setEnabled(false);
+        //cFighterRight.setSelectedIndex(0);
+        //cFighterRight.setEnabled(true);
+        //cVariantRight.removeAllItems();
+        //cVariantRight.setEnabled(false);
     }
     
     /**
