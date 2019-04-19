@@ -21,20 +21,21 @@ public class FighterRenderer extends JLabel implements ListCellRenderer {
     
     
     
+    /** Constructor for Fighter select combo boxes. */
     public FighterRenderer(RenderOption type) {
         renderType = type;
         
         setLayout(new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.weightx = 1.0;
-        constraints.insets = new Insets(2, 2, 2, 2);
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1.0;
+        c.insets = new Insets(2, 2, 2, 2);
         
         fighterLabel.setOpaque(true);
         fighterLabel.setHorizontalAlignment(JLabel.LEFT);
         
-        add(fighterLabel, constraints);
-        setBackground(Color.WHITE);
+        add(fighterLabel, c);
+        setBackground(Color.LIGHT_GRAY);
     }
     
     
@@ -49,7 +50,9 @@ public class FighterRenderer extends JLabel implements ListCellRenderer {
         Fighter fighter = (Fighter) value;
     
         // Set the text of the list element to the Fighter's name (when in fighter mode, the ordinal will be zero)
-        fighterLabel.setText(fighter.getName(index * renderType.ordinal()));
+        if (renderType == RenderOption.FIGHTER) {
+            fighterLabel.setText(fighter.getName(0));
+        }
     
         // Set the Fighter's Icon to the default stock icon of that Fighter
         Icon stockIcon = null;
@@ -62,7 +65,7 @@ public class FighterRenderer extends JLabel implements ListCellRenderer {
     
         // Make the box highlight light gray when selected and nothing otherwise
         if (isSelected) {
-            fighterLabel.setBackground(Color.LIGHT_GRAY);
+            fighterLabel.setBackground(Color.WHITE);
         } else {
             fighterLabel.setBackground(null);
         }

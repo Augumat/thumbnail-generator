@@ -1,5 +1,6 @@
 package main.java.frames;
 
+import com.google.gson.Gson;
 import main.java.Fighter;
 import main.java.templates.Template;
 
@@ -13,11 +14,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * The main window of the program, responsible for receiving input and interfacing with
+ * The main window of the program, responsible for receiving input and interfacing with the user.
  */
 public class Generator extends JFrame implements ItemListener {
     
-    /** Version Number. */
     private static final String version = "v2.0";
     
     private static final int WINDOW_WIDTH = 515;
@@ -98,6 +98,16 @@ public class Generator extends JFrame implements ItemListener {
         this.setIconImage(windowIcon);
         //end icon loading
     
+        buildGui();
+        
+        this.setVisible(true);
+    }
+    
+    
+    
+    /** Creates and arranges all of the GUI elements of the generator. */
+    private void buildGui() {
+        
         // Create the selection pane with the line in it and add it to this frame
         selectionPane = new JPanel()
         {
@@ -121,7 +131,7 @@ public class Generator extends JFrame implements ItemListener {
         Dimension bigButtonPreferredSize = new Dimension(160, 45);
         Insets insets = new Insets(10, 9, 10, 9);
         Dimension componentSize;
-        
+    
         // Create the preview button
         bPreview = new JButton("Show Preview");
         bPreview.addActionListener(e -> new Preview(generate(), windowIcon));
@@ -172,8 +182,6 @@ public class Generator extends JFrame implements ItemListener {
         Dimension matchPreferredSize = new Dimension(240, 25);
         Dimension eventPreferredSize = new Dimension(70, 25);
     }
-    
-    
     
     /** Resets all temporary variables and provides a clean slate for creating a new thumbnail. */
     private void reset() {
@@ -228,6 +236,7 @@ public class Generator extends JFrame implements ItemListener {
         }
         //end save prompt
     }
+    
     //todo generate goes to Generator, export stays
     /**
      * Generates a thumbnail and returns it as a new BufferedImage.
@@ -236,13 +245,18 @@ public class Generator extends JFrame implements ItemListener {
     private BufferedImage generate() {
         
         // Grab the resources needed from the currently selected template
-        Template template;
-        BufferedImage background = template.getBackground();
-        BufferedImage foreground = template.getForeground();
-        String eventName = template.getEventName();
+        //todo remove temp and load actual current template
+        final String tempSlambana =
+                "{\n" +
+                "  \"templateDisplayName\": \"Slambana\",\n" +
+                "  \"templateVersionNumber\": 1.0,\n" +
+                "  \"directoryName\": \"slambana\",\n" +
+                "  \"eventName\": \"Slambana #\"\n" +
+                "}";
+        Template template = (new Gson()).fromJson(tempSlambana, Template.class);
         
         //create canvas using background template
-        BufferedImage thumbnail = copyImage(background);
+        BufferedImage thumbnail = copyImage(template.getBackground());
         Graphics currentThumbnail = thumbnail.createGraphics();
     
         //draw both characters to the canvas in their respective places
@@ -263,7 +277,7 @@ public class Generator extends JFrame implements ItemListener {
         }
     
         //draw the foreground template over the previous
-        currentThumbnail.drawImage(foreground,0,0,null);
+        currentThumbnail.drawImage(template.getForeground(),0,0,null);
     
         //begin text field drawing
         int leftStart = 0;
@@ -273,21 +287,21 @@ public class Generator extends JFrame implements ItemListener {
     
         FontMetrics futuraMetrics = currentThumbnail.getFontMetrics(futuraCondensed);
         FontMetrics lucidaMetrics = currentThumbnail.getFontMetrics(lucidaSans);
-    
-        int leftTagIndent = leftStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagLeft))) / 2);
-        int rightTagIndent = rightStart + ((playerBoxLength - (futuraMetrics.stringWidth(tagRight))) / 2);
-        int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(eventName + eventNumber)) / 2);
-        int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(matchTitle)) / 2);
+        
+        int leftTagIndent = leftStart + ((playerBoxLength - (futuraMetrics.stringWidth(tTagLeft.getText()))) / 2);
+        int rightTagIndent = rightStart + ((playerBoxLength - (futuraMetrics.stringWidth(tTagRight.getText()))) / 2);
+        int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(template.getEventName() + tEventNumber.getText())) / 2);
+        int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(tMatchTitle.getText())) / 2);
     
         currentThumbnail.setColor(Color.WHITE);
         currentThumbnail.setFont(futuraCondensed);
-        currentThumbnail.drawString(tagLeft, leftTagIndent, 75);
-        currentThumbnail.drawString(tagRight, rightTagIndent, 75);
-        currentThumbnail.drawString(eventName + eventNumber, eventNumberIndent,655);
+        currentThumbnail.drawString(tTagLeft.getText(), leftTagIndent, 75);
+        currentThumbnail.drawString(tTagRight.getText(), rightTagIndent, 75);
+        currentThumbnail.drawString(template.getEventName() + tEventNumber.getText(), eventNumberIndent,655);
     
         currentThumbnail.setColor(new Color(160,160,160));
         currentThumbnail.setFont(lucidaSans);
-        currentThumbnail.drawString(matchTitle, roundNumberIndent,710);
+        currentThumbnail.drawString(tMatchTitle.getText(), roundNumberIndent,710);
         //end text field drawing
     
         //finalize and return

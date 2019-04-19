@@ -51,6 +51,7 @@ public class Fighter implements Comparable<Fighter> {
     private BufferedImage[] renders;
     
     
+    
     /**
      * Initializes the fighter and loads all of the supported icons and renders associated with this fighter
      */
