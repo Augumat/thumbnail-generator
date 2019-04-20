@@ -10,7 +10,13 @@ import java.awt.image.BufferedImage;
  * Defines a Fighter and stores the images, offsets, and variant costumes associated with them.
  * @author Augumat
  */
-public class Fighter implements Comparable<Fighter> {
+public class Fighter {
+    
+    /** A list of the sorting modes that can be used to compare Fighters to each other. */
+    public enum SortingMode {
+        Default,     // Sorts Fighters in ascending order of ID, and ascending order from regular Fighter to echo
+        Alphabetical // Sorts Fighters in lexicographical order based on their display names
+    }
     
     /** The number of Variants that each fighter has. */
     private static int VARIANT_BOUND = 8;
@@ -105,6 +111,11 @@ public class Fighter implements Comparable<Fighter> {
         return properName;
     }
     
+    /** Simple getter for the Fighter's status as an echo fighter. */
+    public boolean isEcho() {
+        return echo;
+    }
+    
     /** Gets the Fighter's formal name for when it is wearing the specified variant. */
     public String getName(int variantId) {
         if (variantId < 0 || variantId >= variantNames.length) {
@@ -163,35 +174,53 @@ public class Fighter implements Comparable<Fighter> {
         return icons[variantId];
     }
     
+    /**
+     * Compares one Fighter to another according to a specified SortingMode.
+     * @param first The first Fighter to compare.
+     * @param second The second Fighter to compare.
+     * @param mode How the Fighters should be compared, should be a member of Fighter.SortingMode
+     * @return A positive number if the first Fighter should appear before the second, or a negative number in the
+     *         opposite case.
+     */
+    public static int compare(Fighter first, Fighter second, SortingMode mode) {
+        switch (mode) {
+            case Default:
+                // If the two Fighters are equivalent, return 0
+                if (first.equals(second)) {
+                    return 0;
+                }
+                
+                // Get the difference in IDs
+                int comparisonWeight = first.getId() - second.getId();
+                
+                // If the IDs are the same, use the status as an echo to compare them (ECHOS COME AFTER DEFAULTS)
+                if (comparisonWeight == 0 && second.isEcho()) {
+                    return -1;
+                } else if (comparisonWeight == 0 && first.isEcho()) {
+                    return 1;
+                }
+                
+                // If the comparisonWeight is not zero, simply return the weight, since it will be signed correctly
+                return comparisonWeight;
+            
+            case Alphabetical:
+                // Return the lexicographical difference
+                String firstName = first.getName();
+                String secondName = second.getName();
+                return firstName.compareToIgnoreCase(secondName);
+            
+            default:
+                // If there is no valid mode selected, return values that would leave the list as-is
+                return 0;
+        }
+    }
+    
     /** Returns true of the Fighter ID and its echo status are the same. */
     @Override
     public boolean equals(Object that) {
         return that instanceof Fighter
             && this.id == ((Fighter) that).id
             && this.echo == ((Fighter) that).echo;
-    }
-    
-    /** Sorts Fighters in ascending order of ID, and ascending order from regular Fighter to echo. */
-    @Override
-    public int compareTo(Fighter that) {
-        
-        // If the two Fighters are equivalent, return 0
-        if (this.equals(that)) {
-            return 0;
-        }
-        
-        // Get the difference in IDs
-        int comparisonWeight = this.id - that.id;
-        
-        // If the IDs are the same, use the status as an echo to compare them (ECHOS COME AFTER DEFAULTS)
-        if (comparisonWeight == 0 && that.echo) {
-            return -1;
-        } else if (comparisonWeight == 0 && this.echo) {
-            return 1;
-        }
-        
-        // If the comparisonWeight is not zero, simply return the weight, since it will be signed correctly
-        return comparisonWeight;
     }
     
     

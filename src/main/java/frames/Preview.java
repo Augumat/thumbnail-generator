@@ -5,15 +5,23 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 //todo make all package private
-public class Preview extends JFrame {
+class Preview extends JFrame {
     
     private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = 720;
+    private static final int WINDOW_HEIGHT = 749;
     
-    public Preview(BufferedImage thumbnail, BufferedImage windowIcon) {
+    Preview(BufferedImage thumbnail, BufferedImage windowIcon, double displaySizeScalar) {
         
         // Create this frame with the proper name
         super("Thumbnail Preview");
+        
+        // Scale the size of the Preview window
+        if (displaySizeScalar <= 0) {
+            System.out.println("[ERROR] Negative or zero thumbnail Preview scalar attempted, resetting to default");
+            displaySizeScalar = 1;
+        }
+        int scaledWidth = (int) (WINDOW_WIDTH * displaySizeScalar);
+        int scaledHeight = (int) (WINDOW_HEIGHT * displaySizeScalar);
         
         // If the window icon or the thumbnail are null, dispose of the window after printing an error message
         if (thumbnail == null) {
@@ -30,19 +38,18 @@ public class Preview extends JFrame {
         // Initialize the window
         this.setIconImage(windowIcon);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        this.setSize(scaledWidth, scaledHeight);
         this.setResizable(false);
         
         // Add a custom panel that just displays the passed thumbnail in the window
         JPanel previewPanel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
-                g.drawImage(thumbnail, 0, 0, null);
+                g.drawImage(thumbnail, 0, 0, scaledWidth, scaledHeight, null);
             }
         };
-        previewPanel.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        previewPanel.setPreferredSize(new Dimension(scaledWidth, scaledHeight));
         this.add(previewPanel);
-        this.pack();
         
         // Set the window visible
         this.setVisible(true);

@@ -1,40 +1,62 @@
 package main.java.frames;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import jdk.nashorn.internal.parser.JSONParser;
 import main.java.Fighter;
-import main.java.frames.components.FighterSelectBox;
 import main.java.templates.Template;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The main window of the program, responsible for receiving input and interfacing with the user.
  */
-public class Generator extends JFrame implements ItemListener {
+public class Generator extends JFrame {
     
     private static final String version = "v2.0";
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
     
+    private static final String JSON_SUFFIX = ".json";
+    
+    /** A list of every Fighter discovered by the */
+    private ArrayList<Fighter> allFighters;
+    
     /** The selection pane of the application. */
     private JPanel selectionPane;
-    
     /** The menu containing all of the relevant options regarding templates and Fighter ordering. */
     private JMenuBar menuBar;
+    
     /** The menu for selecting which template to use for the generated thumbnail. */
     private JMenu templateMenu;
+    /** List of radio buttons in the Template select menu. */
+    private JRadioButtonMenuItem[] templateSelectButtons;
     /** The list of Templates loaded by this version of the generator. */
     private Template[] templates;
-    /** */
+    /** The index of the currently selected Template. */
+    private int selectedTemplateIndex;
+    
+    /** A menu for selecting how Fighters should be ordered in the Fighter select combo boxes. */
     private JMenu fighterSortMenu;
+    /** List of radio buttons in the Template select menu. */
+    private JRadioButtonMenuItem[] fighterSortButtons;
+    /** The index of the currently selected Fighter sorting mode. */
+    private Fighter.SortingMode selectedSort;
+    
+    /** A number strictly greater than zero that determines how the preview window is scaled when generated. */
+    private double selectedPreviewScalar = 0.5;
     
     /** Records the tag of the player on the left. */
     private JTextField tTagLeft;
@@ -53,7 +75,6 @@ public class Generator extends JFrame implements ItemListener {
     
     /** Records the match title (grand finals, losers semifinals, etc.). */
     private JTextField tMatchTitle;
-    
     /** Records the event number (34 would produce Slambana #34). */
     private JTextField tEventNumber;
     
@@ -108,40 +129,77 @@ public class Generator extends JFrame implements ItemListener {
         }
         this.setIconImage(windowIcon);
         //end icon loading
+        
+        //begin template loading ...
+        // Creates a temporary dummy file in the data directory that can be easily referenced for its path
+        File anchorFile = new File(FileSystems.getDefault().getPath("res/templates/").toUri());
     
-        //begin template loading
-        //todo remove temp and load actual templates from the folder
-        final String tempSlambana = "{\n" +
-                        "  \"templateDisplayName\": \"Slambana\",\n" +
-                        "  \"templateVersionNumber\": 1.0,\n" +
-                        "  \"directoryName\": \"slambana\",\n" +
-                        "  \"eventName\": \"Slambana #\"\n" +
-                        "}";
-        templates = new Template[1];
-        templates[0] = (new Gson()).fromJson(tempSlambana, Template.class);
-//        try
-//        {
-//            //todo create a file in the directory and then try to discover all templates in the folder
-//            templates = new Template[tempFileName.discover.size];
-//            for (int i = 0; i < templates.length; i++) {
-//                templates[i] = new Gson().fromJson(tempFileName.get, Template.class);
-//            }
-//            //bgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/bg.png"));
-//            //fgTemplate = ImageIO.read(getClass().getResource("/templates/slambana/fg.png"));
-//        }
-//        catch (java.io.IOException e)
-//        {
-//            System.out.println("[ERROR] Template load aborted.");
-//            e.printStackTrace();
-//            System.exit(-1);
-//        }
+        // Creates a FileFilter for directories and one for JSON
+        FileFilter jsonFilter = toTest -> {
+        
+            // Grabs the file name of toTest
+            String fileName = toTest.getName();
+        
+            // If the filename is shorter than or equal in size to the length of a .json suffix literal, then it could
+            // not possibly be a json file, and the filter returns false.
+            if (fileName.length() <= JSON_SUFFIX.length()) {
+                return false;
+            }
+        
+            // Otherwise, the lambda returns true if the file extension is equivalent to the .json suffix literal and
+            // false otherwise.
+            return fileName.substring(fileName.length() - JSON_SUFFIX.length()).equals(JSON_SUFFIX);
+        };
+        File[] jsonFiles = anchorFile.listFiles(jsonFilter);
+        
+        // Checks if any Templates were found and creates a list of them if they weren't
+        templates = new Template[0];
+        if (jsonFiles != null) {
+            templates = new Template[jsonFiles.length];
+        }
+    
+        // Creates a Template object for every File in jsonFiles and stores them in shows
+        for (int i = 0; i < templates.length; i++) {
+        
+            // Grab the raw String data of the current File
+            final Path path = FileSystems.getDefault().getPath("res/templates/", jsonFiles[i].getName());
+    
+            String rawString = "";
+            try {
+                rawString = new String(Files.readAllBytes(path));
+            } catch (IOException e) {
+                System.out.println("Couldn't find file: " + jsonFiles[i].getName());
+            }
+        
+            // Parse that raw String data into a Show object and add it to the output array
+            templates[i] = new Gson().fromJson(rawString, Template.class);
+        }
         //end template loading
     
-        //begin fighter sort loading
-        //todo implement
+        //begin Fighter loading ...
+        // Get the path to the fighter data
+        final Path path = FileSystems.getDefault().getPath("res/", "fighterData.json");
+        
+        // Attempts to load the fighter JSON to fighterData
+        String fighterData = "";
+        try {
+            fighterData = new String(Files.readAllBytes(path));
+        } catch (IOException e) {
+            System.out.println("[ERROR] Failed to find any Fighter data");
+            System.exit(-1);
+        }
+    
+        // Load all the discovered Fighters into a list
+        allFighters = new ArrayList<>(new Gson().fromJson(fighterData, ArrayList.class));
+        //end Fighter loading
+        
+        //begin fighter sort loading ...
+        //todo in future, possibly make these sorts configurable through a config file
         //end fighter sort loading
         
+        //begin saved settings loading ...
         //todo load saved settings from last session
+        //end saved settings loading
         
         // Build the GUI and all related components
         buildGui();
@@ -183,28 +241,45 @@ public class Generator extends JFrame implements ItemListener {
                 WINDOW_WIDTH,
                 20
         );
+        selectionPane.add(menuBar);
+    
+        // Create the fighter sort options menu
+        fighterSortMenu = new JMenu("Sorting");
+        fighterSortButtons = new JRadioButtonMenuItem[Fighter.SortingMode.values().length];
+        for (int i = 0; i < Fighter.SortingMode.values().length; i++) {
+            JRadioButtonMenuItem currentOption = new JRadioButtonMenuItem(Fighter.SortingMode.values()[i].toString());
+            fighterSortButtons[i] = currentOption;
+            currentOption.addActionListener(e -> {
+                fighterSortButtons[selectedSort.ordinal()].setSelected(false);
+                for (int j = 0; j < fighterSortButtons.length; j++) {
+                    if (fighterSortButtons[j].isSelected()) {
+                        selectedSort = Fighter.SortingMode.values()[j];
+                    }
+                }
+            });
+            fighterSortMenu.add(currentOption);
+        }
+        fighterSortMenu.getItem(0).setSelected(true);
+        menuBar.add(fighterSortMenu);
         
         // Create the template menu
         templateMenu = new JMenu("Templates");
-        for (Template currentTemplate: templates) {
-            JRadioButtonMenuItem current = new JRadioButtonMenuItem(currentTemplate.toString());
-            current.addActionListener(e -> System.out.println("get rid of this")/*todo*/);
-            templateMenu.add(current);
+        templateSelectButtons = new JRadioButtonMenuItem[templates.length];
+        for (int i = 0; i < templates.length; i++) {
+            JRadioButtonMenuItem currentOption = new JRadioButtonMenuItem(templates[i].toString());
+            templateSelectButtons[i] = currentOption;
+            currentOption.addActionListener(e -> {
+                templateSelectButtons[selectedTemplateIndex].setSelected(false);
+                for (int j = 0; j < templateSelectButtons.length; j++) {
+                    if (templateSelectButtons[j].isSelected()) {
+                        selectedTemplateIndex = j;
+                    }
+                }
+            });
+            templateMenu.add(currentOption);
         }
         templateMenu.getItem(0).setSelected(true);
         menuBar.add(templateMenu);
-        
-        // Create the fighter sort menu
-        //todo implement
-//        fighterSortMenu = new JMenu("Fighter Sort Mode");
-//        for (FighterSort currentSort: fighterSorts) {
-//            JRadioButtonMenuItem current = new JRadioButtonMenuItem(currentSort.toString());
-//            templateMenu.add();
-//        }
-//        fighterSortMenu.getItem(0).setSelected(true);
-//        menuBar.add(fighterSortMenu);
-        
-        selectionPane.add(menuBar);
         //end menu system
         
         //begin main control buttons
@@ -215,7 +290,7 @@ public class Generator extends JFrame implements ItemListener {
     
         // Create the preview button
         bPreview = new JButton("Show Preview");
-        bPreview.addActionListener(e -> new Preview(generate(), windowIcon));
+        bPreview.addActionListener(e -> new Preview(generate(), windowIcon, selectedPreviewScalar));
         bPreview.setPreferredSize(buttonPreferredSize);
         componentSize = bPreview.getPreferredSize();
         bPreview.setBounds(
@@ -444,11 +519,9 @@ public class Generator extends JFrame implements ItemListener {
         tEventNumber.setText("");
         
         //cFighterLeft.setSelectedIndex(0);
-        //cFighterLeft.setEnabled(true);
         //cVariantLeft.removeAllItems();
         //cVariantLeft.setEnabled(false);
         //cFighterRight.setSelectedIndex(0);
-        //cFighterRight.setEnabled(true);
         //cVariantRight.removeAllItems();
         //cVariantRight.setEnabled(false);
     }
@@ -490,29 +563,21 @@ public class Generator extends JFrame implements ItemListener {
     private BufferedImage generate() {
         
         // Grab the resources needed from the currently selected template
-        //todo remove temp and load actual current template
-        final String tempSlambana =
-                "{\n" +
-                "  \"templateDisplayName\": \"Slambana\",\n" +
-                "  \"templateVersionNumber\": 1.0,\n" +
-                "  \"directoryName\": \"slambana\",\n" +
-                "  \"eventName\": \"Slambana #\"\n" +
-                "}";
-        Template template = (new Gson()).fromJson(tempSlambana, Template.class);
+        Template template = templates[selectedTemplateIndex];
         
         //create canvas using background template
         BufferedImage thumbnail = copyImage(template.getBackground());
-        Graphics currentThumbnail = thumbnail.createGraphics();
+        Graphics output = thumbnail.createGraphics();
     
         //draw both characters to the canvas in their respective places
         try {
             // Draw the left Fighter
-            currentThumbnail.drawImage(
+            output.drawImage(
                     ((Fighter) cFighterLeft.getSelectedItem()).getRender(cVariantLeft.getSelectedIndex()),
                     0, 0, 639, 639, 0, 0, 639, 639, null
             );
             // Draw the Right fighter
-            currentThumbnail.drawImage(
+            output.drawImage(
                     ((Fighter) cFighterRight.getSelectedItem()).getRender(cVariantRight.getSelectedIndex()),
                     1279, 0, 640, 639, 0, 0, 639, 639, null
             );
@@ -522,7 +587,7 @@ public class Generator extends JFrame implements ItemListener {
         }
     
         //draw the foreground template over the previous
-        currentThumbnail.drawImage(template.getForeground(),0,0,null);
+        output.drawImage(template.getForeground(),0,0,null);
     
         //begin text field drawing
         int leftStart = 0;
@@ -530,23 +595,23 @@ public class Generator extends JFrame implements ItemListener {
         int playerBoxLength = 560;
         int centerLine = 640;
     
-        FontMetrics futuraMetrics = currentThumbnail.getFontMetrics(futuraCondensed);
-        FontMetrics lucidaMetrics = currentThumbnail.getFontMetrics(lucidaSans);
+        FontMetrics futuraMetrics = output.getFontMetrics(futuraCondensed);
+        FontMetrics lucidaMetrics = output.getFontMetrics(lucidaSans);
         
         int leftTagIndent = leftStart + ((playerBoxLength - (futuraMetrics.stringWidth(tTagLeft.getText()))) / 2);
         int rightTagIndent = rightStart + ((playerBoxLength - (futuraMetrics.stringWidth(tTagRight.getText()))) / 2);
         int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(template.getEventName() + tEventNumber.getText())) / 2);
         int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(tMatchTitle.getText())) / 2);
     
-        currentThumbnail.setColor(Color.WHITE);
-        currentThumbnail.setFont(futuraCondensed);
-        currentThumbnail.drawString(tTagLeft.getText(), leftTagIndent, 75);
-        currentThumbnail.drawString(tTagRight.getText(), rightTagIndent, 75);
-        currentThumbnail.drawString(template.getEventName() + tEventNumber.getText(), eventNumberIndent,655);
+        output.setColor(Color.WHITE);
+        output.setFont(futuraCondensed);
+        output.drawString(tTagLeft.getText(), leftTagIndent, 75);
+        output.drawString(tTagRight.getText(), rightTagIndent, 75);
+        output.drawString(template.getEventName() + tEventNumber.getText(), eventNumberIndent,655);
     
-        currentThumbnail.setColor(new Color(160,160,160));
-        currentThumbnail.setFont(lucidaSans);
-        currentThumbnail.drawString(tMatchTitle.getText(), roundNumberIndent,710);
+        output.setColor(new Color(160,160,160));
+        output.setFont(lucidaSans);
+        output.drawString(tMatchTitle.getText(), roundNumberIndent,710);
         //end text field drawing
     
         //finalize and return
@@ -564,11 +629,4 @@ public class Generator extends JFrame implements ItemListener {
         tempGraphics.drawImage(oldImage, 0, 0, null);
         return newImage;
     }
-    
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-    
-    }
-    
-    //todo add radio button menu items for different fighter sorting modes
 }

@@ -1,2048 +1,2046 @@
-{
-  "fighters": [
-    {
-      "id": 1,
-      "echo": false,
-      "simpleName": "mario",
-      "properName": "Mario",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 2,
-      "echo": false,
-      "simpleName": "donkeykong",
-      "properName": "Donkey Kong",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 3,
-      "echo": false,
-      "simpleName": "link",
-      "properName": "Link",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 4,
-      "echo": false,
-      "simpleName": "samus",
-      "properName": "Samus",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 4,
-      "echo": true,
-      "simpleName": "darksamus",
-      "properName": "Dark Samus",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 5,
-      "echo": false,
-      "simpleName": "yoshi",
-      "properName": "Yoshi",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 6,
-      "echo": false,
-      "simpleName": "kirby",
-      "properName": "Kirby",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 7,
-      "echo": false,
-      "simpleName": "fox",
-      "properName": "Fox",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 8,
-      "echo": false,
-      "simpleName": "pikachu",
-      "properName": "Pikachu",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 9,
-      "echo": false,
-      "simpleName": "luigi",
-      "properName": "Luigi",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ]
-    },
-    {
-      "id": 10,
-      "echo": false,
-      "simpleName": "ness",
-      "properName": "Ness",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 11,
-      "echo": false,
-      "simpleName": "captainfalcon",
-      "properName": "Captain Falcon",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 12,
-      "echo": false,
-      "simpleName": "jigglypuff",
-      "properName": "Jigglypuff",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 13,
-      "echo": false,
-      "simpleName": "peach",
-      "properName": "Peach",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 13,
-      "echo": true,
-      "simpleName": "daisy",
-      "properName": "Daisy",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 14,
-      "echo": false,
-      "simpleName": "bowser",
-      "properName": "Bowser",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 15,
-      "echo": false,
-      "simpleName": "iceclimbers",
-      "properName": "Ice Climbers",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 16,
-      "echo": false,
-      "simpleName": "sheik",
-      "properName": "Sheik",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 17,
-      "echo": false,
-      "simpleName": "zelda",
-      "properName": "Zelda",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 18,
-      "echo": false,
-      "simpleName": "drmario",
-      "properName": "Dr. Mario",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 19,
-      "echo": false,
-      "simpleName": "pichu",
-      "properName": "Pichu",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 20,
-      "echo": false,
-      "simpleName": "falco",
-      "properName": "Falco",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 21,
-      "echo": false,
-      "simpleName": "marth",
-      "properName": "Marth",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 21,
-      "echo": true,
-      "simpleName": "lucina",
-      "properName": "Lucina",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 22,
-      "echo": false,
-      "simpleName": "younglink",
-      "properName": "Young Link",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 23,
-      "echo": false,
-      "simpleName": "ganondorf",
-      "properName": "Ganondorf",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 24,
-      "echo": false,
-      "simpleName": "mewtwo",
-      "properName": "Mewtwo",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 25,
-      "echo": false,
-      "simpleName": "roy",
-      "properName": "Roy",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 25,
-      "echo": true,
-      "simpleName": "chrom",
-      "properName": "Chrom",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 26,
-      "echo": false,
-      "simpleName": "mrgameandwatch",
-      "properName": "Mr. Game & Watch",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 27,
-      "echo": false,
-      "simpleName": "metaknight",
-      "properName": "Meta Knight",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 28,
-      "echo": false,
-      "simpleName": "pit",
-      "properName": "Pit",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 28,
-      "echo": true,
-      "simpleName": "darkpit",
-      "properName": "Dark Pit",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 29,
-      "echo": false,
-      "simpleName": "zerosuitsamus",
-      "properName": "Zero Suit Samus",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 30,
-      "echo": false,
-      "simpleName": "wario",
-      "properName": "Wario",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 31,
-      "echo": false,
-      "simpleName": "snake",
-      "properName": "Snake",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 32,
-      "echo": false,
-      "simpleName": "ike",
-      "properName": "Ike",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 33,
-      "echo": true,
-      "simpleName": "pokemontrainer",
-      "properName": "Pokémon Trainer",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 33,
-      "echo": false,
-      "simpleName": "squirtle",
-      "properName": "Squirtle",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 34,
-      "echo": false,
-      "simpleName": "ivysaur",
-      "properName": "Ivysaur",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 35,
-      "echo": false,
-      "simpleName": "charizard",
-      "properName": "Charizard",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 36,
-      "echo": false,
-      "simpleName": "diddykong",
-      "properName": "Diddy Kong",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 37,
-      "echo": false,
-      "simpleName": "lucas",
-      "properName": "Lucas",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 38,
-      "echo": false,
-      "simpleName": "sonic",
-      "properName": "Sonic",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 39,
-      "echo": false,
-      "simpleName": "kingdedede",
-      "properName": "King Dedede",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 40,
-      "echo": false,
-      "simpleName": "olimar",
-      "properName": "Olimar",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        "Alph",
-        "Alph",
-        "Alph",
-        "Alph"
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        true,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 41,
-      "echo": false,
-      "simpleName": "lucario",
-      "properName": "Lucario",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 42,
-      "echo": false,
-      "simpleName": "rob",
-      "properName": "R.O.B.",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 43,
-      "echo": false,
-      "simpleName": "toonlink",
-      "properName": "Toon Link",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 44,
-      "echo": false,
-      "simpleName": "wolf",
-      "properName": "Wolf",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 45,
-      "echo": false,
-      "simpleName": "villager",
-      "properName": "Villager",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 46,
-      "echo": false,
-      "simpleName": "megaman",
-      "properName": "Mega Man",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 47,
-      "echo": false,
-      "simpleName": "wiifittrainer",
-      "properName": "Wii Fit Trainer",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 48,
-      "echo": false,
-      "simpleName": "rosalinaandluma",
-      "properName": "Rosalina & Luma",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 49,
-      "echo": false,
-      "simpleName": "littlemac",
-      "properName": "Little Mac",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 50,
-      "echo": false,
-      "simpleName": "greninja",
-      "properName": "Greninja",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 51,
-      "echo": false,
-      "simpleName": "miigunner",
-      "properName": "Mii Gunner",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 52,
-      "echo": false,
-      "simpleName": "miibrawler",
-      "properName": "Mii Brawler",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 53,
-      "echo": false,
-      "simpleName": "miiswordfighter",
-      "properName": "Mii Swordfighter",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 54,
-      "echo": false,
-      "simpleName": "palutena",
-      "properName": "Palutena",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 55,
-      "echo": false,
-      "simpleName": "pacman",
-      "properName": "Pac-Man",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 56,
-      "echo": false,
-      "simpleName": "robin",
-      "properName": "Robin",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 57,
-      "echo": false,
-      "simpleName": "shulk",
-      "properName": "Shulk",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 58,
-      "echo": false,
-      "simpleName": "bowserjr",
-      "properName": "Bowser Jr.",
-      "variantNames": [
-        null,
-        "Larry",
-        "Roy",
-        "Wendy",
-        "Iggy",
-        "Morton",
-        "Lemmy",
-        "Ludwig"
-      ],
-      "variantSupported": [
-        true,
-        true,
-        true,
-        true,
-        true,
-        true,
-        true,
-        true
-      ]
-    },
-    {
-      "id": 59,
-      "echo": false,
-      "simpleName": "duckhunt",
-      "properName": "Duck Hunt",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 60,
-      "echo": false,
-      "simpleName": "ryu",
-      "properName": "Ryu",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 60,
-      "echo": true,
-      "simpleName": "ken",
-      "properName": "Ken",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 61,
-      "echo": false,
-      "simpleName": "cloud",
-      "properName": "Cloud",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 62,
-      "echo": false,
-      "simpleName": "corrin",
-      "properName": "Corrin",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 63,
-      "echo": false,
-      "simpleName": "bayonetta",
-      "properName": "Bayonetta",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 64,
-      "echo": false,
-      "simpleName": "inkling",
-      "properName": "Inkling",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 65,
-      "echo": false,
-      "simpleName": "ridley",
-      "properName": "Ridley",
-      "variantNames": [
-        null,
-        "Meta Ridley",
-        null,
-        null,
-        null,
-        null,
-        null,
-        "Mecha Ridley"
-      ],
-      "variantSupported": [
-        true,
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 66,
-      "echo": false,
-      "simpleName": "simon",
-      "properName": "Simon",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 66,
-      "echo": true,
-      "simpleName": "richter",
-      "properName": "Richter",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 67,
-      "echo": false,
-      "simpleName": "kingkrool",
-      "properName": "King K. Rool",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 68,
-      "echo": false,
-      "simpleName": "isabelle",
-      "properName": "Isabelle",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 69,
-      "echo": false,
-      "simpleName": "incineroar",
-      "properName": "Incineroar",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 70,
-      "echo": false,
-      "simpleName": "pirahnaplant",
-      "properName": "Pirahna Plant",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        true,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    },
-    {
-      "id": 71,
-      "echo": false,
-      "simpleName": "joker",
-      "properName": "Joker",
-      "variantNames": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "variantSupported": [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "echo": false,
+    "simpleName": "mario",
+    "properName": "Mario",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 2,
+    "echo": false,
+    "simpleName": "donkeykong",
+    "properName": "Donkey Kong",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 3,
+    "echo": false,
+    "simpleName": "link",
+    "properName": "Link",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 4,
+    "echo": false,
+    "simpleName": "samus",
+    "properName": "Samus",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 4,
+    "echo": true,
+    "simpleName": "darksamus",
+    "properName": "Dark Samus",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 5,
+    "echo": false,
+    "simpleName": "yoshi",
+    "properName": "Yoshi",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 6,
+    "echo": false,
+    "simpleName": "kirby",
+    "properName": "Kirby",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 7,
+    "echo": false,
+    "simpleName": "fox",
+    "properName": "Fox",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 8,
+    "echo": false,
+    "simpleName": "pikachu",
+    "properName": "Pikachu",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 9,
+    "echo": false,
+    "simpleName": "luigi",
+    "properName": "Luigi",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": 10,
+    "echo": false,
+    "simpleName": "ness",
+    "properName": "Ness",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 11,
+    "echo": false,
+    "simpleName": "captainfalcon",
+    "properName": "Captain Falcon",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 12,
+    "echo": false,
+    "simpleName": "jigglypuff",
+    "properName": "Jigglypuff",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 13,
+    "echo": false,
+    "simpleName": "peach",
+    "properName": "Peach",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 13,
+    "echo": true,
+    "simpleName": "daisy",
+    "properName": "Daisy",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 14,
+    "echo": false,
+    "simpleName": "bowser",
+    "properName": "Bowser",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 15,
+    "echo": false,
+    "simpleName": "iceclimbers",
+    "properName": "Ice Climbers",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 16,
+    "echo": false,
+    "simpleName": "sheik",
+    "properName": "Sheik",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 17,
+    "echo": false,
+    "simpleName": "zelda",
+    "properName": "Zelda",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 18,
+    "echo": false,
+    "simpleName": "drmario",
+    "properName": "Dr. Mario",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 19,
+    "echo": false,
+    "simpleName": "pichu",
+    "properName": "Pichu",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 20,
+    "echo": false,
+    "simpleName": "falco",
+    "properName": "Falco",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 21,
+    "echo": false,
+    "simpleName": "marth",
+    "properName": "Marth",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 21,
+    "echo": true,
+    "simpleName": "lucina",
+    "properName": "Lucina",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 22,
+    "echo": false,
+    "simpleName": "younglink",
+    "properName": "Young Link",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 23,
+    "echo": false,
+    "simpleName": "ganondorf",
+    "properName": "Ganondorf",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 24,
+    "echo": false,
+    "simpleName": "mewtwo",
+    "properName": "Mewtwo",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 25,
+    "echo": false,
+    "simpleName": "roy",
+    "properName": "Roy",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 25,
+    "echo": true,
+    "simpleName": "chrom",
+    "properName": "Chrom",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 26,
+    "echo": false,
+    "simpleName": "mrgameandwatch",
+    "properName": "Mr. Game & Watch",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 27,
+    "echo": false,
+    "simpleName": "metaknight",
+    "properName": "Meta Knight",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 28,
+    "echo": false,
+    "simpleName": "pit",
+    "properName": "Pit",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 28,
+    "echo": true,
+    "simpleName": "darkpit",
+    "properName": "Dark Pit",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 29,
+    "echo": false,
+    "simpleName": "zerosuitsamus",
+    "properName": "Zero Suit Samus",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 30,
+    "echo": false,
+    "simpleName": "wario",
+    "properName": "Wario",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 31,
+    "echo": false,
+    "simpleName": "snake",
+    "properName": "Snake",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 32,
+    "echo": false,
+    "simpleName": "ike",
+    "properName": "Ike",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 33,
+    "echo": true,
+    "simpleName": "pokemontrainer",
+    "properName": "Pokémon Trainer",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 33,
+    "echo": false,
+    "simpleName": "squirtle",
+    "properName": "Squirtle",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 34,
+    "echo": false,
+    "simpleName": "ivysaur",
+    "properName": "Ivysaur",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 35,
+    "echo": false,
+    "simpleName": "charizard",
+    "properName": "Charizard",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 36,
+    "echo": false,
+    "simpleName": "diddykong",
+    "properName": "Diddy Kong",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 37,
+    "echo": false,
+    "simpleName": "lucas",
+    "properName": "Lucas",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 38,
+    "echo": false,
+    "simpleName": "sonic",
+    "properName": "Sonic",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 39,
+    "echo": false,
+    "simpleName": "kingdedede",
+    "properName": "King Dedede",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 40,
+    "echo": false,
+    "simpleName": "olimar",
+    "properName": "Olimar",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      "Alph",
+      "Alph",
+      "Alph",
+      "Alph"
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 41,
+    "echo": false,
+    "simpleName": "lucario",
+    "properName": "Lucario",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 42,
+    "echo": false,
+    "simpleName": "rob",
+    "properName": "R.O.B.",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 43,
+    "echo": false,
+    "simpleName": "toonlink",
+    "properName": "Toon Link",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 44,
+    "echo": false,
+    "simpleName": "wolf",
+    "properName": "Wolf",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 45,
+    "echo": false,
+    "simpleName": "villager",
+    "properName": "Villager",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 46,
+    "echo": false,
+    "simpleName": "megaman",
+    "properName": "Mega Man",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 47,
+    "echo": false,
+    "simpleName": "wiifittrainer",
+    "properName": "Wii Fit Trainer",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 48,
+    "echo": false,
+    "simpleName": "rosalinaandluma",
+    "properName": "Rosalina & Luma",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 49,
+    "echo": false,
+    "simpleName": "littlemac",
+    "properName": "Little Mac",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 50,
+    "echo": false,
+    "simpleName": "greninja",
+    "properName": "Greninja",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 51,
+    "echo": false,
+    "simpleName": "miigunner",
+    "properName": "Mii Gunner",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 52,
+    "echo": false,
+    "simpleName": "miibrawler",
+    "properName": "Mii Brawler",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 53,
+    "echo": false,
+    "simpleName": "miiswordfighter",
+    "properName": "Mii Swordfighter",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 54,
+    "echo": false,
+    "simpleName": "palutena",
+    "properName": "Palutena",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 55,
+    "echo": false,
+    "simpleName": "pacman",
+    "properName": "Pac-Man",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 56,
+    "echo": false,
+    "simpleName": "robin",
+    "properName": "Robin",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 57,
+    "echo": false,
+    "simpleName": "shulk",
+    "properName": "Shulk",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 58,
+    "echo": false,
+    "simpleName": "bowserjr",
+    "properName": "Bowser Jr.",
+    "variantNames": [
+      null,
+      "Larry",
+      "Roy",
+      "Wendy",
+      "Iggy",
+      "Morton",
+      "Lemmy",
+      "Ludwig"
+    ],
+    "variantSupported": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  {
+    "id": 59,
+    "echo": false,
+    "simpleName": "duckhunt",
+    "properName": "Duck Hunt",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 60,
+    "echo": false,
+    "simpleName": "ryu",
+    "properName": "Ryu",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 60,
+    "echo": true,
+    "simpleName": "ken",
+    "properName": "Ken",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 61,
+    "echo": false,
+    "simpleName": "cloud",
+    "properName": "Cloud",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 62,
+    "echo": false,
+    "simpleName": "corrin",
+    "properName": "Corrin",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 63,
+    "echo": false,
+    "simpleName": "bayonetta",
+    "properName": "Bayonetta",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 64,
+    "echo": false,
+    "simpleName": "inkling",
+    "properName": "Inkling",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 65,
+    "echo": false,
+    "simpleName": "ridley",
+    "properName": "Ridley",
+    "variantNames": [
+      null,
+      "Meta Ridley",
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Mecha Ridley"
+    ],
+    "variantSupported": [
+      true,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 66,
+    "echo": false,
+    "simpleName": "simon",
+    "properName": "Simon",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 66,
+    "echo": true,
+    "simpleName": "richter",
+    "properName": "Richter",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 67,
+    "echo": false,
+    "simpleName": "kingkrool",
+    "properName": "King K. Rool",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 68,
+    "echo": false,
+    "simpleName": "isabelle",
+    "properName": "Isabelle",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 69,
+    "echo": false,
+    "simpleName": "incineroar",
+    "properName": "Incineroar",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 70,
+    "echo": false,
+    "simpleName": "pirahnaplant",
+    "properName": "Pirahna Plant",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 71,
+    "echo": false,
+    "simpleName": "joker",
+    "properName": "Joker",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  }
+]
