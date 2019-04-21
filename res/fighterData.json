@@ -247,6 +247,16 @@
       null,
       null,
       null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
     ]
   },
   {
@@ -993,7 +1003,7 @@
       null
     ],
     "variantSupported": [
-      false,
+      true,
       false,
       false,
       false,
@@ -1019,7 +1029,7 @@
       null
     ],
     "variantSupported": [
-      false,
+      true,
       false,
       false,
       false,
@@ -1045,7 +1055,7 @@
       null
     ],
     "variantSupported": [
-      false,
+      true,
       false,
       false,
       false,
@@ -2033,7 +2043,7 @@
       null
     ],
     "variantSupported": [
-      false,
+      true,
       false,
       false,
       false,

@@ -1,9 +1,9 @@
 package main.java.frames;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import jdk.nashorn.internal.parser.JSONParser;
+import com.google.gson.reflect.TypeToken;
 import main.java.Fighter;
+import main.java.frames.components.FighterSelectBox;
 import main.java.templates.Template;
 
 import javax.imageio.ImageIO;
@@ -12,12 +12,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * The main window of the program, responsible for receiving input and interfacing with the user.
@@ -56,7 +57,7 @@ public class Generator extends JFrame {
     private Fighter.SortingMode selectedSort;
     
     /** A number strictly greater than zero that determines how the preview window is scaled when generated. */
-    private double selectedPreviewScalar = 0.5;
+    private double selectedPreviewScalar;
     
     /** Records the tag of the player on the left. */
     private JTextField tTagLeft;
@@ -64,14 +65,14 @@ public class Generator extends JFrame {
     private JTextField tTagRight;
     
     /** Records the fighter that the player on the left chose. */
-    private JComboBox<Fighter> cFighterLeft;
+    private FighterSelectBox cFighterLeft;
     /** Records the fighter that the player on the right chose. */
-    private JComboBox<Fighter> cFighterRight;
+    private FighterSelectBox cFighterRight;
     
     /** Records the variant that the player on the left chose. */
-    private JComboBox<Fighter> cVariantLeft;
+    private FighterSelectBox cVariantLeft;
     /** Records the variant that the player on the right chose. */
-    private JComboBox<Fighter> cVariantRight;
+    private FighterSelectBox cVariantRight;
     
     /** Records the match title (grand finals, losers semifinals, etc.). */
     private JTextField tMatchTitle;
@@ -190,7 +191,11 @@ public class Generator extends JFrame {
         }
     
         // Load all the discovered Fighters into a list
-        allFighters = new ArrayList<>(new Gson().fromJson(fighterData, ArrayList.class));
+        java.lang.reflect.Type FighterList = new TypeToken<ArrayList<Fighter>>() {}.getType();
+        allFighters = new Gson().fromJson(fighterData, FighterList);
+        for (Fighter current: allFighters) {
+            current.init();
+        }
         //end Fighter loading
         
         //begin fighter sort loading ...
@@ -232,7 +237,7 @@ public class Generator extends JFrame {
         selectionPane.setLayout(null);
         selectionPane.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         
-        //enter menu system
+        //enter menu system ...
         // Create the menu bar
         menuBar = new JMenuBar();
         menuBar.setBounds(
@@ -256,6 +261,9 @@ public class Generator extends JFrame {
                         selectedSort = Fighter.SortingMode.values()[j];
                     }
                 }
+                Fighter.sort(allFighters, selectedSort);
+                //todo
+                //resetFighterBoxes();
             });
             fighterSortMenu.add(currentOption);
         }
@@ -280,9 +288,12 @@ public class Generator extends JFrame {
         }
         templateMenu.getItem(0).setSelected(true);
         menuBar.add(templateMenu);
+        
+        // Create the Preview scalar option menu
+        selectedPreviewScalar = 1;
         //end menu system
         
-        //begin main control buttons
+        //begin main control buttons ...
         Dimension buttonPreferredSize = new Dimension(120, 25);
         Dimension bigButtonPreferredSize = new Dimension(160, 45);
         Insets insets = new Insets(26, 9, 36, 9);
@@ -331,10 +342,10 @@ public class Generator extends JFrame {
         selectionPane.add(bReset);
         //end main control buttons
     
-        Dimension tagPreferredSize = new Dimension(180, 25);
+        Dimension tagPreferredSize = new Dimension(150, 25);
         Dimension labelPreferredSize = new Dimension(85, 25);
     
-        //begin tag fields
+        //begin tag fields ...
         tTagLeft = new JTextField();
         tTagLeft.setPreferredSize(tagPreferredSize);
         componentSize = tTagLeft.getPreferredSize();
@@ -381,7 +392,7 @@ public class Generator extends JFrame {
         Dimension matchPreferredSize = new Dimension(240, 25);
         Dimension eventPreferredSize = new Dimension(70, 25);
         
-        //begin match data fields
+        //begin match data fields ...
         tMatchTitle = new JTextField();
         tMatchTitle.setPreferredSize(matchPreferredSize);
         componentSize = tMatchTitle.getPreferredSize();
@@ -427,85 +438,70 @@ public class Generator extends JFrame {
     
         //todo -----------------------------------------------------------------------------------------------Below here
         
-//        Dimension fighterPreferredSize = new Dimension(160, 24);
-//        Dimension variantPreferredSize = new Dimension(50, 24);
-//
-//        cFighterLeft = new FighterSelectBox(sortedFighters);
-//        cFighterLeft.addActionListener(e ->
-//        {
-//            cVariantLeft.setup(cFighterLeft.getSelectedItem());
-//            cVariantLeft.setEnabled(true);
-//        });
-//        cFighterLeft.setPreferredSize(fighterPreferredSize);
-//        componentSize = cFighterLeft.getPreferredSize();
-//        cFighterLeft.setBounds(
-//                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
-//                insets.top,
-//                componentSize.width,
-//                componentSize.height
-//        );
-//        selectionPane.add(cFighterLeft);
-//
-//        cFighterRight = new JComboBox(Fighter.FIGHTER_OPTIONS);
-//        cFighterRight.addActionListener(e ->
-//        {
-//            cFighterRight.setEnabled(false);
-//            for (String current: TEMP_VARIANCE/*todo Variant select remove --- Fighter.VARIANT_OPTIONS[fighterRight.getId()]*/)
-//            {
-//                cVariantRight.addItem(current);
-//            }
-//            cVariantRight.setEnabled(true);
-//        });
-//        cFighterRight.setPreferredSize(fighterPreferredSize);
-//        componentSize = cFighterRight.getPreferredSize();
-//        cFighterRight.setBounds(
-//                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
-//                insets.top + 30,
-//                componentSize.width,
-//                componentSize.height
-//        );
-//        selectionPane.add(cFighterRight);
-//
-//        cVariantLeft = new JComboBox();
-//        cVariantLeft.addActionListener(e ->
-//        {
-//            fighterLeft = new Fighter(cFighterLeft.getSelectedIndex(), cVariantLeft.getSelectedIndex());
-//            cVariantLeft.setEnabled(false);
-//            if (isGeneratorReady())
-//            {
-//                fullTrigger();
-//            }
-//        });
-//        cVariantLeft.setPreferredSize(variantPreferredSize);
-//        componentSize = cVariantLeft.getPreferredSize();
-//        cVariantLeft.setBounds(
-//                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
-//                insets.top,
-//                componentSize.width,
-//                componentSize.height
-//        );
-//        selectionPane.add(cVariantLeft);
-//
-//        cVariantRight = new JComboBox();
-//        cVariantRight.addActionListener(e ->
-//        {
-//            fighterRight = new Fighter(cFighterRight.getSelectedIndex(), cVariantRight.getSelectedIndex());
-//            cVariantRight.setEnabled(false);
-//            if (isGeneratorReady())
-//            {
-//                fullTrigger();
-//            }
-//        });
-//        cVariantRight.setPreferredSize(variantPreferredSize);
-//        componentSize = cVariantRight.getPreferredSize();
-//        cVariantRight.setBounds(
-//                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
-//                insets.top + 30,
-//                componentSize.width,
-//                componentSize.height
-//        );
-//        selectionPane.add(cVariantRight);
-        //end tag/fighters/variant fields
+        Dimension fighterPreferredSize = new Dimension(170, 24);
+        Dimension variantPreferredSize = new Dimension(70, 24);
+        
+        //begin fighter/variant fields ...
+        cFighterLeft = new FighterSelectBox(allFighters.toArray(new Fighter[0]));
+        cFighterLeft.addActionListener(e -> {
+            cVariantLeft.removeAllItems();
+            for (int i = 0; i < Fighter.VARIANT_BOUND; i++) {
+                cVariantLeft.addItem((Fighter) cFighterLeft.getSelectedItem());
+            }
+            cVariantLeft.setEnabled(true);
+        });
+        cFighterLeft.setPreferredSize(fighterPreferredSize);
+        componentSize = cFighterLeft.getPreferredSize();
+        cFighterLeft.setBounds(
+                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
+                insets.top,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(cFighterLeft);
+
+        cFighterRight = new FighterSelectBox(allFighters.toArray(new Fighter[0]));
+        cFighterRight.addActionListener(e -> {
+            cVariantRight.removeAllItems();
+            for (int i = 0; i < Fighter.VARIANT_BOUND; i++) {
+                cVariantRight.addItem((Fighter) cFighterRight.getSelectedItem());
+            }
+            cVariantRight.setEnabled(true);
+        });
+        cFighterRight.setPreferredSize(fighterPreferredSize);
+        componentSize = cFighterRight.getPreferredSize();
+        cFighterRight.setBounds(
+                insets.left + tagPreferredSize.width + labelPreferredSize.width + 10,
+                insets.top + 30,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(cFighterRight);
+
+        cVariantLeft = new FighterSelectBox(allFighters.toArray(new Fighter[0])[0]);
+        cVariantLeft.setPreferredSize(variantPreferredSize);
+        componentSize = cVariantLeft.getPreferredSize();
+        cVariantLeft.setMaximumRowCount(Fighter.VARIANT_BOUND); // 8 is the number of variants per Fighter
+        cVariantLeft.setBounds(
+                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
+                insets.top,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(cVariantLeft);
+
+        cVariantRight = new FighterSelectBox(allFighters.toArray(new Fighter[0])[0]);
+        cVariantRight.setPreferredSize(variantPreferredSize);
+        componentSize = cVariantRight.getPreferredSize();
+        cVariantRight.setMaximumRowCount(Fighter.VARIANT_BOUND); // 8 is the number of variants per Fighter
+        cVariantRight.setBounds(
+                insets.left + tagPreferredSize.width + fighterPreferredSize.width + labelPreferredSize.width + 20,
+                insets.top + 30,
+                componentSize.width,
+                componentSize.height
+        );
+        selectionPane.add(cVariantRight);
+        //end fighters/variant fields
         //end component creation
     }
     
@@ -518,12 +514,12 @@ public class Generator extends JFrame {
         tMatchTitle.setText("");
         tEventNumber.setText("");
         
-        //cFighterLeft.setSelectedIndex(0);
+        cFighterLeft.setSelectedIndex(0);
         //cVariantLeft.removeAllItems();
-        //cVariantLeft.setEnabled(false);
-        //cFighterRight.setSelectedIndex(0);
+        cVariantLeft.setEnabled(false);
+        cFighterRight.setSelectedIndex(0);
         //cVariantRight.removeAllItems();
-        //cVariantRight.setEnabled(false);
+        cVariantRight.setEnabled(false);
     }
     
     /**
@@ -545,6 +541,8 @@ public class Generator extends JFrame {
             //            chooser.showDialog(selectionWindow, "Save Thumbnail");
             
             FileDialog dialog = new FileDialog(this, "Save", FileDialog.SAVE);
+            dialog.setFile("*.png");
+            dialog.setFilenameFilter((dir, name) -> name.length() > 4 && name.substring(name.length() - 4).equals(".png"));
             dialog.setVisible(true);
             String path = dialog.getDirectory() + dialog.getFile(); //todo this line and dialog.getFile specifically are interesting...
             ImageIO.write(generatedThumbnail, "PNG", new File(path));
@@ -573,12 +571,12 @@ public class Generator extends JFrame {
         try {
             // Draw the left Fighter
             output.drawImage(
-                    ((Fighter) cFighterLeft.getSelectedItem()).getRender(cVariantLeft.getSelectedIndex()),
+                    (allFighters.get(cFighterLeft.getSelectedIndex())).getRender(cVariantLeft.getSelectedIndex()),
                     0, 0, 639, 639, 0, 0, 639, 639, null
             );
             // Draw the Right fighter
             output.drawImage(
-                    ((Fighter) cFighterRight.getSelectedItem()).getRender(cVariantRight.getSelectedIndex()),
+                    (allFighters.get(cFighterRight.getSelectedIndex())).getRender(cVariantRight.getSelectedIndex()),
                     1279, 0, 640, 639, 0, 0, 639, 639, null
             );
         } catch (Exception e) {
