@@ -3,7 +3,8 @@ package main.java.frames;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import main.java.Fighter;
-import main.java.frames.components.FighterSelectBox;
+import main.java.frames.components.fighter.FighterSelectBox;
+import main.java.frames.components.variant.VariantSelectBox;
 import main.java.templates.Template;
 
 import javax.imageio.ImageIO;
@@ -12,12 +13,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -43,7 +42,7 @@ public class Generator extends JFrame {
     /** The menu for selecting which template to use for the generated thumbnail. */
     private JMenu templateMenu;
     /** List of radio buttons in the Template select menu. */
-    private JRadioButtonMenuItem[] templateSelectButtons;
+    private JMenuItem[] templateSelectButtons;
     /** The list of Templates loaded by this version of the generator. */
     private Template[] templates;
     /** The index of the currently selected Template. */
@@ -52,10 +51,14 @@ public class Generator extends JFrame {
     /** A menu for selecting how Fighters should be ordered in the Fighter select combo boxes. */
     private JMenu fighterSortMenu;
     /** List of radio buttons in the Template select menu. */
-    private JRadioButtonMenuItem[] fighterSortButtons;
+    private JMenuItem[] fighterSortButtons;
     /** The index of the currently selected Fighter sorting mode. */
     private Fighter.SortingMode selectedSort;
     
+    /** A menu for selecting option on how the preview window should be displayed (size, etc). */
+    private JMenu previewMenu;
+    /** List of radio buttons in the Preview options menu. */
+    private JMenuItem[] previewSelectButtons;
     /** A number strictly greater than zero that determines how the preview window is scaled when generated. */
     private double selectedPreviewScalar;
     
@@ -70,9 +73,9 @@ public class Generator extends JFrame {
     private FighterSelectBox cFighterRight;
     
     /** Records the variant that the player on the left chose. */
-    private FighterSelectBox cVariantLeft;
+    private VariantSelectBox cVariantLeft;
     /** Records the variant that the player on the right chose. */
-    private FighterSelectBox cVariantRight;
+    private VariantSelectBox cVariantRight;
     
     /** Records the match title (grand finals, losers semifinals, etc.). */
     private JTextField tMatchTitle;
@@ -229,7 +232,7 @@ public class Generator extends JFrame {
             {
                 super.paintComponent(g);
                 g.drawLine(5, 116, WINDOW_WIDTH - 13, 116);
-                //g.drawImage(Temp.getWindowBackground(), 0, 0, null);
+                //g.drawImage(getWindowBackground(), 0, 0, null);
                 //todo maybe add this if I do a button overhaul
             }
         };
@@ -255,18 +258,37 @@ public class Generator extends JFrame {
             JRadioButtonMenuItem currentOption = new JRadioButtonMenuItem(Fighter.SortingMode.values()[i].toString());
             fighterSortButtons[i] = currentOption;
             currentOption.addActionListener(e -> {
-                fighterSortButtons[selectedSort.ordinal()].setSelected(false);
-                for (int j = 0; j < fighterSortButtons.length; j++) {
-                    if (fighterSortButtons[j].isSelected()) {
-                        selectedSort = Fighter.SortingMode.values()[j];
+                if (!fighterSortButtons[selectedSort.ordinal()].isSelected()) {
+                    // Handle case where the index that was already selected is deselected
+                    fighterSortButtons[selectedSort.ordinal()].setSelected(true);
+                    
+                } else {
+                    
+                    // Deselect everything except the newly selected sort
+                    fighterSortButtons[selectedSort.ordinal()].setSelected(false);
+                    for (int j = 0; j < fighterSortButtons.length; j++) {
+                        if (fighterSortButtons[j].isSelected()) {
+                            selectedSort = Fighter.SortingMode.values()[j];
+                        }
                     }
+                    
+                    // Reset the Fighter select boxes and Variant boxes
+                    Fighter.sort(allFighters, selectedSort);
+                    for (Fighter current: allFighters) {
+                        cFighterLeft.addItem(current);
+                        cFighterRight.addItem(current);
+                    }
+                    for (int j = 0; j < allFighters.size(); j++) {
+                        cFighterLeft.removeItemAt(0);
+                        cFighterRight.removeItemAt(0);
+                    }
+                    cVariantLeft.setEnabled(false);
+                    cVariantRight.setEnabled(false);
                 }
-                Fighter.sort(allFighters, selectedSort);
-                //todo
-                //resetFighterBoxes();
             });
             fighterSortMenu.add(currentOption);
         }
+        selectedSort = Fighter.SortingMode.Default;
         fighterSortMenu.getItem(0).setSelected(true);
         menuBar.add(fighterSortMenu);
         
@@ -277,10 +299,14 @@ public class Generator extends JFrame {
             JRadioButtonMenuItem currentOption = new JRadioButtonMenuItem(templates[i].toString());
             templateSelectButtons[i] = currentOption;
             currentOption.addActionListener(e -> {
-                templateSelectButtons[selectedTemplateIndex].setSelected(false);
-                for (int j = 0; j < templateSelectButtons.length; j++) {
-                    if (templateSelectButtons[j].isSelected()) {
-                        selectedTemplateIndex = j;
+                if (!templateSelectButtons[selectedTemplateIndex].isSelected()) {
+                    templateSelectButtons[selectedTemplateIndex].setSelected(true);
+                } else {
+                    templateSelectButtons[selectedTemplateIndex].setSelected(false);
+                    for (int j = 0; j < templateSelectButtons.length; j++) {
+                        if (templateSelectButtons[j].isSelected()) {
+                            selectedTemplateIndex = j;
+                        }
                     }
                 }
             });
@@ -290,7 +316,33 @@ public class Generator extends JFrame {
         menuBar.add(templateMenu);
         
         // Create the Preview scalar option menu
-        selectedPreviewScalar = 1;
+        previewMenu = new JMenu("Preview");
+        previewSelectButtons = new JRadioButtonMenuItem[1];
+        //previewSelectButtons[0] = new JRadioButtonMenuItem("[1/1] Full size ");
+        previewSelectButtons[0] = new JRadioButtonMenuItem("Thumbnail size [1/6]");
+        previewSelectButtons[0].addActionListener(e -> {
+                    if (previewSelectButtons[0].isSelected()) {
+                        selectedPreviewScalar = 1.0 / 6.0;
+                    } else {
+                        selectedPreviewScalar = 1.00;
+                    }
+                });
+//        for (JMenuItem current: previewSelectButtons) {
+//            current.addActionListener(e -> {
+//                if (!previewSelectButtons[].isSelected()) {
+//                    templateSelectButtons[selectedTemplateIndex].setSelected(true);
+//                } else {
+//                    templateSelectButtons[selectedTemplateIndex].setSelected(false);
+//                    for (int j = 0; j < templateSelectButtons.length; j++) {
+//                        if (templateSelectButtons[j].isSelected()) {
+//                            selectedTemplateIndex = j;
+//                        }
+//                    }
+//                }
+//            });
+//        }
+        previewMenu.add(previewSelectButtons[0]);
+        menuBar.add(previewMenu);
         //end menu system
         
         //begin main control buttons ...
@@ -342,7 +394,7 @@ public class Generator extends JFrame {
         selectionPane.add(bReset);
         //end main control buttons
     
-        Dimension tagPreferredSize = new Dimension(150, 25);
+        Dimension tagPreferredSize = new Dimension(170, 25);
         Dimension labelPreferredSize = new Dimension(85, 25);
     
         //begin tag fields ...
@@ -435,19 +487,13 @@ public class Generator extends JFrame {
         selectionPane.add(lEventNumber);
         selectionPane.add(tEventNumber);
         //end match data fields
-    
-        //todo -----------------------------------------------------------------------------------------------Below here
         
         Dimension fighterPreferredSize = new Dimension(170, 24);
-        Dimension variantPreferredSize = new Dimension(70, 24);
         
-        //begin fighter/variant fields ...
+        //begin fighter fields ...
         cFighterLeft = new FighterSelectBox(allFighters.toArray(new Fighter[0]));
         cFighterLeft.addActionListener(e -> {
-            cVariantLeft.removeAllItems();
-            for (int i = 0; i < Fighter.VARIANT_BOUND; i++) {
-                cVariantLeft.addItem((Fighter) cFighterLeft.getSelectedItem());
-            }
+            cVariantLeft.setFighter((Fighter) cFighterLeft.getSelectedItem());
             cVariantLeft.setEnabled(true);
         });
         cFighterLeft.setPreferredSize(fighterPreferredSize);
@@ -462,10 +508,7 @@ public class Generator extends JFrame {
 
         cFighterRight = new FighterSelectBox(allFighters.toArray(new Fighter[0]));
         cFighterRight.addActionListener(e -> {
-            cVariantRight.removeAllItems();
-            for (int i = 0; i < Fighter.VARIANT_BOUND; i++) {
-                cVariantRight.addItem((Fighter) cFighterRight.getSelectedItem());
-            }
+            cVariantRight.setFighter((Fighter) cFighterRight.getSelectedItem());
             cVariantRight.setEnabled(true);
         });
         cFighterRight.setPreferredSize(fighterPreferredSize);
@@ -477,8 +520,12 @@ public class Generator extends JFrame {
                 componentSize.height
         );
         selectionPane.add(cFighterRight);
-
-        cVariantLeft = new FighterSelectBox(allFighters.toArray(new Fighter[0])[0]);
+        //end fighter fields
+        
+        Dimension variantPreferredSize = new Dimension(50, 24);
+        
+        //begin variant fields ...
+        cVariantLeft = new VariantSelectBox();
         cVariantLeft.setPreferredSize(variantPreferredSize);
         componentSize = cVariantLeft.getPreferredSize();
         cVariantLeft.setMaximumRowCount(Fighter.VARIANT_BOUND); // 8 is the number of variants per Fighter
@@ -490,7 +537,7 @@ public class Generator extends JFrame {
         );
         selectionPane.add(cVariantLeft);
 
-        cVariantRight = new FighterSelectBox(allFighters.toArray(new Fighter[0])[0]);
+        cVariantRight = new VariantSelectBox();
         cVariantRight.setPreferredSize(variantPreferredSize);
         componentSize = cVariantRight.getPreferredSize();
         cVariantRight.setMaximumRowCount(Fighter.VARIANT_BOUND); // 8 is the number of variants per Fighter
@@ -501,7 +548,8 @@ public class Generator extends JFrame {
                 componentSize.height
         );
         selectionPane.add(cVariantRight);
-        //end fighters/variant fields
+        //end variant fields
+        
         //end component creation
     }
     
@@ -515,11 +563,14 @@ public class Generator extends JFrame {
         tEventNumber.setText("");
         
         cFighterLeft.setSelectedIndex(0);
-        //cVariantLeft.removeAllItems();
-        cVariantLeft.setEnabled(false);
         cFighterRight.setSelectedIndex(0);
-        //cVariantRight.removeAllItems();
+        
+        cVariantLeft.setFighter(null);
+        cVariantLeft.setEnabled(false);
+        cVariantLeft.setSelectedIndex(0);
+        cVariantRight.setFighter(null);
         cVariantRight.setEnabled(false);
+        cVariantRight.setSelectedIndex(0);
     }
     
     /**
@@ -553,7 +604,6 @@ public class Generator extends JFrame {
         //end save prompt
     }
     
-    //todo generate goes to Generator, export stays
     /**
      * Generates a thumbnail and returns it as a new BufferedImage.
      * @return The newly generated thumbnail.

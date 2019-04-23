@@ -1,51 +1,39 @@
-package main.java.frames.components;
+package main.java.frames.components.variant;
 
 import main.java.Fighter;
 
 import javax.swing.*;
 import java.awt.*;
 
-class FighterRenderer extends JLabel implements ListCellRenderer {
+class VariantRenderer extends JLabel implements ListCellRenderer {
     
-    /** Options for what kind of renderer this should be. */
-    enum RenderOption {
-        FIGHTER,
-        VARIANT
-    }
-
     /** The JLabel containing the icon of this Fighter. */
     private JLabel fighterLabel;
-
-    /** Which rendering type this FighterRenderer should act as. */
-    private RenderOption renderType;
-
-
-
-    /** Constructor for Fighter select combo boxes. */
-    FighterRenderer(RenderOption type) {
+    
+    /** Used for Variant select boxes, stores the Fighter whose variants will be shown. */
+    private Fighter displayFighter;
+    
+    
+    /** Constructor for Variant select combo boxes. */
+    VariantRenderer(Fighter fighter) {
+        displayFighter = fighter;
         
-        renderType = type;
-
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
         c.insets = new Insets(2, 2, 2, 2);
-
+        
         fighterLabel = new JLabel();
         fighterLabel.setOpaque(true);
-        if (renderType == RenderOption.FIGHTER) {
-            fighterLabel.setHorizontalAlignment(JLabel.LEFT);
-        } else {
-            fighterLabel.setHorizontalAlignment(JLabel.CENTER);
-        }
-
+        fighterLabel.setHorizontalAlignment(JLabel.CENTER);
+        
         add(fighterLabel, c);
         setBackground(Color.LIGHT_GRAY);
     }
-
-
-
+    
+    
+    
     @Override
     public Component getListCellRendererComponent(JList list,
                                                   Object value,
@@ -53,26 +41,23 @@ class FighterRenderer extends JLabel implements ListCellRenderer {
                                                   boolean isSelected,
                                                   boolean cellHasFocus) {
         // Grab the fighter this list element refers to
-        Fighter fighter = (Fighter) value;
+        Integer currentIndex = (Integer) value;
         
-        // Set the text of the list element to the Fighter's name (when in fighter mode, the ordinal will be zero)
-        if (renderType == RenderOption.FIGHTER) {
-            fighterLabel.setText(fighter.getName(0));
-        } else if (renderType == RenderOption.VARIANT && index != -1) {
-            fighterLabel.setText("" + index);
-        }
-
         // Set the Fighter's Icon to the default stock icon of that Fighter
         Icon stockIcon = null;
         if (index != -1) {
             try {
-                stockIcon = fighter.getIcon(index * renderType.ordinal());
+                fighterLabel.setText(null);
+                stockIcon = displayFighter.getIcon(currentIndex);
             } catch (Exception e) {
-                System.out.println(
-                        "[ERROR] Icon not found from FighterRenderer request of "
-                                + index * renderType.ordinal() + " from " + fighter.getName()
-                );
+                //            System.out.println(
+                //                    "[ERROR] Icon not found from VariantRenderer request of "
+                //                            + currentIndex + " from " + displayFighter.getName()
+                //            );
             }
+        } else {
+            // If the selected value in the selection box, display which variant is selected (1-indexed for users)
+            fighterLabel.setText("" + (currentIndex + 1));
         }
         fighterLabel.setIcon(stockIcon);
         
@@ -82,7 +67,7 @@ class FighterRenderer extends JLabel implements ListCellRenderer {
         } else {
             fighterLabel.setBackground(null);
         }
-
+        
         return fighterLabel;
     }
 }

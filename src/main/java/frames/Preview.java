@@ -8,7 +8,11 @@ import java.awt.image.BufferedImage;
 class Preview extends JFrame {
     
     private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = 749;
+    private static final int WINDOW_HEIGHT = 720;
+    
+    //todo remove this constant it's a hacky fix for a weird issue
+    /** Constant for offset in display vs window size discrepancies. */
+    private static final int HEIGHT_CONSTANT = 30;
     
     Preview(BufferedImage thumbnail, BufferedImage windowIcon, double displaySizeScalar) {
         
@@ -45,11 +49,20 @@ class Preview extends JFrame {
         JPanel previewPanel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
+                //todo remove these comments if they aren't fixing the problem
+                //g.setColor(Color.DARK_GRAY);
+                //g.drawRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
                 g.drawImage(thumbnail, 0, 0, scaledWidth, scaledHeight, null);
             }
         };
-        previewPanel.setPreferredSize(new Dimension(scaledWidth, scaledHeight));
+        previewPanel.setSize(new Dimension(scaledWidth, scaledHeight));
+        this.setSize(new Dimension(scaledWidth, scaledHeight + (int) (HEIGHT_CONSTANT / displaySizeScalar)));
         this.add(previewPanel);
+        
+        //System.out.println("scaledWidth: " + scaledWidth);
+        //System.out.println("scaledHeight: " + scaledHeight);
+        //System.out.println("width: " + this.getWidth());
+        //System.out.println("height: " + this.getHeight());
         
         // Set the window visible
         this.setVisible(true);

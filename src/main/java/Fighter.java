@@ -60,7 +60,8 @@ public class Fighter {
     
     
     /**
-     * Initializes the fighter and loads all of the supported icons and renders associated with this fighter.
+     * Initializes the fighter and loads all of the supported icons and renders associated with this fighter. This is
+     * intended to be called on every Fighter after they are loaded from JSON.
      */
     public void init() {
     
@@ -183,7 +184,7 @@ public class Fighter {
      * @return A positive number if the first Fighter should appear before the second, or a negative number in the
      *         opposite case.
      */
-    public static int compare(Fighter first, Fighter second, SortingMode mode) {
+    private static int compare(Fighter first, Fighter second, SortingMode mode) {
         switch (mode) {
             case Default:
                 // If the two Fighters are equivalent, return 0
@@ -216,9 +217,14 @@ public class Fighter {
         }
     }
     
-    public static List<Fighter> sort(List<Fighter> list, SortingMode mode) {
-        //todo implement
-        return list;
+    /**
+     * Sorts a list of Fighters based on the provided SortingMode. The provided list is modified directly by reference.
+     * This will always preserve every element, only rearranging the contents of the list.
+     * @param list The list of Fighters to be sorted.
+     * @param mode One of the members of SortingMode, they do what it says on the tin.
+     */
+    public static void sort(List<Fighter> list, SortingMode mode) {
+        list.sort((f1, f2) -> compare(f1, f2, mode));
     }
     
     /** Returns true of the Fighter ID and its echo status are the same. */

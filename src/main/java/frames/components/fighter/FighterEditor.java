@@ -1,4 +1,4 @@
-package main.java.frames.components;
+package main.java.frames.components.fighter;
 
 import main.java.Fighter;
 
