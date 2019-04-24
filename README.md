@@ -1,4 +1,4 @@
-# Thumbnail-Generator
+# AuGen (Thumbnail-Generator)
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
 Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Youtube\]](https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA)
