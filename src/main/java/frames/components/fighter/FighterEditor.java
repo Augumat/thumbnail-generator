@@ -27,7 +27,7 @@ class FighterEditor extends BasicComboBoxEditor {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1.0;
-        c.insets = new Insets(2, 4, 2, 2);
+        c.insets = new Insets(2, 6, 2, 2);
 
         panel.add(label, c);
     }

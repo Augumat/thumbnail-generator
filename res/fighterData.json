@@ -900,7 +900,7 @@
     ],
     "variantSupported": [
       true,
-      false,
+      true,
       false,
       false,
       false,
@@ -952,7 +952,7 @@
     ],
     "variantSupported": [
       true,
-      false,
+      true,
       false,
       false,
       false,
