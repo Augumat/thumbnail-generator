@@ -1,15 +1,27 @@
 # Thumbnail-Generator
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
-Check them out here!
-
-https://www.twitch.tv/crossslashstudios
-
-https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA
+Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Youtube\]](https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA)
 
 
 
 ## Changelog
+v2.0
+
+- Added a menu bar with various dropdown menus that can be used for changing settings
+
+  - Added a template selection menu for easier generation of different thumbnails (Currently supports Slambana and House of Paign thumbnail types)
+  
+  - Added a sort menu to arrange Fighters by characteristics other than their order of introduction to the series when displayed in the Fighter select boxes (Currently supports default and alphabetical sorting)
+
+  - Added an option to authentically size the preview thumbnail (No antialiasing support at the moment)
+  
+- Added character stock icons to the Fighter select and variant select boxes for easier navigation and general ease of use
+
+- Fixed questionable design decisions from older versions such as forcing text fields to lock after a string was inputted
+
+- Countless behind-the-scenes rewrites to make the project cleaner overall and future-proof it
+
 v1.5.1
 
 - Updated the "Slambana" text to be all caps
