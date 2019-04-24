@@ -43,9 +43,6 @@ class VariantEditor extends BasicComboBoxEditor {
     }
     
     public void setItem(Object item) {
-        
-        System.out.println("setting item" + item.toString());
-        
         if (!(item instanceof Integer)) {
             return;
         }

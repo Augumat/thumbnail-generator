@@ -11,13 +11,20 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
+import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.CodeSource;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 /**
  * The main window of the program, responsible for receiving input and interfacing with the user.
@@ -28,8 +35,6 @@ public class Generator extends JFrame {
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
-    
-    private static final String JSON_SUFFIX = ".json";
     
     /** A list of every Fighter discovered by the */
     private ArrayList<Fighter> allFighters;
@@ -127,7 +132,7 @@ public class Generator extends JFrame {
         try {
             windowIcon = ImageIO.read(getClass().getResource("/icon.png"));
         } catch (java.io.IOException e) {
-            System.out.println("[ERROR] Window icon load aborted.");
+            System.out.println("[ERROR] Window icon load aborted");
             e.printStackTrace();
             System.exit(1);
         }
@@ -135,44 +140,46 @@ public class Generator extends JFrame {
         //end icon loading
         
         //begin template loading ...
-        // Creates a temporary dummy file in the data directory that can be easily referenced for its path
-        File anchorFile = new File(FileSystems.getDefault().getPath("res/templates/").toUri());
-    
-        // Creates a FileFilter for directories and one for JSON
-        FileFilter jsonFilter = toTest -> {
-        
-            // Grabs the file name of toTest
-            String fileName = toTest.getName();
-        
-            // If the filename is shorter than or equal in size to the length of a .json suffix literal, then it could
-            // not possibly be a json file, and the filter returns false.
-            if (fileName.length() <= JSON_SUFFIX.length()) {
-                return false;
+        // Grab the relative URL of the application jar
+        URL jarLocation = getClass().getProtectionDomain().getCodeSource().getLocation();
+        ArrayList<String> jsonFiles = new ArrayList<>();
+        try {
+            ZipInputStream in = new ZipInputStream(jarLocation.openStream());
+            while (true) {
+                // Grabs the next entry in the input stream, exits the loop when there are no more entries
+                ZipEntry currentEntry = in.getNextEntry();
+                if (currentEntry == null) {
+                    break;
+                }
+                
+                // Grab the current entry and see if it is a json file in the correct folder
+                String name = currentEntry.getName();
+                if (name.startsWith("templates/") && name.endsWith(".json")) {
+                    jsonFiles.add(name);
+                }
             }
-        
-            // Otherwise, the lambda returns true if the file extension is equivalent to the .json suffix literal and
-            // false otherwise.
-            return fileName.substring(fileName.length() - JSON_SUFFIX.length()).equals(JSON_SUFFIX);
-        };
-        File[] jsonFiles = anchorFile.listFiles(jsonFilter);
-        
-        // Checks if any Templates were found and creates a list of them if they weren't
-        templates = new Template[0];
-        if (jsonFiles != null) {
-            templates = new Template[jsonFiles.length];
+            in.close();
+        } catch (IOException e) {
+            System.out.println("[ERROR] Could not load Templates");
+            System.exit(-1);
         }
     
-        // Creates a Template object for every File in jsonFiles and stores them in shows
+        // Creates a Template object for every File in jsonFiles and stores them in templates
+        templates = new Template[jsonFiles.size()];
         for (int i = 0; i < templates.length; i++) {
         
             // Grab the raw String data of the current File
-            final Path path = FileSystems.getDefault().getPath("res/templates/", jsonFiles[i].getName());
-    
             String rawString = "";
             try {
-                rawString = new String(Files.readAllBytes(path));
+                InputStream in = getClass().getResourceAsStream("/" + jsonFiles.get(i));
+                byte[] byteString = new byte[in.available()];
+                in.read(byteString);
+                rawString = new String(byteString);
+                
             } catch (IOException e) {
-                System.out.println("Couldn't find file: " + jsonFiles[i].getName());
+                System.out.println("[ERROR] Couldn't find listed Template file");
+                e.printStackTrace();
+                System.exit(-1);
             }
         
             // Parse that raw String data into a Show object and add it to the output array
@@ -181,18 +188,21 @@ public class Generator extends JFrame {
         //end template loading
     
         //begin Fighter loading ...
-        // Get the path to the fighter data
-        final Path path = FileSystems.getDefault().getPath("res/", "fighterData.json");
-        
         // Attempts to load the fighter JSON to fighterData
         String fighterData = "";
         try {
-            fighterData = new String(Files.readAllBytes(path));
+            InputStream in = getClass().getResourceAsStream("/fighterData.json");
+            byte[] byteString = new byte[in.available()];
+            in.read(byteString);
+            fighterData = new String(byteString);
+            in.close();
+            
         } catch (IOException e) {
-            System.out.println("[ERROR] Failed to find any Fighter data");
+            System.out.println("[ERROR] Failed to load Fighter data");
+            e.printStackTrace();
             System.exit(-1);
         }
-    
+        
         // Load all the discovered Fighters into a list
         java.lang.reflect.Type FighterList = new TypeToken<ArrayList<Fighter>>() {}.getType();
         allFighters = new Gson().fromJson(fighterData, FighterList);
@@ -321,26 +331,12 @@ public class Generator extends JFrame {
         //previewSelectButtons[0] = new JRadioButtonMenuItem("[1/1] Full size ");
         previewSelectButtons[0] = new JRadioButtonMenuItem("Thumbnail size [1/6]");
         previewSelectButtons[0].addActionListener(e -> {
-                    if (previewSelectButtons[0].isSelected()) {
-                        selectedPreviewScalar = 1.0 / 6.0;
-                    } else {
-                        selectedPreviewScalar = 1.00;
-                    }
-                });
-//        for (JMenuItem current: previewSelectButtons) {
-//            current.addActionListener(e -> {
-//                if (!previewSelectButtons[].isSelected()) {
-//                    templateSelectButtons[selectedTemplateIndex].setSelected(true);
-//                } else {
-//                    templateSelectButtons[selectedTemplateIndex].setSelected(false);
-//                    for (int j = 0; j < templateSelectButtons.length; j++) {
-//                        if (templateSelectButtons[j].isSelected()) {
-//                            selectedTemplateIndex = j;
-//                        }
-//                    }
-//                }
-//            });
-//        }
+            if (previewSelectButtons[0].isSelected()) {
+                selectedPreviewScalar = 1.0 / 6.0;
+            } else {
+                selectedPreviewScalar = 1.00;
+            }
+        });
         previewMenu.add(previewSelectButtons[0]);
         menuBar.add(previewMenu);
         //end menu system

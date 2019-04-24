@@ -4,15 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-//todo make all package private
 class Preview extends JFrame {
     
-    private static final int WINDOW_WIDTH = 1280;
-    private static final int WINDOW_HEIGHT = 720;
+    private static final int DEFAULT_WINDOW_WIDTH = 1280;
+    private static final int DEFAULT_WINDOW_HEIGHT = 720;
     
-    //todo remove this constant it's a hacky fix for a weird issue
+    //todo remove this constant if I ever find a better fix for such an odd issue
     /** Constant for offset in display vs window size discrepancies. */
-    private static final int HEIGHT_CONSTANT = 30;
+    private static final int WIDTH_CONSTANT = 6;
+    private static final int HEIGHT_CONSTANT = 29;
+    
+    
     
     Preview(BufferedImage thumbnail, BufferedImage windowIcon, double displaySizeScalar) {
         
@@ -24,8 +26,8 @@ class Preview extends JFrame {
             System.out.println("[ERROR] Negative or zero thumbnail Preview scalar attempted, resetting to default");
             displaySizeScalar = 1;
         }
-        int scaledWidth = (int) (WINDOW_WIDTH * displaySizeScalar);
-        int scaledHeight = (int) (WINDOW_HEIGHT * displaySizeScalar);
+        int scaledWidth = (int) (DEFAULT_WINDOW_WIDTH * displaySizeScalar);
+        int scaledHeight = (int) (DEFAULT_WINDOW_HEIGHT * displaySizeScalar);
         
         // If the window icon or the thumbnail are null, dispose of the window after printing an error message
         if (thumbnail == null) {
@@ -49,20 +51,12 @@ class Preview extends JFrame {
         JPanel previewPanel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
-                //todo remove these comments if they aren't fixing the problem
-                //g.setColor(Color.DARK_GRAY);
-                //g.drawRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
                 g.drawImage(thumbnail, 0, 0, scaledWidth, scaledHeight, null);
             }
         };
         previewPanel.setSize(new Dimension(scaledWidth, scaledHeight));
-        this.setSize(new Dimension(scaledWidth, scaledHeight + (int) (HEIGHT_CONSTANT / displaySizeScalar)));
+        this.setSize(new Dimension(scaledWidth + WIDTH_CONSTANT, scaledHeight + HEIGHT_CONSTANT));
         this.add(previewPanel);
-        
-        //System.out.println("scaledWidth: " + scaledWidth);
-        //System.out.println("scaledHeight: " + scaledHeight);
-        //System.out.println("width: " + this.getWidth());
-        //System.out.println("height: " + this.getHeight());
         
         // Set the window visible
         this.setVisible(true);
