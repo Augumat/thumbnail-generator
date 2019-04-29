@@ -31,7 +31,7 @@ import static com.sun.javafx.scene.control.skin.Utils.getResource;
  */
 public class Generator extends JFrame {
     
-    private static final String version = "v2.0";
+    private static final String version = "v2.0.2";
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
@@ -109,8 +109,8 @@ public class Generator extends JFrame {
         // Initialize the Generator with its proper name and version
         super("Thumbnail Generator " + version);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setResizable(false);
+        this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         
         //begin font loading ...
         try {

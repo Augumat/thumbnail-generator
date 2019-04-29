@@ -44,8 +44,8 @@ class Preview extends JFrame {
         // Initialize the window
         this.setIconImage(windowIcon);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.setSize(scaledWidth, scaledHeight);
         this.setResizable(false);
+        this.setSize(new Dimension(scaledWidth + WIDTH_CONSTANT, scaledHeight + HEIGHT_CONSTANT));
         
         // Add a custom panel that just displays the passed thumbnail in the window
         JPanel previewPanel = new JPanel() {
@@ -55,7 +55,6 @@ class Preview extends JFrame {
             }
         };
         previewPanel.setSize(new Dimension(scaledWidth, scaledHeight));
-        this.setSize(new Dimension(scaledWidth + WIDTH_CONSTANT, scaledHeight + HEIGHT_CONSTANT));
         this.add(previewPanel);
         
         // Set the window visible
