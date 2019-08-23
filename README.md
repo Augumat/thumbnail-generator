@@ -6,7 +6,7 @@ Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Yout
 
 
 ## Changelog
-v2.1.0
+v2.1
 
 - Added support for Hero and his 3 alternate costumes
 
