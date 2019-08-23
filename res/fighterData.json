@@ -2052,5 +2052,31 @@
       true,
       false
     ]
+  },
+  {
+    "id": 72,
+    "echo": false,
+    "simpleName": "hero",
+    "properName": "Hero",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      true,
+      true,
+      false,
+      false,
+      false,
+      false
+    ]
   }
 ]
