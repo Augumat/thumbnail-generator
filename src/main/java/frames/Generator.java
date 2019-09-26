@@ -12,19 +12,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.CodeSource;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 /**
  * The main window of the program, responsible for receiving input and interfacing with the user.
@@ -114,8 +105,8 @@ public class Generator extends JFrame {
         
         //begin font loading ...
         try {
-            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/futura_condensed_regular.ttf")).deriveFont(72F);
-            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/lucida_sans_regular.ttf")).deriveFont(48F);
+            futuraCondensed = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Futura_Condensed_Regular.ttf")).deriveFont(72F);
+            lucidaSans = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/fonts/Lucida_Sans_Regular.ttf")).deriveFont(48F);
         } catch (FontFormatException | IOException e) {
             if (e instanceof IOException) {
                 System.out.println("[ERROR] Font loading aborted.");
@@ -572,7 +563,6 @@ public class Generator extends JFrame {
     /**
      * Generates a thumbnail from the accumulated state of the App class if everything is defined and prompts to save
      * the file to a user-defined location.
-     * @return true if a thumbnail is successfully generated, false otherwise.
      */
     private void export() {
         //generates the thumbnail and saves it to a variable

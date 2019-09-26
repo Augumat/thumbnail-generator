@@ -1462,7 +1462,7 @@
     "properName": "Mii Gunner",
     "variantNames": [
       null,
-      null,
+      "Sans",
       null,
       null,
       null,
@@ -1472,7 +1472,7 @@
     ],
     "variantSupported": [
       true,
-      false,
+      true,
       false,
       false,
       false,
@@ -2073,6 +2073,32 @@
       true,
       true,
       true,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  {
+    "id": 73,
+    "echo": false,
+    "simpleName": "banjoandkazooie",
+    "properName": "Banjo & Kazooie",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      false,
+      false,
+      false,
       false,
       false,
       false,
