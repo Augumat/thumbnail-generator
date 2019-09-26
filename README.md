@@ -6,6 +6,17 @@ Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Yout
 
 
 ## Changelog
+
+v2.2.0
+
+- Added support for Banjo & Kazooie
+- Added support for Sans as a Mii Gunner costume
+- Fixed an odd bug involving font loading
+
+v2.1.0
+
+- Added support for Hero and his 3 alternate costumes
+
 v2.0.2
 
 - Fixed a graphical bug involving window sizes
