@@ -1,6 +1,8 @@
 # AuGen (Thumbnail-Generator)
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
+Uses simple image layering of character renders combined with overlaid text and pre-made thumbnail templates to generate professional-grade thumbnails for Super Smash Bros vods.
+
 Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Youtube\]](https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA)
 
 
