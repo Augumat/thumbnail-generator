@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # AuGen (Thumbnail-Generator)
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
@@ -160,4 +159,3 @@ v1.2
 - Resource loading overhaul
 
 - Packaged an executable .jar file for the program, works outside of IDE now
->>>>>>> 752846da90b3d960d8839cf707d022f93ea935bd
