@@ -1,9 +1,71 @@
-# AuGen (Thumbnail-Generator)
+# AuGen (thumbnail-generator)
+
+## Summary
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
 Uses simple image layering of character renders combined with overlaid text and pre-made thumbnail templates to generate professional-grade thumbnails for Super Smash Bros vods.
 
 Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Youtube\]](https://www.youtube.com/channel/UCtkWBSJDL-KiXGt27LxHWwA)
+
+
+
+## Features (Planned / Implemented)
+
+- [x] Preview functionality (View your thumbnails without having to generate, save, and open them)
+- [x] All character portraits
+  - [x] Unique character alt costumes (M/F Wii Fit, Koopalings, etc.)
+  - [ ] All character alt costumes
+- [x] Expandable background / foreground template system
+  - [ ] Customizeable fonts and text placement options for templates
+- [x] Different sorting modes for character selection (fighter ID, alphabetical, etc.)
+
+And more to come!
+
+
+
+## Gallery
+
+<details>
+  <summary>The main UI</summary>
+  
+  ![The main UI](https://media.discordapp.net/attachments/533545367816634369/632123136883556371/1.PNG)
+</details>
+
+<details>
+  <summary>Selecting a fighter</summary>
+  
+  ![Selecting a fighter](https://media.discordapp.net/attachments/533545367816634369/632123139593338880/2.PNG)
+</details>
+
+<details>
+  <summary>Choosing an alt costume</summary>
+  
+  ![Selecting an alt costume](https://media.discordapp.net/attachments/533545367816634369/632123142004801557/3.PNG)
+</details>
+
+<details>
+  <summary>Entering match info</summary>
+  
+  ![Entering match info](https://media.discordapp.net/attachments/533545367816634369/632123144752201739/4.PNG)
+</details>
+
+<details>
+  <summary>Previewing the thumbnail</summary>
+  
+  ![Previewing the thumbnail](https://media.discordapp.net/attachments/533545367816634369/632123133855268864/5.PNG)
+</details>
+
+<details>
+  <summary>Generating and saving</summary>
+  
+  ![Generating and saving](https://media.discordapp.net/attachments/533545367816634369/632123134119641088/6.PNG)
+</details>
+
+<details>
+  <summary>The final product!</summary>
+  
+  ![What are you reading these for?](https://media.discordapp.net/attachments/533545367816634369/632125315887398942/7.png)
+</details>
 
 
 
@@ -17,7 +79,7 @@ v2.2.0
 
 v2.1.0
 
-- Added support for Hero and his 3 alternate costumes
+- Added support for Hero and his 3 main alternate costumes
 
 v2.0.2
 
