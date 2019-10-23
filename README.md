@@ -25,6 +25,8 @@ And more to come!
 
 ## Gallery
 
+(Click to expand a tab)
+
 <details>
   <summary>The main UI</summary>
   
