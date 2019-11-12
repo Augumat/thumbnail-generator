@@ -22,7 +22,7 @@ import java.util.zip.ZipInputStream;
  */
 public class Generator extends JFrame {
     
-    private static final String version = "v2.0.2";
+    private static final String version = "v2.3.0";
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
