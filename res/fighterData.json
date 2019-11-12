@@ -2104,5 +2104,31 @@
       true,
       true
     ]
+  },
+  {
+    "id": 74,
+    "echo": false,
+    "simpleName": "terry",
+    "properName": "Terry",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
   }
 ]
