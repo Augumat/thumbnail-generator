@@ -73,6 +73,29 @@ And more to come!
 
 ## Changelog
 
+v2.3.0
+
+- Added support for Terry
+- (almost) Reached the 1/4 milestone for alt-costume support in time for this update!  The following fighters now have all of their alt costumes implemented;
+  - Banjo & Kazooie
+  - Bayonetta
+  - Bowser
+  - Bowser Jr.
+  - Captain Falcon
+  - Charizard
+  - Chrom
+  - Cloud
+  - Corrin
+  - Daisy
+  - Dark Pit
+  - Dark Samus
+  - Diddy Kong
+  - Donkey Kong
+  - Dr. Mario
+  - Duck Hunt
+  - Terry
+- (allegedly) Fixed a small bug with window size
+
 v2.2.0
 
 - Added support for Banjo & Kazooie
@@ -90,47 +113,34 @@ v2.0.2
 v2.0.1
 
 - Updated UI to use correct look and feel
-
 - Tweaked UI elements to work with new look and feel options
-
 - Added support for Ike's Radiant Dawn alt skin
-
 - Added support for Wario's classic costume
-
 - Fixed incorrectly lowercase text in the Slambana template
 
 v2.0
 
 - Added a menu bar with various dropdown menus that can be used for changing settings
-
   - Added a template selection menu for easier generation of different thumbnails (Currently supports Slambana and House of Paign thumbnail types)
-  
   - Added a sort menu to arrange Fighters by characteristics other than their order of introduction to the series when displayed in the Fighter select boxes (Currently supports default and alphabetical sorting)
-  
   - Added an option to authentically size the preview thumbnail (No antialiasing support at the moment)
-  
 - Added character stock icons to the Fighter select and variant select boxes for easier navigation and general ease of use
-
 - Fixed questionable design decisions from older versions such as forcing text fields to lock after a string was inputted
-
 - Countless behind-the-scenes rewrites to make the project cleaner overall and future-proof it
 
 v1.5.1
 
 - Updated the "Slambana" text to be all caps
-
 - Permanently moved compiled release versions to the Releases tab and out of the repository
 
 v1.5
 
 - Updated some character portraits
-
 - Added a temporary HoP version while the rework is in progress (will be supported within the main program in the next version)
 
 v1.4
 
 - Fixed R.O.B. and Bowser Jr. crashes caused by trailing periods in their names
-
 - Restructured resources folders for ease of access and to better accommodate planned features
 
 v1.3
@@ -140,5 +150,4 @@ v1.3
 v1.2
 
 - Resource loading overhaul
-
 - Packaged an executable .jar file for the program, works outside of IDE now
