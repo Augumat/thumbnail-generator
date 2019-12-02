@@ -54,8 +54,8 @@ public class Fighter {
     /** An array of the Fighter's stock icons, includes all 8 variants. */
     private Icon[] icons;
     
-    /** An array of the Fighter's full-scale renders, includes all 8 variants. */
-    private BufferedImage[] renders;
+//    /** An array of the Fighter's full-scale renders, includes all 8 variants. */
+//    private BufferedImage[] renders;
     
     
     
@@ -64,22 +64,6 @@ public class Fighter {
      * intended to be called on every Fighter after they are loaded from JSON.
      */
     public void init() {
-    
-        // Attempt to load each render from /res/ if it is supported, otherwise leave it as null.  If a render is
-        // allegedly supported but cannot be loaded, throw an exception.
-        renders = new BufferedImage[VARIANT_BOUND];
-        for (int variantID = 0; variantID < VARIANT_BOUND; variantID++) {
-            if (variantSupported[variantID]) {
-                try {
-                    renders[variantID] = ImageIO.read(getClass().getResource(
-                            "/fighters/" + simpleName + "/render" + variantID + ".png"
-                    ));
-                } catch (java.io.IOException e) {
-                    System.out.println("[ERROR] Failed to load " + simpleName + "'s " + variantID + " render, which was allegedly supported.");
-                }
-            }
-        }
-    
         // Attempt to load each icon from /res/ if it is supported, otherwise leave it as null.  If an icon is allegedly
         // supported but cannot be loaded, throw an exception.
         icons = new Icon[VARIANT_BOUND];
@@ -148,7 +132,17 @@ public class Fighter {
         }
         
         // If the inputs are acceptable, return the render of the specified variant
-        return renders[variantId];
+        try {
+            return ImageIO.read(getClass().getResource(
+                    "/fighters/" + simpleName + "/render" + variantId + ".png"
+            ));
+        } catch (java.io.IOException e) {
+            System.out.println("[ERROR] Failed to load " + simpleName + "'s " + variantId + " render, which was allegedly supported.");
+            System.exit(1);
+        }
+        
+        // In any other case return a blank 640x640 image
+        return new BufferedImage(640, 640, BufferedImage.TYPE_INT_ARGB);
     }
     
     /**
