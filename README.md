@@ -29,49 +29,60 @@ And more to come!
 
 <details>
   <summary>The main UI</summary>
-  
+
   ![The main UI](https://media.discordapp.net/attachments/533545367816634369/632123136883556371/1.PNG)
 </details>
 
 <details>
   <summary>Selecting a fighter</summary>
-  
+
   ![Selecting a fighter](https://media.discordapp.net/attachments/533545367816634369/632123139593338880/2.PNG)
 </details>
 
 <details>
   <summary>Choosing an alt costume</summary>
-  
+
   ![Selecting an alt costume](https://media.discordapp.net/attachments/533545367816634369/632123142004801557/3.PNG)
 </details>
 
 <details>
   <summary>Entering match info</summary>
-  
+
   ![Entering match info](https://media.discordapp.net/attachments/533545367816634369/632123144752201739/4.PNG)
 </details>
 
 <details>
   <summary>Previewing the thumbnail</summary>
-  
+
   ![Previewing the thumbnail](https://media.discordapp.net/attachments/533545367816634369/632123133855268864/5.PNG)
 </details>
 
 <details>
   <summary>Generating and saving</summary>
-  
+
   ![Generating and saving](https://media.discordapp.net/attachments/533545367816634369/632123134119641088/6.PNG)
 </details>
 
 <details>
   <summary>The final product!</summary>
-  
+
   ![What are you reading these for?](https://media.discordapp.net/attachments/533545367816634369/632125315887398942/7.png)
 </details>
 
 
 
 ## Changelog
+
+v2.3.1
+
+- Reduced memory footprint eightfold (by fixing a poor design decision from past me)
+- Significantly sped up startup time (as a consequence of the previous fix)
+- The following fighters now have all of their alt costumes implemented;
+  - Duck Hunt
+  - Falco
+  - Fox
+  - Ganondorf
+  - Greninja
 
 v2.3.0
 
