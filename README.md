@@ -25,49 +25,19 @@ And more to come!
 
 ## Gallery
 
-(Click to expand a tab)
+![The main UI](https://media.discordapp.net/attachments/533545367816634369/632123136883556371/1.PNG)
 
-<details>
-  <summary>The main UI</summary>
+![Selecting a fighter](https://media.discordapp.net/attachments/533545367816634369/632123139593338880/2.PNG)
 
-  ![The main UI](https://media.discordapp.net/attachments/533545367816634369/632123136883556371/1.PNG)
-</details>
+![Selecting an alt costume](https://media.discordapp.net/attachments/533545367816634369/632123142004801557/3.PNG)
 
-<details>
-  <summary>Selecting a fighter</summary>
+![Entering match info](https://media.discordapp.net/attachments/533545367816634369/632123144752201739/4.PNG)
 
-  ![Selecting a fighter](https://media.discordapp.net/attachments/533545367816634369/632123139593338880/2.PNG)
-</details>
+![Previewing the thumbnail](https://media.discordapp.net/attachments/533545367816634369/632123133855268864/5.PNG)
 
-<details>
-  <summary>Choosing an alt costume</summary>
+![Generating and saving](https://media.discordapp.net/attachments/533545367816634369/632123134119641088/6.PNG)
 
-  ![Selecting an alt costume](https://media.discordapp.net/attachments/533545367816634369/632123142004801557/3.PNG)
-</details>
-
-<details>
-  <summary>Entering match info</summary>
-
-  ![Entering match info](https://media.discordapp.net/attachments/533545367816634369/632123144752201739/4.PNG)
-</details>
-
-<details>
-  <summary>Previewing the thumbnail</summary>
-
-  ![Previewing the thumbnail](https://media.discordapp.net/attachments/533545367816634369/632123133855268864/5.PNG)
-</details>
-
-<details>
-  <summary>Generating and saving</summary>
-
-  ![Generating and saving](https://media.discordapp.net/attachments/533545367816634369/632123134119641088/6.PNG)
-</details>
-
-<details>
-  <summary>The final product!</summary>
-
-  ![What are you reading these for?](https://media.discordapp.net/attachments/533545367816634369/632125315887398942/7.png)
-</details>
+![What are you reading these for?](https://media.discordapp.net/attachments/533545367816634369/632125315887398942/7.png)
 
 
 
