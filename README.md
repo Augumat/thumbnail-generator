@@ -73,6 +73,35 @@ And more to come!
 
 ## Changelog
 
+v2.3.2
+
+- Updated the license to GPL 3.0
+- Added Byleth!
+
+- REACHED THE 1/2 milestone for alt costumes! :D
+- The following fighters now have all of their alt costumes implemented;
+  - Hero
+  - Ice Climbers
+  - Ike
+  - Incineroar
+  - Inkling
+  - Isabelle
+  - Ivysaur
+  - Jigglypuff
+  - Joker
+  - Ken
+  - King Dedede
+  - King K. Rool
+  - Kirby
+  - Link
+  - Little Mac
+  - Lucario
+  - Lucas
+  - Lucina
+  - Luigi
+  - Mario
+  - Marth
+
 v2.3.1
 
 - Reduced memory footprint eightfold (by fixing a poor design decision from past me)
