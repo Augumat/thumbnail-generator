@@ -2130,5 +2130,31 @@
       true,
       true
     ]
+  },
+  {
+    "id": 75,
+    "echo": false,
+    "simpleName": "byleth",
+    "properName": "Byleth",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    "variantSupported": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
   }
 ]
