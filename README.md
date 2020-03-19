@@ -1,6 +1,11 @@
-# AuGen (thumbnail-generator)
+# **AuGen (thumbnail-generator)**
+
+## \>\>\>\> READ ME FIRST \<\<\<\<
+
+To run this program,
 
 ## Summary
+
 Originally made to generate thumbnails for Slambana weekly stream vods, and now for House of Paign vods as well.
 
 Uses simple image layering of character renders combined with overlaid text and pre-made thumbnail templates to generate professional-grade thumbnails for Super Smash Bros vods.
@@ -14,10 +19,14 @@ Check us out here! [\[Twitch\]](https://www.twitch.tv/crossslashstudios) [\[Yout
 - [x] Preview functionality (View your thumbnails without having to generate, save, and open them)
 - [x] All character portraits
   - [x] Unique character alt costumes (M/F Wii Fit, Koopalings, etc.)
-  - [ ] All character alt costumes
+  - [x] All character alt costumes
 - [x] Expandable background / foreground template system
-  - [ ] Customizeable fonts and text placement options for templates
-- [x] Different sorting modes for character selection (fighter ID, alphabetical, etc.)
+  - [ ] Customizable fonts and text placement options for templates
+  - [ ] Make possible to load from external "template" files
+- [ ] Different ways to find fighters
+  - [x] ID sorting
+  - [x] Alphabetical sorting
+  - [ ] Narrowing list by typing the fighter's name
 
 And more to come!
 
@@ -43,12 +52,18 @@ And more to come!
 
 ## Changelog
 
+v2.4.0
+
+- **Every alternate costume for every character in the game is now supported!**
+- (I won't list them here since you can safely assume they're all in the generator now)
+- Some popular Mii costumes are also included besides the base Mii renders
+
 v2.3.2
 
 - Updated the license to GPL 3.0
 - Added Byleth!
 
-- REACHED THE 1/2 milestone for alt costumes! :D
+- Reached the halfway milestone for alt costumes! :D
 - The following fighters now have all of their alt costumes implemented;
   - Hero
   - Ice Climbers

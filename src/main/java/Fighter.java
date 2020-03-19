@@ -47,7 +47,7 @@ public class Fighter {
     /**
      * This indicates whether or not the variant corresponding to the index in the array has a valid render that can be
      * loaded from resources. The JSON for this section should be updated manually when new renders are added to the
-     * project.
+     * project. If this field is null, all 8 alternate costumes are supported.
      */
     private boolean[] variantSupported;
     
@@ -68,7 +68,7 @@ public class Fighter {
         // supported but cannot be loaded, throw an exception.
         icons = new Icon[VARIANT_BOUND];
         for (int variantID = 0; variantID < VARIANT_BOUND; variantID++) {
-            if (variantSupported[variantID]) {
+            if (variantSupported == null || variantSupported[variantID]) {
                 try {
                     icons[variantID] = new ImageIcon(ImageIO.read(getClass().getResource(
                             "/fighters/" + simpleName + "/icon" + variantID + ".png"
@@ -127,7 +127,7 @@ public class Fighter {
         }
         
         // If the current version does not support the fighter at the given index, throw an exception
-        if (!variantSupported[variantId]) {
+        if (variantSupported != null && !variantSupported[variantId]) {
             throw new Exception("Attempted to get a Fighter render that is not currently supported by Thumbnail-Generator");
         }
         
@@ -162,7 +162,7 @@ public class Fighter {
         }
         
         // If the current version does not support the fighter at the given index, throw an exception
-        if (!variantSupported[variantId]) {
+        if (variantSupported != null && !variantSupported[variantId]) {
             throw new Exception("Attempted to get a Fighter icon that is not currently supported by Thumbnail-Generator");
         }
         
