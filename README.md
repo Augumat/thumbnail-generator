@@ -2,7 +2,15 @@
 
 ## \>\>\>\> READ ME FIRST \<\<\<\<
 
-To run this program,
+### Installation instructions
+
+To run this program, you will need to install the JRE (Java Runtime Environment) for your operating system from Oracle's website.
+
+Once you have that, all you need to do is download the `.jar` file in the latest **"Releases"** tab at the top of this page and run it.
+
+If you have any questions or requests, or would just like the support this project, [shoot me an email](mailto:ma62@illinois.edu?subject=[GitHub]%20Thumbnail%20Generator%20Questions) at `ma62@illinois.edu`.
+
+Happy generating!
 
 ## Summary
 
