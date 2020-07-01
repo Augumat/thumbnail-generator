@@ -904,7 +904,7 @@
       null,
       "Sans",
       "Cuphead",
-      null,
+      "Vault Boy",
       null,
       null,
       null,
@@ -914,7 +914,7 @@
       true,
       true,
       true,
-      false,
+      true,
       false,
       false,
       false,
@@ -1346,6 +1346,22 @@
     "echo": false,
     "simpleName": "byleth",
     "properName": "Byleth",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  {
+    "id": 76,
+    "echo": false,
+    "simpleName": "minmin",
+    "properName": "Min Min",
     "variantNames": [
       null,
       null,
