@@ -7,7 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79c2d826-95ed-471f-849e-510dbe10c665" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon0.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon1.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon2.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon3.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon4.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon5.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon6.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/fighters/steve/icon7.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/steve/icon7.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +28,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frames/Generator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
+            <state relative-caret-position="3145">
               <caret line="200" column="27" selection-start-line="200" selection-start-column="27" selection-end-line="200" selection-end-column="27" />
             </state>
           </provider>
@@ -30,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/fighterData.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="22525">
               <caret line="1325" column="5" selection-start-line="1325" selection-start-column="5" selection-end-line="1325" selection-end-column="5" />
             </state>
           </provider>
@@ -39,7 +46,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Fighter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
+            <state relative-caret-position="1938">
               <caret line="125" column="85" selection-start-line="125" selection-start-column="85" selection-end-line="125" selection-end-column="85" />
             </state>
           </provider>
@@ -50,7 +57,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="578">
-                <caret line="58" column="74" lean-forward="true" selection-start-line="58" selection-start-column="74" selection-end-line="58" selection-end-column="74" />
+                <caret line="58" selection-start-line="58" selection-end-line="58" />
               </first_editor>
               <second_editor />
             </state>
@@ -99,24 +106,6 @@
             <path>
               <item name="thumbnail-generator" type="b2602c69:ProjectViewProjectNode" />
               <item name="thumbnail-generator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="thumbnail-generator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="thumbnail-generator" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="thumbnail-generator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="thumbnail-generator" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="thumbnail-generator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="thumbnail-generator" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="artifacts" type="462c0819:PsiDirectoryNode" />
-              <item name="AuGen_jar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="thumbnail-generator" type="b2602c69:ProjectViewProjectNode" />
@@ -222,7 +211,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10021322" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10127932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -286,21 +275,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frames/Generator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
+        <state relative-caret-position="3145">
           <caret line="200" column="27" selection-start-line="200" selection-start-column="27" selection-end-line="200" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/fighterData.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="22525">
           <caret line="1325" column="5" selection-start-line="1325" selection-start-column="5" selection-end-line="1325" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Fighter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
+        <state relative-caret-position="1938">
           <caret line="125" column="85" selection-start-line="125" selection-start-column="85" selection-end-line="125" selection-end-column="85" />
         </state>
       </provider>
@@ -309,7 +298,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="578">
-            <caret line="58" column="74" lean-forward="true" selection-start-line="58" selection-start-column="74" selection-end-line="58" selection-end-column="74" />
+            <caret line="58" selection-start-line="58" selection-end-line="58" />
           </first_editor>
           <second_editor />
         </state>
