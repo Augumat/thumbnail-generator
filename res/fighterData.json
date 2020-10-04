@@ -1372,5 +1372,21 @@
       null,
       null
     ]
+  },
+  {
+    "id": 77,
+    "echo": false,
+    "simpleName": "steve",
+    "properName": "Steve",
+    "variantNames": [
+      null,
+      "Alex",
+      null,
+      "Alex",
+      null,
+      "Alex",
+      "Zombie",
+      "Enderman"
+    ]
   }
 ]
