@@ -60,6 +60,8 @@ And more to come!
 
 ## Changelog
 
+v2.5+ (Check the Releases tab for further changes)
+
 v2.4.0
 
 - **Every alternate costume for every character in the game is now supported!**
