@@ -1388,5 +1388,21 @@
       "Zombie",
       "Enderman"
     ]
+  },
+  {
+    "id": 78,
+    "echo": false,
+    "simpleName": "sephiroth",
+    "properName": "Sephiroth",
+    "variantNames": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   }
 ]
