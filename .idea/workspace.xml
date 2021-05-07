@@ -7,17 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79c2d826-95ed-471f-849e-510dbe10c665" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/res/templates/hands_off_my_stock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/templates/hands_off_my_stock/bg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/templates/hands_off_my_stock/fg.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render1.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render2.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render3.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render4.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render5.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render6.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/fighters/olimar/render7.png" beforeDir="false" afterPath="$PROJECT_DIR$/res/fighters/olimar/render7.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/templates/hands_off_my_stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/templates/hands_off_my_stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/templates/house_of_paign.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/templates/house_of_paign.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/templates/slambana.json" beforeDir="false" afterPath="$PROJECT_DIR$/res/templates/slambana.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frames/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frames/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/templates/Template.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/templates/Template.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

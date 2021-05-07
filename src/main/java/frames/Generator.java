@@ -22,7 +22,7 @@ import java.util.zip.ZipInputStream;
  */
 public class Generator extends JFrame {
     
-    private static final String version = "v2.7.1";
+    private static final String version = "v2.8.0";
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
@@ -637,13 +637,15 @@ public class Generator extends JFrame {
         int eventNumberIndent = centerLine - ((futuraMetrics.stringWidth(template.getEventName() + tEventNumber.getText())) / 2);
         int roundNumberIndent = centerLine - ((lucidaMetrics.stringWidth(tMatchTitle.getText())) / 2);
     
-        output.setColor(Color.WHITE);
+        output.setColor(template.getColor(Template.ColorElement.TAG));
         output.setFont(futuraCondensed);
         output.drawString(tTagLeft.getText(), leftTagIndent, 75);
         output.drawString(tTagRight.getText(), rightTagIndent, 75);
+
+        output.setColor(template.getColor(Template.ColorElement.EVENT));
         output.drawString(template.getEventName() + tEventNumber.getText(), eventNumberIndent,655);
-    
-        output.setColor(new Color(160,160,160));
+
+        output.setColor(template.getColor(Template.ColorElement.MATCH));
         output.setFont(lucidaSans);
         output.drawString(tMatchTitle.getText(), roundNumberIndent,710);
         //end text field drawing

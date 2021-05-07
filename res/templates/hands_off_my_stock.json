@@ -2,5 +2,8 @@
   "templateDisplayName": "Hands Off My Stock",
   "templateVersionNumber": 1.0,
   "directoryName": "hands_off_my_stock",
-  "eventName": "HANDS OFF MY STOCK "
+  "eventName": "HANDS OFF MY STOCK ",
+  "tagColor": 0,
+  "matchColor": 10526880,
+  "eventNumberColor": 16777215
 }

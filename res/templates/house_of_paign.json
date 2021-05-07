@@ -2,5 +2,8 @@
   "templateDisplayName": "House of Paign",
   "templateVersionNumber": 1.0,
   "directoryName": "house_of_paign",
-  "eventName": "HOUSE OF PAIGN "
+  "eventName": "HOUSE OF PAIGN ",
+  "tagColor": 16777215,
+  "matchColor": 10526880,
+  "eventNumberColor": 16777215
 }

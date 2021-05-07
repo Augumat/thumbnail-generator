@@ -2,5 +2,8 @@
   "templateDisplayName": "Slambana",
   "templateVersionNumber": 1.1,
   "directoryName": "slambana",
-  "eventName": "SLAMBANA #"
+  "eventName": "SLAMBANA #",
+  "tagColor": 16777215,
+  "matchColor": 10526880,
+  "eventNumberColor": 16777215
 }
