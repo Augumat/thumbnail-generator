@@ -60,7 +60,7 @@ And more to come!
 
 ## Changelog
 
-v2.5+ (Check the Releases tab for further changes)
+v2.5+ (Changelog migrated to Releases tab)
 
 v2.4.0
 
