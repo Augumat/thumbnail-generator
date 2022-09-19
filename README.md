@@ -42,19 +42,15 @@ And more to come!
 
 ## Gallery
 
-![The main UI](https://media.discordapp.net/attachments/533545367816634369/632123136883556371/1.PNG)
+![The main UI](https://github.com/Augumat/thumbnail-generator/blob/master/README_RESOURCES/interface_blank.png)
 
-![Selecting a fighter](https://media.discordapp.net/attachments/533545367816634369/632123139593338880/2.PNG)
+![Selecting a fighter](https://github.com/Augumat/thumbnail-generator/blob/master/README_RESOURCES/interface_fighter.png)
 
-![Selecting an alt costume](https://media.discordapp.net/attachments/533545367816634369/632123142004801557/3.PNG)
+![Selecting an alt costume](https://github.com/Augumat/thumbnail-generator/blob/master/README_RESOURCES/interface_costume.png)
 
-![Entering match info](https://media.discordapp.net/attachments/533545367816634369/632123144752201739/4.PNG)
+![Previewing the thumbnail](https://github.com/Augumat/thumbnail-generator/blob/master/README_RESOURCES/interface_preview.png)
 
-![Previewing the thumbnail](https://media.discordapp.net/attachments/533545367816634369/632123133855268864/5.PNG)
-
-![Generating and saving](https://media.discordapp.net/attachments/533545367816634369/632123134119641088/6.PNG)
-
-![What are you reading these for?](https://media.discordapp.net/attachments/533545367816634369/632125315887398942/7.png)
+![Final program output](https://github.com/Augumat/thumbnail-generator/blob/master/README_RESOURCES/output.png)
 
 
 
