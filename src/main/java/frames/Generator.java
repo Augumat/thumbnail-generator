@@ -1,6 +1,7 @@
 package main.java.frames;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import main.java.Fighter;
 import main.java.frames.components.fighter.FighterSelectBox;
@@ -22,11 +23,13 @@ import java.util.zip.ZipInputStream;
  */
 public class Generator extends JFrame {
     
-    private static final String version = "v2.8.3";
+    private static final String version = "v2.9.0";
     
     private static final int WINDOW_WIDTH = 515;
     private static final int WINDOW_HEIGHT = 205;
-    
+
+    private Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
     /** A list of every Fighter discovered by the */
     private ArrayList<Fighter> allFighters;
     
@@ -174,7 +177,7 @@ public class Generator extends JFrame {
             }
         
             // Parse that raw String data into a Show object and add it to the output array
-            templates[i] = new Gson().fromJson(rawString, Template.class);
+            templates[i] = gson.fromJson(rawString, Template.class);
         }
         //end template loading
     
@@ -196,7 +199,7 @@ public class Generator extends JFrame {
         
         // Load all the discovered Fighters into a list
         java.lang.reflect.Type FighterList = new TypeToken<ArrayList<Fighter>>() {}.getType();
-        allFighters = new Gson().fromJson(fighterData, FighterList);
+        allFighters = gson.fromJson(fighterData, FighterList);
         for (Fighter current: allFighters) {
             current.init();
         }

@@ -1,6 +1,6 @@
 package main.java;
 
-import com.sun.istack.internal.NotNull;
+import com.google.gson.annotations.Expose;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,18 +23,23 @@ public class Fighter {
     public static final int VARIANT_BOUND = 8;
     
     /** ID number of this Fighter, ordered according to  */
+
+    @Expose
     private int id;
     
     /** Whether or not this Fighter is an echo fighter. */
+    @Expose
     private boolean echo;
     
     /** A simplified version of this Fighter's name, and also the name of their resources folder. */
+    @Expose
     private String simpleName;
     
     /**
      * Properly formatted full version of this Fighter's name. This is also used as the default name for the Fighter
      * and the name used for any variants that do not have unique names associated with them.
      */
+    @Expose
     private String properName;
     
     /**
@@ -42,6 +47,7 @@ public class Fighter {
      * variant at that index will be set to the properName of the Fighter. If the array itself is null, every element of
      * the array will be set to the properName.
      */
+    @Expose
     private String[] variantNames;
     
     /**
@@ -49,6 +55,7 @@ public class Fighter {
      * loaded from resources. The JSON for this section should be updated manually when new renders are added to the
      * project. If this field is null, all 8 alternate costumes are supported.
      */
+    @Expose
     private boolean[] variantSupported;
     
     /** An array of the Fighter's stock icons, includes all 8 variants. */
@@ -118,7 +125,6 @@ public class Fighter {
      * @throws Exception Throws an Exception with a message reporting that an illegal variant number was requested or
      *                   that the variant specified is not currently supported in this version of the application.
      */
-    @NotNull
     public BufferedImage getRender(final int variantId) throws Exception {
         
         // If the specified variantId is outside the bounds of acceptable values, throw an exception
@@ -153,7 +159,6 @@ public class Fighter {
      * @throws Exception Throws an Exception with a message reporting that an illegal variant number was requested or
      *                   that the variant specified is not currently supported in this version of the application.
      */
-    @NotNull
     public Icon getIcon(final int variantId) throws Exception {
         
         // If the specified variantId is outside the bounds of acceptable values, throw an exception

@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import com.google.gson.annotations.Expose;
 
 public class Template {
 
@@ -15,16 +16,23 @@ public class Template {
     };
 
     // Info about the template folder itself
+    @Expose
     private String templateDisplayName;
+    @Expose
     private float templateVersionNumber;
+    @Expose
     private String directoryName;
-    
+
     // Info for use by the generator
+    @Expose
     private String eventName;
     private BufferedImage background;
     private BufferedImage foreground;
+    @Expose
     private int tagColor;
+    @Expose
     private int matchColor;
+    @Expose
     private int eventNumberColor;
     
     //todo add font specifications and stuff maybe
